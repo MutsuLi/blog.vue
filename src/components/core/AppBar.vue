@@ -33,13 +33,13 @@
 
         <v-spacer />
 
-        <v-text-field
+        <!-- <v-text-field
           append-icon="mdi-magnify"
           flat
           hide-details
           solo-inverted
           style="max-width: 300px;"
-        />
+        /> -->
       </v-row>
     </v-container>
   </v-app-bar>
