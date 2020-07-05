@@ -1,6 +1,12 @@
 <template>
-  <v-app-bar app flat>
-    <v-app-bar-nav-icon class="hidden-md-and-up" @click="toggleDrawer" />
+  <v-app-bar
+    app
+    flat
+  >
+    <v-app-bar-nav-icon
+      class="hidden-md-and-up"
+      @click="toggleDrawer"
+    />
 
     <v-container class="mx-auto py-0">
       <v-row align="center">
@@ -21,7 +27,9 @@
           class="hidden-sm-and-down"
           text
           @click="onClick($event, link)"
-        >{{ link.text }}</v-btn>
+        >
+          {{ link.text }}
+        </v-btn>
 
         <v-spacer />
 
@@ -38,25 +46,28 @@
 </template>
 
 <script>
-// Utilities
-import { mapGetters, mapMutations } from "vuex";
+  // Utilities
+  import {
+    mapGetters,
+    mapMutations,
+  } from 'vuex'
 
-export default {
-  name: "CoreAppBar",
+  export default {
+    name: 'CoreAppBar',
 
-  computed: {
-    ...mapGetters(["links"])
-  },
+    computed: {
+      ...mapGetters(['links']),
+    },
 
-  methods: {
-    ...mapMutations(["toggleDrawer"]),
-    onClick(e, item) {
-      e.stopPropagation();
+    methods: {
+      ...mapMutations(['toggleDrawer']),
+      onClick (e, item) {
+        e.stopPropagation()
 
-      if (item.to || !item.href) return;
+        if (item.to || !item.href) return
 
-      this.$vuetify.goTo(item.href.endsWith("!") ? 0 : item.href);
-    }
+        this.$vuetify.goTo(item.href.endsWith('!') ? 0 : item.href)
+      },
+    },
   }
-};
 </script>

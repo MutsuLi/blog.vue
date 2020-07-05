@@ -1,10 +1,10 @@
 <template>
   <v-app>
     <core-app-bar />
-    <!-- <core-drawer />
+    <core-drawer />
     <core-view />
     <core-footer />
-    <core-cta /> -->
+    <core-cta />
   </v-app>
 </template>
 
@@ -13,11 +13,11 @@
     name: 'App',
 
     components: {
-      // CoreCta: () => import('@/components/core/Cta'),
-      // CoreDrawer: () => import('@/components/core/Drawer'),
-      // CoreFooter: () => import('@/components/core/Footer'),
+      CoreCta: () => import('@/components/core/Cta'),
+      CoreDrawer: () => import('@/components/core/Drawer'),
+      CoreFooter: () => import('@/components/core/Footer'),
       CoreAppBar: () => import('@/components/core/AppBar'),
-      // CoreView: () => import('@/components/core/View'),
+      CoreView: () => import('@/components/core/View'),
     },
   }
 </script>
