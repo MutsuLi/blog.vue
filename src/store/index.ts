@@ -21,15 +21,12 @@ export default new Vuex.Store({
   getters: {
     categories: state => {
       const categories: category[] = []
-
+      let hashMap = new Set();
       for (const article of state.articles) {
-        if (
-          !article.category ||
-          categories.find(category => category.text||category === article.category)
-        ) continue
-
-        const text = article.category
-
+        if ((typeof (article.category) == "undefined") || article.category == "") continue;
+        if (hashMap.has(article.category)) continue;
+        hashMap.add(article.category);
+        const text = article.category;
         categories.push({
           text,
           href: '#!',
@@ -39,7 +36,7 @@ export default new Vuex.Store({
       return categories.sort().slice(0, 4)
     },
     links: (state, getters) => {
-      return state.items.concat(getters.categories)
+      return state.items;
     },
   },
   mutations: {
