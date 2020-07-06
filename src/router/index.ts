@@ -5,6 +5,7 @@ import Passage from '../views/Passage.vue'
 
 Vue.use(VueRouter)
 
+
   const routes: Array<RouteConfig> = [
   {
     path: '/',
@@ -19,6 +20,7 @@ Vue.use(VueRouter)
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

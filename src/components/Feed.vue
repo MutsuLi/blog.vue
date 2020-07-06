@@ -14,7 +14,8 @@
     </v-row>
 
     <v-row align="center">
-      <v-col cols="3">
+      <v-pagination v-model="page" :length="pages" :total-visible="7" circle></v-pagination>
+      <!-- <v-col cols="3">
         <base-btn
           v-if="page !== 1"
           class="ml-0"
@@ -46,46 +47,44 @@
         >
           <v-icon>mdi-chevron-right</v-icon>
         </base-btn>
-      </v-col>
+      </v-col>-->
     </v-row>
   </v-container>
 </template>
 
 <script>
-  // Utilities
-  import {
-    mapState,
-  } from 'vuex'
+// Utilities
+import { mapState } from "vuex";
 
-  export default {
-    name: 'Feed',
+export default {
+  name: "Feed",
 
-    components: {
-      FeedCard: () => import('@/components/FeedCard'),
+  components: {
+    FeedCard: () => import("@/components/FeedCard")
+  },
+
+  data: () => ({
+    layout: [2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 3],
+    page: 1
+  }),
+
+  computed: {
+    ...mapState(["Passages"]),
+    pages() {
+      return Math.ceil(this.Passages.length / 11);
     },
+    paginatedArticles() {
+      const start = (this.page - 1) * 11;
+      const stop = this.page * 11;
 
-    data: () => ({
-      layout: [2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 3],
-      page: 1,
-    }),
+      return this.Passages.slice(start, stop);
+    }
+  },
 
-    computed: {
-      ...mapState(['Passages']),
-      pages () {
-        return Math.ceil(this.Passages.length / 11)
-      },
-      paginatedArticles () {
-        const start = (this.page - 1) * 11
-        const stop = this.page * 11
-
-        return this.Passages.slice(start, stop)
-      },
-    },
-
-    watch: {
-      page () {
-        window.scrollTo(0, 0)
-      },
-    },
+  watch: {
+    page() {
+      window.scrollTo(0, 0);
+    }
   }
+};
 </script>
