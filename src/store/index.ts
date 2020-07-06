@@ -16,6 +16,9 @@ export default new Vuex.Store({
       {
         text: 'About',
         href: '#about',
+      }, {
+        text: 'doc',
+        href: '',
       },
     ],
   },
@@ -38,6 +41,9 @@ export default new Vuex.Store({
     },
     links: (state, getters) => {
       return state.items;
+    },
+    hotestList: (state, getters) => {
+      return state.Passages.sort().slice(0, 4);
     },
   },
   mutations: {
