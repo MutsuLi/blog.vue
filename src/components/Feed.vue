@@ -7,7 +7,7 @@
 
       <feed-card
         v-for="(article, i) in paginatedArticles"
-        :key="article.title"
+        :key="article.btitle"
         :size="layout[i]"
         :value="article"
       />
@@ -70,15 +70,15 @@
     }),
 
     computed: {
-      ...mapState(['articles']),
+      ...mapState(['Passages']),
       pages () {
-        return Math.ceil(this.articles.length / 11)
+        return Math.ceil(this.Passages.length / 11)
       },
       paginatedArticles () {
         const start = (this.page - 1) * 11
         const stop = this.page * 11
 
-        return this.articles.slice(start, stop)
+        return this.Passages.slice(start, stop)
       },
     },
 

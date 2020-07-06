@@ -6,11 +6,12 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     articles: require('@/data/articles.json'),
+    Passages: require('@/data/Passages.json'),
     drawer: false,
     items: [
       {
         text: 'Home',
-        href: '#!',
+        href: '',
       },
       {
         text: 'About',
@@ -22,11 +23,11 @@ export default new Vuex.Store({
     categories: state => {
       const categories: category[] = []
       let hashMap = new Set();
-      for (const article of state.articles) {
-        if ((typeof (article.category) == "undefined") || article.category == "") continue;
-        if (hashMap.has(article.category)) continue;
-        hashMap.add(article.category);
-        const text = article.category;
+      for (const article of state.Passages) {
+        if ((typeof (article.bcategory) == "undefined") || article.bcategory == "") continue;
+        if (hashMap.has(article.bcategory)) continue;
+        hashMap.add(article.bcategory);
+        const text = article.bcategory;
         categories.push({
           text,
           href: '#!',

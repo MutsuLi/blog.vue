@@ -1,41 +1,39 @@
 <template>
-  <v-col
-    cols="12"
-    :md="size === 2 ? 6 : size === 3 ? 4 : undefined"
-  >
-    <base-card
-      :height="value.prominent ? 450 : 350"
-      color="grey lighten-1"
-      dark
-      href="#!"
-    >
-      <v-img
-        :src="require(`@/assets/articles/${value.hero}`)"
-        height="100%"
-        gradient="rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)"
+  <v-col cols="12" :md="size === 2 ? 6 : size === 3 ? 4 : undefined">
+    <v-hover v-slot:default="{ hover }">
+      <v-card
+        :height="value.prominent ? 450 : 350"
+        :elevation="hover ? 12 : 2"
+        :class="{ 'on-hover': hover }"
+        href="#!"
       >
-        <v-row
-          v-if="!value.prominent"
-          class="fill-height text-right ma-0"
-        >
+        <!-- <v-img
+          :src="require(`@/assets/articles/${value.hero}`)"
+          height="100%"
+          gradient="rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)"
+        >-->
+        <v-row v-if="!value.prominent" class="fill-height text-right ma-0">
           <v-col cols="12">
             <v-chip
               label
               class="mx-0 mb-2 text-uppercase"
-              color="grey darken-3"
+              color="blue"
               text-color="white"
               small
-              @click.stop=""
-            >
-              {{ value.category }}
-            </v-chip>
+              @click.stop
+            >{{ value.bcategory }}</v-chip>
 
-            <h3 class="title font-weight-bold mb-2">
-              {{ value.title }}
-            </h3>
+            <h3 class="title font-weight-bold mb-2" text-color="black">{{ value.btitle }}</h3>
 
-            <div class="caption">
-              {{ value.author }}<br>Date
+            <div class="caption" text-color="black">
+              {{ value.bsubmitter }}
+              <br /> {{ value.bCreateTime }}
+            </div>
+            <div>
+              <p
+                class="ma-0 body-1 font-weight-bold font-italic text-left"
+                text-color="black"
+              >{{ value.bRemark }}</p>
             </div>
           </v-col>
 
@@ -43,38 +41,48 @@
             <v-chip
               class="text-uppercase ma-0"
               color="primary"
+              :class="{ 'show-btns': hover }"
               label
               small
-              @click.stop=""
-            >
-              Read More
-            </v-chip>
+              @click.stop
+            >Read More</v-chip>
           </v-col>
         </v-row>
-      </v-img>
-    </base-card>
+        <!-- </v-img> -->
+      </v-card>
+    </v-hover>
   </v-col>
 </template>
 
 <script>
-  export default {
-    name: 'FeedCard',
+export default {
+  name: "FeedCard",
 
-    props: {
-      size: {
-        type: Number,
-        required: true,
-      },
-      value: {
-        type: Object,
-        default: () => ({}),
-      },
+  props: {
+    size: {
+      type: Number,
+      required: true
     },
+    value: {
+      type: Object,
+      default: () => ({})
+    }
   }
+};
 </script>
 
 <style>
-.v-image__image {
-  transition: .3s linear;
+/* .v-image__image {
+  transition: 0.3s linear;
+} */
+.v-card {
+  transition: opacity 0.4s ease-in-out
+}
+
+.v-card:not(.on-hover) {
+  opacity: 0.8;
+}
+.show-btns {
+  color: rgba(255, 255, 255, 1) !important;
 }
 </style>
