@@ -33,7 +33,7 @@ export default new Vuex.Store({
         const text = article.bcategory;
         categories.push({
           text,
-          href: '#!',
+          href: '',
         })
       }
 

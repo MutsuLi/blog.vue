@@ -18,7 +18,7 @@ export default {
 
   data: () => ({
     posts: [
-      { src: "adventurealtitude.jpg", href: "" },
+      { src: "adventurealtitude.jpg" },
       { src: "garden.jpg" },
       { src: "pigduck.jpg" },
       { src: "rain.jpg" },
