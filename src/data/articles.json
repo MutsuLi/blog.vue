@@ -1,99 +1,101 @@
-[{
-        "title": "Moroccan Days",
-        "author": "John L",
-        "category": "Travel",
-        "hero": "moroccandays.jpg",
-        "text":"Moroccan Days John L"
-    },
-    {
-        "title": "Swedish Fishing",
-        "author": "Rachel L",
-        "category": "Leisure",
-        "hero": "autumnclouds.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "The Adventure Begins",
-        "hero": "snowcup.jpg",
-        "category": "Leisure",
-        "author": "Rachel L",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "Paris in Spring",
-        "author": "John L",
-        "category": "Travel",
-        "hero": "christmas.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "Youthful Independence",
-        "author": "Rachel L",
-        "category": "Political",
-        "hero": "july4.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "Trial By Fire",
-        "author": "Anthony R",
-        "category": "Cooking",
-        "hero": "firepots.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "Water Ventures",
-        "author": "Rachel L",
-        "category": "Leisure",
-        "hero": "jellyfish.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "Mt. Zekial",
-        "author": "Rachel L",
-        "category": "Travel",
-        "hero": "mountaincabin.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "Cozumel Caves",
-        "author": "Rachel L",
-        "category": "Travel",
-        "hero": "lightcave.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "Amazing Ireland",
-        "author": "Rachel L",
-        "category": "Travel",
-        "hero": "greengrass.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "Cabin Fever",
-        "author": "Rachel L",
-        "category": "Travel",
-        "hero": "snowcabin.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "To the ancient ruins",
-        "author": "Rachel L",
-        "category": "Travel",
-        "hero": "ruins.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "New fashion trends",
-        "author": "Rachel L",
-        "category": "Travel",
-        "hero": "umbrella.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    },
-    {
-        "title": "Go on a vacation",
-        "author": "Rachel L",
-        "category": "Travel",
-        "hero": "adventurecave.jpg",   
-        "text":"Swedish Fishing Rachel L"
-    }
-]
+{
+    "data": [{
+            "title": "Moroccan Days",
+            "author": "John L",
+            "category": "Travel",
+            "hero": "moroccandays.jpg",
+            "text": "Moroccan Days John L"
+        },
+        {
+            "title": "Swedish Fishing",
+            "author": "Rachel L",
+            "category": "Leisure",
+            "hero": "autumnclouds.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "The Adventure Begins",
+            "hero": "snowcup.jpg",
+            "category": "Leisure",
+            "author": "Rachel L",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "Paris in Spring",
+            "author": "John L",
+            "category": "Travel",
+            "hero": "christmas.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "Youthful Independence",
+            "author": "Rachel L",
+            "category": "Political",
+            "hero": "july4.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "Trial By Fire",
+            "author": "Anthony R",
+            "category": "Cooking",
+            "hero": "firepots.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "Water Ventures",
+            "author": "Rachel L",
+            "category": "Leisure",
+            "hero": "jellyfish.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "Mt. Zekial",
+            "author": "Rachel L",
+            "category": "Travel",
+            "hero": "mountaincabin.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "Cozumel Caves",
+            "author": "Rachel L",
+            "category": "Travel",
+            "hero": "lightcave.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "Amazing Ireland",
+            "author": "Rachel L",
+            "category": "Travel",
+            "hero": "greengrass.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "Cabin Fever",
+            "author": "Rachel L",
+            "category": "Travel",
+            "hero": "snowcabin.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "To the ancient ruins",
+            "author": "Rachel L",
+            "category": "Travel",
+            "hero": "ruins.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "New fashion trends",
+            "author": "Rachel L",
+            "category": "Travel",
+            "hero": "umbrella.jpg",
+            "text": "Swedish Fishing Rachel L"
+        },
+        {
+            "title": "Go on a vacation",
+            "author": "Rachel L",
+            "category": "Travel",
+            "hero": "adventurecave.jpg",
+            "text": "Swedish Fishing Rachel L"
+        }
+    ]
+}
