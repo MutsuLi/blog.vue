@@ -15,7 +15,7 @@
         />
 
         <v-btn
-          v-for="(link, i) in links"
+          v-for="(link, i) in tags"
           :key="i"
           v-bind="link"
           class="hidden-sm-and-down"
@@ -55,9 +55,11 @@ export default {
   name: "CoreAppBar",
 
   computed: {
-    ...mapGetters(["links"])
+    ...mapGetters(["tags"])
   },
-
+  mounted() {
+    this.$store.dispatch('getContentRows')
+  },
   methods: {
     ...mapMutations(["toggleDrawer"]),
     onClick(e, item) {

@@ -2,19 +2,6 @@
 import * as TYPE from '../actionType/contentType'
 
 
-// douga 动画 1
-// bangumi 番剧 13
-// music 音乐 3
-// dance 舞蹈 129
-// game 游戏 4
-// technology  科技 36
-// life 生活 160
-// kichiku 鬼畜 119
-// fashion 时尚 155
-// ad 广告 165
-// ent  娱乐 5
-// movie 电影 23
-// teleplay TV剧 11
 
 
 const state = {
@@ -56,10 +43,10 @@ const actions = {
     getContentRank({ commit, state, rootState }, categoryId) {
         console.log(categoryId)
         rootState.requesting = true
-        commit(TYPE.CONTENT_REQUEST)
+        commit(TYPE.CONTENT_RANK_REQUEST)
         rootState.requesting = false
         let response = require('@/data/Passages.json');
-        commit(TYPE.CONTENT_SUCCESS, response)
+        commit(TYPE.CONTENT_RANK_SUCCESS, response)
         // commit(TYPE.CONTENT_RANK_REQUEST)
         // let param = {
         //     categoryId: categoryId
@@ -74,22 +61,24 @@ const actions = {
         //     rootState.requesting = false
         //     commit(TYPE.CONTENT_RANK_FAILURE)
         // })
+    }, getContentTags({ commit, state, rootState }) {
+        const categories: category[] = []
+        let hashMap = new Set();
+        for (const article of state.Passages) {
+            if ((typeof (article.bcategory) == "undefined") || article.bcategory == "") continue;
+            if (hashMap.has(article.bcategory)) continue;
+            hashMap.add(article.bcategory);
+            const text = article.bcategory;
+            console.log(categories);
+            categories.push({
+                text,
+                href: '',
+            })
+        }
+        commit(TYPE.CONTENT_SUCCESS, categories)
     }
 }
 
-// 1  douga 动画
-// 2  bangumi 番剧
-// 3  music 音乐
-// 4  dance 舞蹈
-// 5  game 游戏
-// 6  technology  科技
-// 7  life 生活
-// 8  kichiku 鬼畜
-// 9  fashion 时尚
-// 10 ad 广告
-// 11 ent  娱乐
-// 12 movie 电影
-// 13 teleplay TV剧
 const mutations = {
     [TYPE.CONTENT_REQUEST](state) {
 
@@ -136,6 +125,10 @@ const mutations = {
     },
     [TYPE.CONTENT_RANK_FAILURE](state) {
 
+    },
+    // 标签信息
+    [TYPE.CONTENT_TAGS_SUCCESS](state, response) {
+        state.tags = response;
     }
 }
 
