@@ -7,7 +7,7 @@
 
       <feed-card
         v-for="(article, i) in paginatedArticles"
-        :key="article.btitle"
+        :key="article.title"
         :size="layout[i]"
         :value="article"
       />
@@ -54,7 +54,7 @@
 
 <script>
 // Utilities
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Feed",
@@ -69,15 +69,15 @@ export default {
   }),
 
   computed: {
-    ...mapState(["Passages"]),
+    ...mapGetters(["passages"]),
     pages() {
-      return Math.ceil(this.Passages.length / 11);
+      return Math.ceil(this.passages.length / 11);
     },
     paginatedArticles() {
       const start = (this.page - 1) * 11;
       const stop = this.page * 11;
-
-      return this.Passages.slice(start, stop);
+      console.log(this)
+      return this.passages.slice(start, stop);
     }
   },
 

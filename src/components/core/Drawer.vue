@@ -7,7 +7,7 @@
   >
     <v-list>
       <v-list-item
-        v-for="(link, i) in links"
+        v-for="(link, i) in menus"
         :key="i"
         :to="link.to"
         :href="link.href"
@@ -30,7 +30,7 @@
     name: 'CoreDrawer',
 
     computed: {
-      ...mapGetters(['links']),
+      ...mapGetters(['menus']),
       drawer: {
         get () {
           return this.$store.state.drawer

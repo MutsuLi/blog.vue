@@ -1,6 +1,6 @@
 <template>
   <v-carousel cycle height="400" hide-delimiter-background show-arrows-on-hover>
-    <v-carousel-item v-for="(each, i) in hotestList" :key="i" :href="each.href">
+    <v-carousel-item v-for="(each, i) in ranks" :key="i" :href="each.href">
       <v-sheet height="100%" color="grey">
         <v-row class="fill-height" align="center" justify="center">
           <div class="display-3" :href="each.href">{{ each.btitle }}</div>
@@ -28,8 +28,11 @@ export default {
       slides: ["First", "Second", "Third", "Fourth", "Fifth"]
     };
   },
+  mounted() {
+    this.$store.dispatch("getContentRank");
+  },
   computed: {
-    ...mapGetters(["hotestList"])
+    ...mapGetters(["ranks"])
   }
 };
 </script>

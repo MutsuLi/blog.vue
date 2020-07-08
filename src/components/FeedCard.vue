@@ -21,19 +21,19 @@
               text-color="white"
               small
               @click.stop
-            >{{ value.bcategory }}</v-chip>
+            >{{ value.category }}</v-chip>
 
-            <h3 class="title font-weight-bold mb-2" text-color="black">{{ value.btitle }}</h3>
+            <h3 class="title font-weight-bold mb-2" text-color="black">{{ value.title }}</h3>
 
             <div class="caption" text-color="black">
-              {{ value.bsubmitter }}
-              <br /> {{ value.bCreateTime }}
+              {{ value.submitter }}
+              <br /> {{ value.createTime }}
             </div>
             <div>
               <p
                 class="ma-0 body-1 font-weight-bold font-italic text-left"
                 text-color="black"
-              >{{ value.bRemark }}</p>
+              >{{ value.remark }}</p>
             </div>
           </v-col>
 

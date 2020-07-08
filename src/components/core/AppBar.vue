@@ -15,14 +15,14 @@
         />
 
         <v-btn
-          v-for="(link, i) in tags"
+          v-for="(menu, i) in menus"
           :key="i"
-          v-bind="link"
+          v-bind="menu"
           class="hidden-sm-and-down"
           text
-          @click="onClick($event, link)"
-        >{{ link.text }}</v-btn>
-        <v-menu right bottom  offset-y>
+          @click="onClick($event, menu)"
+        >{{ menu.name }}</v-btn>
+        <v-menu right bottom offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn icon v-bind="attrs" v-on="on">
               <v-icon>mdi-dots-horizontal</v-icon>
@@ -55,10 +55,10 @@ export default {
   name: "CoreAppBar",
 
   computed: {
-    ...mapGetters(["tags"])
+    ...mapGetters(["menus"])
   },
   mounted() {
-    this.$store.dispatch('getContentRows')
+    this.$store.dispatch("getMenuList");
   },
   methods: {
     ...mapMutations(["toggleDrawer"]),

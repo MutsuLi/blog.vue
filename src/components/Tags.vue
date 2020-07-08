@@ -3,7 +3,7 @@
     <base-subheading>Tags</base-subheading>
 
     <v-chip
-      v-for="(category, i) in categories"
+      v-for="(tag, i) in tags"
       :key="i"
       class="mr-2"
       color="secondary"
@@ -11,21 +11,21 @@
       small
       tag
       text-color="white"
-    >
-      {{ category.text }}
-    </v-chip>
+    >{{ tag.text }}</v-chip>
   </v-container>
 </template>
 
 <script>
-  // Utilities
-  import { mapGetters } from 'vuex'
+// Utilities
+import { mapGetters } from "vuex";
 
-  export default {
-    name: 'Tags',
-
-    computed: {
-      ...mapGetters(['categories']),
-    },
+export default {
+  name: "Tags",
+  mounted() {
+    this.$store.dispatch("getContentTags");
+  },
+  computed: {
+    ...mapGetters(["tags"])
   }
+};
 </script>
