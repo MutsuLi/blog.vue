@@ -65,7 +65,9 @@ Vue.use(Vuex)
 // import rankStore from './modules/rankStore'
 // import promoteStore from './modules/promoteStore'
 // import liveStore from './modules/liveStore'
-import passageStore from './modules/passageStore'
+// import passageStore from './modules/passageStore'
+// Modules
+import * as modules from './modules'
 
 const state = {
   requesting: false,
@@ -77,10 +79,13 @@ const getters = {
   error: state => state.error
 }
 
-export default new Vuex.Store({
+
+Vue.use(Vuex);
+const store = new Vuex.Store({
   state,
   getters,
-  modules: {
-    passageStore
-  }
-})
+  modules
+});
+store.dispatch('app/init');
+export default store;
+
