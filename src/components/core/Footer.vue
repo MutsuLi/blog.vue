@@ -1,10 +1,6 @@
 <template>
-  <v-footer
-    class="py-4"
-    dark
-    height="auto"
-  >
-    <v-container class="mx-auto">
+  <v-footer class="py-4" dark height="auto" clipped-left clipped-right flat>
+    <v-container class="mx-auto" align="center">
       <v-row>
         <v-col cols="9">
           <base-btn
@@ -22,12 +18,7 @@
 
         <v-spacer />
 
-        <base-btn
-          class="mr-0"
-          square
-          title="Go to top"
-          @click="$vuetify.goTo(0)"
-        >
+        <base-btn class="mr-0" square title="Go to top" @click="$vuetify.goTo(0)">
           <v-icon>mdi-chevron-up</v-icon>
         </base-btn>
       </v-row>
@@ -36,40 +27,40 @@
 </template>
 
 <script>
-  export default {
-    name: 'CoreFooter',
+export default {
+  name: "CoreFooter",
 
-    data: () => ({
-      items: [
-        {
-          href: '#!',
-          icon: 'mdi-twitter',
-        },
-        {
-          href: '#!',
-          icon: 'mdi-instagram',
-        },
-        {
-          href: '#!',
-          icon: 'mdi-facebook',
-        },
-        {
-          href: '#!',
-          icon: 'mdi-google-plus',
-        },
-        {
-          href: '#!',
-          icon: 'mdi-reddit',
-        },
-        {
-          href: '#!',
-          icon: 'mdi-discord',
-        },
-        {
-          href: '#!',
-          icon: 'mdi-pinterest',
-        },
-      ],
-    }),
-  }
+  data: () => ({
+    items: [
+      {
+        href: "#!",
+        icon: "mdi-twitter"
+      },
+      {
+        href: "#!",
+        icon: "mdi-instagram"
+      },
+      {
+        href: "#!",
+        icon: "mdi-facebook"
+      },
+      {
+        href: "#!",
+        icon: "mdi-google-plus"
+      },
+      {
+        href: "#!",
+        icon: "mdi-reddit"
+      },
+      {
+        href: "#!",
+        icon: "mdi-discord"
+      },
+      {
+        href: "#!",
+        icon: "mdi-pinterest"
+      }
+    ]
+  })
+};
 </script>

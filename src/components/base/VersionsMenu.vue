@@ -8,13 +8,7 @@
     transition="slide-y-reverse-transition"
   >
     <template v-slot:activator="{ attrs, on }">
-      <v-btn
-        class="text--secondary text-lowercase"
-        rounded
-        text
-        v-bind="attrs"
-        v-on="on"
-      >
+      <v-btn class="text--secondary text-lowercase" rounded text v-bind="attrs" v-on="on">
         <v-icon left>mdi-tag-outline</v-icon>
 
         <span v-text="version" />
@@ -24,12 +18,8 @@
     </template>
 
     <v-card>
-      <v-list
-        class="px-0 py-1"
-        dense
-        nav
-      >
-        <v-subheader v-text="$t('Vuetify.AppToolbar.documentation')" />
+      <v-list class="px-0 py-1" dense nav>
+        <v-subheader v-text="'Vuetify.AppToolbar.documentation'" />
 
         <base-item
           v-for="(archive, i) in archives"
@@ -41,7 +31,7 @@
 
         <v-divider />
 
-        <v-subheader v-text="$t('Vuetify.AppToolbar.releases')" />
+        <v-subheader v-text="'Vuetify.AppToolbar.releases'" />
 
         <base-item
           v-for="(release, i) in releases"
@@ -56,61 +46,59 @@
 </template>
 
 <script>
-  // Utilities
-  import {
-    sync,
-  } from 'vuex-pathify'
+// Utilities
+import { sync } from "vuex-pathify";
 
-  export default {
-    name: 'BaseVersionsMenu',
+export default {
+  name: "BaseVersionsMenu",
 
-    data: () => ({
-      menu: false,
-    }),
+  data: () => ({
+    menu: false
+  }),
 
-    computed: {
-      currentVersion: sync('app/currentVersion'),
-      archives () {
-        return [
-          {
-            icon: 'mdi-shield-lock',
-            text: 'v1.5.x',
-            subtext: this.$t('Vuetify.AppToolbar.stable'),
-            href: 'https://v15.vuetifyjs.com',
-          },
-          {
-            icon: 'mdi-package',
-            text: 'v1.0.x',
-            subtext: this.$t('Vuetify.AppToolbar.archived'),
-            href: 'https://v1.vuetifyjs.com',
-          },
-          {
-            icon: 'mdi-developer-board',
-            text: this.$t('Vuetify.AppToolbar.dev'),
-            subtext: this.$t('Vuetify.AppToolbar.inDev'),
-            href: 'https://dev.vuetifyjs.com',
-          },
-          {
-            icon: 'mdi-rocket',
-            text: this.$t('Vuetify.AppToolbar.next'),
-            subtext: this.$t('Vuetify.AppToolbar.inDev'),
-            href: 'https://next.vuetifyjs.com',
-          },
-        ]
-      },
-      releases () {
-        return [
-          {
-            icon: 'mdi-star-box',
-            href: `https://github.com/vuetifyjs/vuetify/releases/${this.version}`,
-            text: this.$t('Vuetify.AppToolbar.current'),
-            subtext: this.version,
-          },
-        ]
-      },
-      version () {
-        return `v${this.currentVersion}`
-      },
+  computed: {
+    currentVersion: sync("app/currentVersion"),
+    archives() {
+      return [
+        {
+          icon: "mdi-shield-lock",
+          text: "v1.5.x",
+          subtext: "Vuetify.AppToolbar.stable",
+          href: "https://v15.vuetifyjs.com"
+        },
+        {
+          icon: "mdi-package",
+          text: "v1.0.x",
+          subtext: "Vuetify.AppToolbar.archived",
+          href: "https://v1.vuetifyjs.com"
+        },
+        {
+          icon: "mdi-developer-board",
+          text: "Vuetify.AppToolbar.dev",
+          subtext: "Vuetify.AppToolbar.inDev",
+          href: "https://dev.vuetifyjs.com"
+        },
+        {
+          icon: "mdi-rocket",
+          text: "Vuetify.AppToolbar.next",
+          subtext: "Vuetify.AppToolbar.inDev",
+          href: "https://next.vuetifyjs.com"
+        }
+      ];
     },
+    releases() {
+      return [
+        {
+          icon: "mdi-star-box",
+          href: `https://github.com/vuetifyjs/vuetify/releases/${this.version}`,
+          text: "Vuetify.AppToolbar.current",
+          subtext: this.version
+        }
+      ];
+    },
+    version() {
+      return `v${this.currentVersion}`;
+    }
   }
+};
 </script>

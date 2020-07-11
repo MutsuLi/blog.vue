@@ -9,7 +9,7 @@
 
         <v-responsive
           class="overflow-visible"
-          min-height="90vh"
+          min-height="100vh"
         >
           <router-view />
         </v-responsive>

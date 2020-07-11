@@ -1,5 +1,13 @@
 <template>
-  <v-navigation-drawer v-model="drawer" :right="$vuetify.rtl" :width="300" app clipped>
+  <v-navigation-drawer
+    v-model="drawer"
+    :right="right"
+    :width="300"
+    app
+    clipped
+    :expand-on-hover="expandOnHover"
+    :mini-variant="miniVariant"
+  >
     <v-divider class="my-1" />
 
     <v-list class="pt-0 pb-7" dense expand nav>
@@ -10,7 +18,7 @@
 
         <base-group v-else-if="item.group" :key="`group-${i}`" :item="item" />
 
-        <base-item
+        <!-- <base-item
           v-else
           :key="`item-${i}`"
           :chip="genChip(item)"
@@ -18,7 +26,7 @@
           :subtext="item.subtext"
           :text="item.text"
           :to="item.to"
-        />
+        />-->
       </template>
     </v-list>
 
@@ -45,7 +53,14 @@ import { sync } from "vuex-pathify";
 
 export default {
   name: "CoreDrawer",
-
+  data() {
+    return {
+      drawer: true,
+      miniVariant: true,
+      expandOnHover: true,
+      background: false
+    };
+  },
   components: {
     BaseVersionsMenu: () => import("../base/VersionsMenu"),
     BaseThemeToggle: () => import("../base/ThemeToggle"),
@@ -53,6 +68,7 @@ export default {
     BaseItem: () => import("../base/Item")
   },
   computed: {
+    //...sync("app/*"),
     namespaced: sync("app/namespaced"),
     state: sync("app/state"),
     mutations: sync("app/mutations"),

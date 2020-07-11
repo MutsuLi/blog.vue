@@ -5,7 +5,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'vuetify/dist/vuetify.min.css'; //css 需引入
+import { sync } from 'vuex-router-sync'
 
+sync(store, router)
 Vue.config.productionTip = false
 
 new Vue({
@@ -14,3 +16,5 @@ new Vue({
   router,
   render: h => h(App),
 }).$mount('#app')
+
+
