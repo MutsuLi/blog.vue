@@ -8,7 +8,6 @@
 export default {
   name: "Passage",
   components: {
-    HomeCarousels: () => import("@/components/home/Carousels")
   }
 };
 </script>

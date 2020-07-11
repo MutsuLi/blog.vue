@@ -1,29 +1,19 @@
 <template>
-  <v-footer class="py-4" dark height="auto" clipped-left clipped-right flat>
-    <v-container class="mx-auto" align="center">
-      <v-row>
-        <v-col cols="9">
-          <base-btn
-            v-for="(item, i) in items"
-            :key="i"
-            :href="item.href"
-            class="ml-0 mr-3"
-            color="primary"
-            square
-            target="_blank"
-          >
-            <v-icon v-text="item.icon" />
-          </base-btn>
-        </v-col>
-
-        <v-spacer />
-
-        <base-btn class="mr-0" square title="Go to top" @click="$vuetify.goTo(0)">
-          <v-icon>mdi-chevron-up</v-icon>
-        </base-btn>
-      </v-row>
+  <div class="ma-1 pa-1">
+    <v-container fluid>
+      <v-footer padless clipped-left clipped-right flat>
+        <v-spacer></v-spacer>
+        <v-container>
+          <v-row justify="center">
+            <v-col
+              class="text-center"
+              cols="12"
+            >Powered by .NET Core 3.1.4 © mutsuli {{ new Date().getFullYear() }}</v-col>
+          </v-row>
+        </v-container>
+      </v-footer>
     </v-container>
-  </v-footer>
+  </div>
 </template>
 
 <script>

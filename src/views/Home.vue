@@ -1,12 +1,11 @@
 <template>
   <div id="home">
     <articles>
-      <HomeCarousels/>
+      <HomeCarousels />
       <banner />
     </articles>
     <!-- <about />-->
-    <social /> 
-    <core-footer/>   
+    <social />
   </div>
 </template>
 
@@ -20,7 +19,7 @@ export default {
     Articles: () => import("@/components/home/Articles"),
     Banner: () => import("@/components/home/Banner"),
     Social: () => import("@/components/home/Social"),
-    CoreFooter: () => import("@/components/core/Footer")
+    //CoreFooter: () => import("@/components/core/Footer")
   }
 };
 </script>
