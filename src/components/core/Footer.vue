@@ -7,8 +7,11 @@
           <v-row justify="center">
             <v-col
               class="text-center"
-              cols="12"
+              cols="9"
             >Powered by .NET Core 3.1.4 © mutsuli {{ new Date().getFullYear() }}</v-col>
+            <base-btn class="mr-0" square title="Go to top" @click="$vuetify.goTo(0)">
+              <v-icon>mdi-chevron-up</v-icon>
+            </base-btn>
           </v-row>
         </v-container>
       </v-footer>

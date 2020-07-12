@@ -1,0 +1,45 @@
+<template>
+  <v-main>
+    <v-responsive class="mx-auto overflow-visible" max-width="1024">
+      <v-container>
+        <v-responsive class="overflow-visible" min-height="90vh">
+          <base-title>{{btitle}}</base-title>
+          <base-text>{{bcontent}}</base-text>
+        </v-responsive>
+      </v-container>
+    </v-responsive>
+  </v-main>
+</template>
+
+<script>
+export default {
+  name: "PassageContent",
+  data: () => {
+    return {
+      bID: 48,
+      bsubmitter: "学习",
+      btitle: "WebAPI Get请求参数传入输入带有[]不识别问题",
+      digest: null,
+      previous:
+        ".Net Core 迁移之坑一 《WebAPI Get请求参数传入输入带有[]不识别问题》",
+      previousID: 46,
+      next: "Mvc model验证总结",
+      nextID: 50,
+      bcategory: "技术博文",
+      bcontent:
+        '<p>在Framwork 体系下 WebAPI项目 会有很多默认特性，例如：Get查询竟然支持三种数组查询方式</p><p>1.https://localhost:44390/api/values?status=1&amp;status=2</p><p>2.https://localhost:44390/api/values?status[]=1&amp;status[]=2</p><p>3.https://localhost:44390/api/values?status[0]=1&amp;status[1]=2</p><p><br></p><p>&lt;img src="<span style="background-color: rgb(255, 255, 255);">http://123.206.33.109:7090/images%5C0506120113image.png</span>" /&gt;</p><p><br></p><p>直到客户端同鞋找到我，才发现第二种在.net core webapi 默认竟然不支持</p><p>于是google了好久加上询问大牛，才找到一个解决方案，就是通过&nbsp;Conventions 解决</p><p><br></p><pre class="ql-syntax" spellcheck="false">using Microsoft.AspNetCore.Http;\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.AspNetCore.Mvc.ApplicationModels;\nusing Microsoft.AspNetCore.Mvc.Filters;\nusing Microsoft.AspNetCore.Mvc.ModelBinding;\nusing Microsoft.Extensions.Primitives;\nusing System;\nusing System.Globalization;\nusing System.Linq;\nusing System.Threading.Tasks;\n\nnamespace WebApplication\n{\n    public class ArraryHandleQueryConvention : IParameterModelConvention\n    {\n        public void Apply(ParameterModel parameter)\n        {\n            if (parameter.ParameterType.IsArray || parameter.Attributes.OfType&lt;FromQueryAttribute&gt;().Any())\n                parameter.Action.Filters.Add(new ArrayQueryStringAttribute(parameter.ParameterName));\n        }\n    }\n    public class ArrayQueryStringValueProvider : QueryStringValueProvider\n    {\n        private readonly string _key;\n        private readonly IQueryCollection _values;\n\n        public ArrayQueryStringValueProvider(IQueryCollection values)\n            : this(null, values)\n        {\n        }\n\n        public ArrayQueryStringValueProvider(string key, IQueryCollection values)\n            : base(BindingSource.Query, values, CultureInfo.InvariantCulture)\n        {\n            _key = key;\n            _values = values;\n        }\n\n        public override ValueProviderResult GetValue(string key)\n        {\n            var result = base.GetValue(key + "[]");\n\n            if (_key != null &amp;&amp; _key != key)\n            {\n                return result;\n            }\n            if (result != ValueProviderResult.None)\n            {\n                var splitValues = new StringValues(result.Values.ToArray());\n                return new ValueProviderResult(splitValues, result.Culture);\n            }\n            return result;\n        }\n    }\n\n    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = false)]\n    public class ArrayQueryStringAttribute : Attribute, IResourceFilter\n    {\n        private readonly ArrayQueryStringValueProviderFactory _factory;\n\n        public ArrayQueryStringAttribute(string key)\n        {\n            _factory = new ArrayQueryStringValueProviderFactory();\n        }\n\n        public void OnResourceExecuted(ResourceExecutedContext context)\n        {\n        }\n\n        public void OnResourceExecuting(ResourceExecutingContext context)\n        {\n            context.ValueProviderFactories.Insert(0, _factory);\n        }\n    }\n    public class ArrayQueryStringValueProviderFactory : IValueProviderFactory\n    {\n        private readonly string _key;\n\n        public ArrayQueryStringValueProviderFactory() \n        {\n        }\n\n        public ArrayQueryStringValueProviderFactory(string key)\n        {\n            _key = key;\n        }\n\n        public Task CreateValueProviderAsync(ValueProviderFactoryContext context)\n        {\n            context.ValueProviders.Insert(0, new ArrayQueryStringValueProvider(_key, context.ActionContext.HttpContext.Request.Query));\n            return Task.CompletedTask;\n        }\n    }\n}\n</pre><p><br></p><p>StartUp 里面添加就行了如图</p><p><strong>说者无意听者有心，后来大牛找到我说其实还有第二种方式 就是&nbsp;JQueryQueryStringValueProviderFactory</strong></p><p><br></p><p><br></p><p>&lt;img src="http://123.206.33.109:7090/images%5C0506120248image.png" /&gt;</p><p><br></p><p>1行代码就解决了有木有</p><p>看下结果大功告成</p><p><br></p>',
+      btraffic: 145,
+      bcommentNum: 0,
+      bUpdateTime: "2019-01-01T00:00:00",
+      bCreateTime: "2019-01-01T00:00:00",
+      bRemark: null
+    };
+  },
+  components: {
+    BaseTitle: () => import("../base/Title"),
+    BaseText: () => import("../base/Text")
+    //   DocumentationBreadcrumbs: () => import('./Breadcrumbs'),
+    //   DocumentationContribution: () => import('./Contribution'),
+  }
+};
+</script>

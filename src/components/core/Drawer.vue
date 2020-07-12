@@ -1,7 +1,6 @@
 <template>
   <v-navigation-drawer
     v-model="drawer"
-    :right="right"
     :width="300"
     app
     clipped
@@ -55,7 +54,6 @@ export default {
   name: "CoreDrawer",
   data() {
     return {
-      drawer: true,
       miniVariant: true,
       expandOnHover: true,
       background: false
@@ -68,12 +66,12 @@ export default {
     BaseItem: () => import("../base/Item")
   },
   computed: {
-    //...sync("app/*"),
-    namespaced: sync("app/namespaced"),
-    state: sync("app/state"),
-    mutations: sync("app/mutations"),
-    actions: sync("app/actions"),
-    getters: sync("app/getters"),
+    ...sync("app/*"),
+    // namespaced: sync("app/namespaced"),
+    // state: sync("app/state"),
+    // mutations: sync("app/mutations"),
+    // actions: sync("app/actions"),
+    // getters: sync("app/getters"),
     links: sync("documentation/links"),
     children() {
       return this.item.children.map(item => ({
