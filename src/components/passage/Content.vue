@@ -22,47 +22,31 @@ export default {
       content: `
 # 预览地址： [http://www.lybenson.com/bilibili/](http://www.lybenson.com/bilibili/)
 ## 技术栈
-
 前端：vue2 + vuex + webpack + ES6/7 + stylus + nginx
-
 后端：koa2
-
 ## 项目运行
-
 #### 源码地址:  [https://github.com/lybenson/bilibili-vue](https://github.com/lybenson/bilibili-vue) 
-
 #### 如何运行
-
 运行前请先安装\`nodejs\`
-
 \`clone\`项目到本地
-
 \`\`\`shell
 git clone https://github.com/lybenson/bilibili-vue.git
 \`\`\`
-
 前端运行
-
 \`\`\`shell
 cd bilibili-vue
 npm install
 npm run dev
 \`\`\`
-
 后端运行
-
 \`\`\`shell
 cd bilibili-vue/bilibili-api
 npm install
 npm run dev
 \`\`\`
-
 为了确保运行正确，请先运行后端服务。再运行前端，之后访问 http://localhost:8080
-
 ## 组件
-
 根据首页的各模块的功能不同，划分出了共20多个可复用的组件。具体请看下方
-
 \`\`\`shell
 ├── banner  //轮播组件
 │   ├── Banner.vue

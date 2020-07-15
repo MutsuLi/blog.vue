@@ -52,7 +52,7 @@ import { get, sync } from "vuex-pathify";
 export default {
   name: "passageToc",
   components: {
-    BaseMarkdown: () => import("../base/Markdown"),
+    BaseMarkdown: () => import("../base/Markdown")
   },
   data: () => ({
     activeIndex: 0,
@@ -64,8 +64,8 @@ export default {
   computed: {
     ...get("documentation", ["headings", "namespace", "page"]),
     structure: sync("documentation/structure"),
-    supporters: sync("app/supporters"),
     toc() {
+      console.log(this.namespace, this.page, this.string);
       const t = string => `${this.namespace}.${this.page}.${string}`;
 
       return this.headings
@@ -139,30 +139,30 @@ export default {
 
 <style lang="sass">
 #documentation-toc
-    .supporter-group__title
-        padding-left: 8px
+  .supporter-group__title
+    padding-left: 8px
 
 .documentation-toc
-    list-style-type: none !important
-    margin: 0
-    padding: 32px 0 0
-    text-align: left
-    width: 100%
+  list-style-type: none !important
+  margin: 0
+  padding: 32px 0 0
+  text-align: left
+  width: 100%
 
-    li
-        border-left: 2px solid transparent
-        padding: 0 24px 0 8px
+  li
+    border-left: 2px solid transparent
+    padding: 0 24px 0 8px
 
     li a
-        color: inherit
-        font-size: .875rem
-        font-weight: 400
-        text-decoration: none
-        transition: color .1s ease-in
+      color: inherit
+      font-size: .875rem
+      font-weight: 400
+      text-decoration: none
+      transition: color .1s ease-in
 
     .supporter-group
-        justify-content: flex-start !important
+      justify-content: flex-start !important
 
     .documentation-toc__link--subheader
-        margin-left: 8px
+      margin-left: 8px
 </style>

@@ -91,11 +91,12 @@ export default {
       console.log(`Invalid type ${typeof code}, expected string`, code);
       code = "";
     }
+    var rendererMD = new marked.Renderer();
     // Convert markdown links
     code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink);
 
     const innerHTML = marked(code);
-    console.log(wantsList);
+
     return h(this.tag, {
       staticClass: "v-markdown",
       class: { "mb-6": wantsList },
@@ -126,9 +127,9 @@ export default {
     margin: 8px 0
 
   .v-markdown code
-    box-shadow: none !important
-    color: #333 !important
-    background-color: #f8f8f8!important
+    box-shadow: none 
+    color: #333 
+    background-color: #f8f8f8
 
   .v-markdown kbd > code
     background: transparent !important
