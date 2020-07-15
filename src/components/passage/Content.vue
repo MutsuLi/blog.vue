@@ -1,6 +1,5 @@
 <template>
   <section id="content">
-    <base-title>{{btitle}}</base-title>
     <base-text>{{content}}</base-text>
   </section>
 </template>
@@ -21,8 +20,7 @@ export default {
       nextID: 50,
       bcategory: "技术博文",
       content: `
-预览地址： [http://www.lybenson.com/bilibili/](http://www.lybenson.com/bilibili/)
-
+# 预览地址： [http://www.lybenson.com/bilibili/](http://www.lybenson.com/bilibili/)
 ## 技术栈
 
 前端：vue2 + vuex + webpack + ES6/7 + stylus + nginx
@@ -140,7 +138,6 @@ B站首页充斥着大量的动画效果。目前动画使用的主要有三种�
 2. 通过\`js\`触发的效果，如点击轮播图的原点时，主要通过设置css属性\`transition: .2s;\`，再通过\`js\` 设置css属性\`this.$refs.banner.style.marginLeft = left\`。
 
 3. 通过\`vue\`提供的动画方式。
-
    \`\`\`javascript
    <transition name="fade">
     <div v-if="isSort">
@@ -149,7 +146,6 @@ B站首页充斥着大量的动画效果。目前动画使用的主要有三种�
     </div>
    </transition>
    \`\`\`
-
 ## 样式
 
 样式文件使用的是\`stylus\`，暂未使用任何\`vue\`现成的UI组件。需要安装\`stylus-loader\`, \`stylus\`，由于\`vue-cli\`中的\`webpack\`已经配置好了\`stylus\`了，所以只需要安装就可以了。

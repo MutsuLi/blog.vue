@@ -33,7 +33,7 @@ export default {
   }),
 
   computed: {
-    lang: sync("route/params@lang"),
+    //lang: sync("route/params@lang"),
     namespace: get("documentation/namespace"),
     page: get("documentation/page")
   },
@@ -91,22 +91,10 @@ export default {
       console.log(`Invalid type ${typeof code}, expected string`, code);
       code = "";
     }
-    var rendererMD = new marked.Renderer();
-    rendererMD.code  = (code, language) => {
-      console.log(code);
-      var escapedText = code.toLowerCase().replace(/[^\w]+/g, "-");
-
-      return (
-        //<code class="javascript" style="word-break: break-word; white-space: initial;"><span class="hljs-keyword">const</span> lexer = <span class="hljs-keyword">new</span> marked.Lexer()</code>
-        `<code class="${language}"  style="word-break: break-word; white-space: initial;>"
-        <span class="hljs-keyword">${code}</span>
-        </code>`
-      );
-    };
     // Convert markdown links
     code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink);
 
-    const innerHTML = marked(code, { renderer: rendererMD });
+    const innerHTML = marked(code);
     console.log(wantsList);
     return h(this.tag, {
       staticClass: "v-markdown",
@@ -139,8 +127,8 @@ export default {
 
   .v-markdown code
     box-shadow: none !important
-    color: #C0341D !important
-    background-color: #fbe5e1 !important
+    color: #333 !important
+    background-color: #f8f8f8!important
 
   .v-markdown kbd > code
     background: transparent !important

@@ -25,6 +25,7 @@
     "vue-analytics": "^5.22.1",
     "vue-class-component": "^7.2.3",
     "vue-cli-plugin-vuetify": "^2.0.6",
+    "vue-prism-component": "^1.2.0",
     "vue-property-decorator": "^8.4.2",
     "vue-router": "^3.2.0",
     "vuetify": "^2.3.3",

@@ -14,7 +14,7 @@ import languages from '@/data/i18n/languages.json'
 //     props: true,
 //     children,
 //   }
-// }
+// }Module '@/data/i18n/languages.json' was resolved to 'd:/develop/ricardo/blog.vue/src/data/i18n/languages.json', but '--resolveJsonModule' is not used.
 
 export function trailingSlash (str) {
   return str.endsWith('/') ? str : str + '/'
@@ -32,25 +32,25 @@ export function preferredLanguage () {
     : window.localStorage.getItem('currentLanguage') || navigator.languages.find(l => l.match(languageRegexp)) || 'en'
 }
 
-export function root (children) {
-  return [
-    layout(
-      `/:lang(${languagePattern})`,
-      'Root',
-      children
-    ),
-    {
-      path: `/:lang(${genericLanguageRegexp.source})/*`,
-      redirect: to => trailingSlash(`/${preferredLanguage()}/${to.params.pathMatch || ''}`),
-    },
-    {
-      // The previous one doesn't match if there's no slash after the language code
-      path: `/:lang(${genericLanguageRegexp.source})`,
-      redirect: () => `/${preferredLanguage()}/`,
-    },
-    redirect(to => trailingSlash(`/${preferredLanguage()}${to.path}`)),
-  ]
-}
+// export function root (children) {
+//   return [
+//     layout(
+//       `/:lang(${languagePattern})`,
+//       'Root',
+//       children
+//     ),
+//     {
+//       path: `/:lang(${genericLanguageRegexp.source})/*`,
+//       redirect: to => trailingSlash(`/${preferredLanguage()}/${to.params.pathMatch || ''}`),
+//     },
+//     {
+//       // The previous one doesn't match if there's no slash after the language code
+//       path: `/:lang(${genericLanguageRegexp.source})`,
+//       redirect: () => `/${preferredLanguage()}/`,
+//     },
+//     redirect(to => trailingSlash(`/${preferredLanguage()}${to.path}`)),
+//   ]
+// }
 
 export function redirect (redirect) {
   return { path: '*', redirect }
