@@ -5,7 +5,9 @@ import { parseLink } from "@/util/helpers";
 import { get, sync } from "vuex-pathify";
 
 marked.setOptions({
-  headerIds: false
+  headerIds: false,
+  breaks: true,
+  smartLists: true
 });
 
 export default {
@@ -89,12 +91,23 @@ export default {
       console.log(`Invalid type ${typeof code}, expected string`, code);
       code = "";
     }
+    var rendererMD = new marked.Renderer();
+    rendererMD.code  = (code, language) => {
+      console.log(code);
+      var escapedText = code.toLowerCase().replace(/[^\w]+/g, "-");
 
+      return (
+        //<code class="javascript" style="word-break: break-word; white-space: initial;"><span class="hljs-keyword">const</span> lexer = <span class="hljs-keyword">new</span> marked.Lexer()</code>
+        `<code class="${language}"  style="word-break: break-word; white-space: initial;>"
+        <span class="hljs-keyword">${code}</span>
+        </code>`
+      );
+    };
     // Convert markdown links
     code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink);
 
-    const innerHTML = marked(code);
-
+    const innerHTML = marked(code, { renderer: rendererMD });
+    console.log(wantsList);
     return h(this.tag, {
       staticClass: "v-markdown",
       class: { "mb-6": wantsList },
@@ -126,7 +139,7 @@ export default {
 
   .v-markdown code
     box-shadow: none !important
-    color: #c0341d !important
+    color: #C0341D !important
     background-color: #fbe5e1 !important
 
   .v-markdown kbd > code
