@@ -3,7 +3,7 @@ import camelCase from 'lodash/camelCase'
 import upperFirst from 'lodash/upperFirst'
 import { make } from 'vuex-pathify'
 
-function addHeadingAndAd (children) {
+function addHeadingAndAd(children) {
   children.splice(0, 0, {
     type: 'section',
     children: [
@@ -14,7 +14,7 @@ function addHeadingAndAd (children) {
   })
 }
 
-function getHeadings (children, toc = []) {
+function getHeadings(children, toc = []) {
   for (const child of children) {
     if (child.children) {
       getHeadings(child.children, toc)
@@ -44,7 +44,7 @@ function getHeadings (children, toc = []) {
   return toc
 }
 
-function getNamespace (namespace) {
+function getNamespace(namespace) {
   switch (namespace) {
     case 'introduction': return 'introduction/why-vuetify'
     case 'getting-started': return 'getting-started/quick-start'
@@ -56,7 +56,7 @@ function getNamespace (namespace) {
   }
 }
 
-function addFooterAd (children = []) {
+function addFooterAd(children = []) {
   if (!children.length) return
 
   const index = children.length - 1
@@ -82,7 +82,7 @@ const mutations = make.mutations(state)
 const actions = {}
 
 const getters = {
-  breadcrumbs (state, getters, rootState) {
+  breadcrumbs(state, getters, rootState) {
     if (!rootState.route) return []
 
     const namespace = rootState.route.params.namespace
@@ -106,20 +106,20 @@ const getters = {
       },
     ]
   },
-  headings (state, getters) {
+  headings(state, getters) {
     return getHeadings(getters.structure)
   },
-  namespace (state, getters, rootState) {
+  namespace(state, getters, rootState) {
     return !rootState.route
       ? undefined
       : upperFirst(camelCase(rootState.route.params.namespace))
   },
-  page (state, getters, rootState) {
+  page(state, getters, rootState) {
     return !rootState.route
       ? undefined
       : upperFirst(camelCase(rootState.route.params.page))
   },
-  structure (state, getters, rootState) {
+  structure(state, getters, rootState) {
     const children = JSON.parse(JSON.stringify((state.structure || {}).children || []))
 
     if (!children.length) return children
@@ -129,7 +129,7 @@ const getters = {
 
     return children
   },
-  themes (state) {
+  themes(state) {
     return Object.values(state.templates)
   },
 }
