@@ -1,5 +1,6 @@
 // import { contentApi, contentrankApi } from 'api'
 import * as TYPE from '../actionType/contentType'
+import { parseLink } from "@/util/helpers";
 
 //
 import marked from "marked";
@@ -40,7 +41,6 @@ const getters = {
 
 const actions = {
     getContentDetail({ commit, state, rootState }, bID) {
-        console.log(bID)
         rootState.requesting = true
         commit(TYPE.CONTENT_RANK_REQUEST)
         rootState.requesting = false
@@ -55,18 +55,17 @@ const mutations = {
     },
     [TYPE.CONTENT_PASSAGE_SUCCESS](state, response) {
         const rendererMD = new marked.Renderer();
-        const tagsArr: Array<string> = new Array();
+        const tagsArr: Array<object> = new Array();
         rendererMD.heading = (text, level) => {
             var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-            tagsArr.push(escapedText);
-            return '<h' + level + '><a name="' +
-                escapedText +
-                '" class="anchor" href="#' +
-                escapedText +
-                '"><span class="header-link"></span></a>' +
-                text + '</h' + level + '>';
+            tagsArr.push({ text, subTitle: level > 2 });
+            return `<h${level}>
+            <a name="${text}" id="${text}" class="anchor" href="#${text}">
+            <span class="header-link"></span></a>${text}</h${level}>`;
         };
-        const innerHTML = marked(response, { renderer: rendererMD });
+
+        let rawHtml = response.bcontent.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink);
+        const innerHTML = marked(rawHtml, { renderer: rendererMD });
         let passage = response;
         let result = {
             ID: passage.bID,
@@ -82,9 +81,10 @@ const mutations = {
             nextID: passage.nextID,
             previousID: passage.previousID,
             previous: passage.previous,
-            tags: tagsArr
+            headings: tagsArr
         };
         state.passage = result;
+
     },
     // 标签信息
     [TYPE.CONTENT_TAGS_SUCCESS](state, response) {
@@ -93,7 +93,6 @@ const mutations = {
 }
 
 export default {
-    namespaced: true,
     state,
     getters,
     actions,

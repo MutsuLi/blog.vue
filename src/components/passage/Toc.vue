@@ -48,7 +48,7 @@
 import kebabCase from "lodash/kebabCase";
 import { goTo } from "@/util/helpers";
 import { get, sync } from "vuex-pathify";
-
+import { mapGetters } from "vuex";
 export default {
   name: "passageToc",
   components: {
@@ -62,33 +62,19 @@ export default {
   }),
 
   computed: {
-    ...get("documentation", ["headings", "namespace", "page"]),
+    ...mapGetters(["passage"]),
     structure: sync("documentation/structure"),
     toc() {
-      console.log(this.namespace, this.page, this.string);
-      const t = string => `${this.namespace}.${this.page}.${string}`;
-
-      return this.headings
-        .map(h => {
-          const translation = h.indexOf(".") > -1 ? this.$t(h) : t(h);
-          let text = translation.split(" ");
-
-          text.shift();
-          text = text.join(" ");
-
-          const isSubheading = translation.substring(0, 3) === "###";
-          const isHeading =
-            !isSubheading && translation.substring(0, 2) === "##";
-          const isIntroduction = !isHeading && translation.charAt(0) === "#";
-
+      return this.passage.headings
+        .map(title => {
           return {
-            id: kebabCase(text),
-            subheader: isSubheading,
-            text,
-            visible: isSubheading || isHeading || isIntroduction
+            id: kebabCase(title.text),
+            subheader: title.subTitle,
+            text: title.text,
+            visible: !title.subTitle
           };
         })
-        .filter(h => h.visible);
+        .filter(title => title.visible);
     }
   },
 
@@ -97,7 +83,6 @@ export default {
       immediate: true,
       handler(val) {
         if (!val.length) return;
-
         this.$nextTick(() => (this.internalToc = this.toc.slice()));
       }
     }
@@ -108,29 +93,23 @@ export default {
     findActiveIndex() {
       if (this.currentOffset < 100) {
         this.activeIndex = 0;
-
         return;
       }
 
       const list = this.toc.slice().reverse();
+
       const index = list.findIndex(item => {
         const section = document.getElementById(item.id);
-
         if (!section) return false;
-
         return section.offsetTop - 100 < this.currentOffset;
       });
-
       const lastIndex = list.length - 1;
-
       this.activeIndex = index > -1 ? lastIndex - index : lastIndex;
     },
     onScroll() {
       this.currentOffset =
         window.pageYOffset || document.documentElement.offsetTop || 0;
-
       clearTimeout(this.timeout);
-
       this.timeout = setTimeout(this.findActiveIndex, 50);
     }
   }

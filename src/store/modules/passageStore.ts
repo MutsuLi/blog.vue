@@ -10,7 +10,6 @@ const state = {
     // sortIds: [1, 13, 3, 129, 4, 36, 160, 119, 155, 165, 5, 23, 11],
     // sortValues: ['动画', '番剧', '音乐', '舞蹈', '游戏', '科技', '生活', '鬼畜', '时尚', '广告', '娱乐', '电影', 'TV剧'],
     passages: [],
-    passage: {},
     ranks: [],
     tags: [],
     menus: []
@@ -19,7 +18,6 @@ const state = {
 
 const getters = {
     passages: state => state.passages,
-    passage: state => state.passage,
     ranks: state => state.ranks,
     tags: state => state.tags,
     menus: state => state.menus
@@ -33,7 +31,6 @@ const actions = {
         commit(TYPE.MENU_REQUEST)
         rootState.requesting = false
         let response = require('@/data/menu.json').data;
-        console.log(response);
         commit(TYPE.MENU_SUCCESS, response)
         // contentApi.content().then((response) => {
         //     rootState.requesting = false
@@ -55,28 +52,6 @@ const actions = {
         // }, (error) => {
         //     rootState.requesting = false
         //     commit(TYPE.CONTENT_FAILURE)
-        // })
-    }, getContentDetail({ commit, state, rootState }, bID) {
-        console.log(bID)
-        rootState.requesting = true
-        commit(TYPE.CONTENT_RANK_REQUEST)
-        rootState.requesting = false
-        let response = require('@/data/detail.json');
-        //let passage = response.data.find(passage => passage.bID == bID);
-        commit(TYPE.CONTENT_PASSAGE_SUCCESS, response)
-        // commit(TYPE.CONTENT_RANK_REQUEST)
-        // let param = {
-        //     categoryId: categoryId
-        // }
-        // contentrankApi.contentrank(param).then((response) => {
-        //     rootState.requesting = false
-        //     if (categoryId === 1) {
-        //         console.log(response)
-        //     }
-        //     commit(TYPE.CONTENT_RANK_SUCCESS, response)
-        // }, (error) => {
-        //     rootState.requesting = false
-        //     commit(TYPE.CONTENT_RANK_FAILURE)
         // })
     },
     getContentRank({ commit, state, rootState }, categoryId) {
@@ -127,40 +102,6 @@ const mutations = {
     },
     [TYPE.MENU_SUCCESS](state, response) {
         state.menus = response;
-    },
-    [TYPE.CONTENT_REQUEST](state) {
-
-    },
-    [TYPE.CONTENT_SUCCESS](state, response) {
-        let list = response.data;
-        for (let i = 0; i < list.length; i++) {
-            let passage = list[i]
-            let rowItem = {
-                ID: passage.bID,
-                category: passage.bcategory,
-                title: passage.btitle,
-                content: passage.bcontent,
-                createTime: passage.bCreateTime,
-                updateTime: passage.bUpdateTime,
-                submitter: passage.bsubmitter,
-                remark: passage.bRemark,
-                href: passage.href
-            }
-            state.passages.push(rowItem)
-        }
-        // for(let key of state.sortKeys) {
-        // 	// console.log(JSON.stringify(Object.values(response[key])))
-        // 	let rowItem = {
-        // 		categoty: 0,
-        // 		key: response[key],
-        // 		data: Object.values(response[key])
-        // 	}
-        // 	// state.rows.push(rowItem)
-        // 	state.rows.push(Object.values(response[key]))
-        // }
-    },
-    [TYPE.CONTENT_FAILURE](state) {
-
     },
     [TYPE.CONTENT_PASSAGE_SUCCESS](state, response) {
         let passage = response;

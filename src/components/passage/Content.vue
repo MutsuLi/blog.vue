@@ -1,6 +1,8 @@
 <template>
   <section id="content">
-    <base-text>{{content}}</base-text>
+    <base-text>
+      <slot />
+    </base-text>
   </section>
 </template>
 
@@ -10,12 +12,9 @@ export default {
   mounted() {
     this.$store.dispatch("getContentDetail");
   },
-  computed: {
-    ...mapGetters(["passages"]),
-  },
   components: {
     BaseTitle: () => import("../base/Title"),
-    BaseText: () => import("../base/Text")
+    BaseText: () => import("./Text")
     //   DocumentationBreadcrumbs: () => import('./Breadcrumbs'),
     //   DocumentationContribution: () => import('./Contribution'),
   }

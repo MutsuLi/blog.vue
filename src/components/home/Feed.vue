@@ -60,7 +60,7 @@ export default {
   name: "Feed",
 
   components: {
-    FeedCard: () => import("@/components/FeedCard")
+    FeedCard: () => import("@/components/home/FeedCard")
   },
 
   data: () => ({
@@ -76,7 +76,6 @@ export default {
     paginatedArticles() {
       const start = (this.page - 1) * 11;
       const stop = this.page * 11;
-      console.log(this)
       return this.passages.slice(start, stop);
     }
   },

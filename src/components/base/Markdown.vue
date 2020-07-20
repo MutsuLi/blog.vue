@@ -19,8 +19,8 @@ export default {
       default: ""
     },
     source: {
-      type: String,
-      default: ""
+      type: Object,
+      default: () => ({})
     },
     tag: {
       type: String,
@@ -69,37 +69,37 @@ export default {
 
   render(h, context) {
     let code = this.code || this.source;
-
-    if (!this.code) {
+    if (!code) {
       if ((this.$slots.default || []).length > 0) {
         code = this.$slots.default[0].text.trim();
       }
-
       if (code.indexOf(".") > -1) {
         code = code;
       } else if (this.namespace && this.page) {
         code = `${this.namespace}.${this.page}.${code}`;
       }
+    } else if (this.source) {
+      console.log(this.source)
+      code = this.source.code;
     }
+    // // Probably wants to make a list
+    // const wantsList = Array.isArray(code);
 
-    // Probably wants to make a list
-    const wantsList = Array.isArray(code);
+    // if (wantsList) code = code.map(c => `- ${c}\n`).join("");
 
-    if (wantsList) code = code.map(c => `- ${c}\n`).join("");
+    // if (typeof code !== "string") {
+    //   console.log(`Invalid type ${typeof code}, expected string`, code);
+    //   code = "";
+    // }
+    // var rendererMD = new marked.Renderer();
+    // // Convert markdown links
+    // code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink);
 
-    if (typeof code !== "string") {
-      console.log(`Invalid type ${typeof code}, expected string`, code);
-      code = "";
-    }
-    var rendererMD = new marked.Renderer();
-    // Convert markdown links
-    code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink);
-
-    const innerHTML = marked(code);
+    const innerHTML = code;
 
     return h(this.tag, {
       staticClass: "v-markdown",
-      class: { "mb-6": wantsList },
+      class: { "mb-6": true },
       domProps: { innerHTML }
     });
   }

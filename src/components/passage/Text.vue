@@ -19,8 +19,7 @@ export default {
   },
   computed: {
     ...mapGetters(["passage"]),
-    text: () => {
-      console.log(this);
+    text() {
       let source = this.passage.content;
       let code = this.passage.contentHtml;
       return { source, code };

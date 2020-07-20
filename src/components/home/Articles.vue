@@ -13,7 +13,7 @@
       this.$store.dispatch("getContentRows");
     },
     components: {
-      Feed: () => import('@/components/Feed'),
+      Feed: () => import('@/components/home/Feed'),
     },
   }
 </script>
