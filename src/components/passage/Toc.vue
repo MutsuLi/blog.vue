@@ -4,9 +4,12 @@
     v-scroll="onScroll"
     :floating="structure === false"
     :right="!$vuetify.rtl"
+    :width="350"
     app
     clipped
   >
+    <passage-author></passage-author>
+    <passage-tags></passage-tags>
     <template v-if="structure !== false">
       <ul class="pt-8 mb-6 documentation-toc">
         <li class="mb-4">
@@ -52,7 +55,9 @@ import { mapGetters } from "vuex";
 export default {
   name: "passageToc",
   components: {
-    BaseMarkdown: () => import("../base/Markdown")
+    BaseMarkdown: () => import("../base/Markdown"),
+    PassageAuthor: () => import("./Author"),
+    PassageTags: () => import("./Tags")
   },
   data: () => ({
     activeIndex: 0,
