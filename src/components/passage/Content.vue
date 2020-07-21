@@ -15,8 +15,6 @@ export default {
   components: {
     BaseTitle: () => import("../base/Title"),
     BaseText: () => import("./Text")
-    //   DocumentationBreadcrumbs: () => import('./Breadcrumbs'),
-    //   DocumentationContribution: () => import('./Contribution'),
   }
 };
 </script>

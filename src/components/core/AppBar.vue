@@ -10,9 +10,9 @@
     <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
 
     <base-vuetify-logo />
+    <v-spacer />
     <home-search />
 
-    <v-spacer />
     <v-spacer class="d-sm-none" />
   </v-app-bar>
 </template>

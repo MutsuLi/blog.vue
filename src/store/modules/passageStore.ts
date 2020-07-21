@@ -55,7 +55,6 @@ const actions = {
         // })
     },
     getContentRank({ commit, state, rootState }, categoryId) {
-        console.log(categoryId)
         rootState.requesting = true
         commit(TYPE.CONTENT_RANK_REQUEST)
         rootState.requesting = false
@@ -150,7 +149,8 @@ const mutations = {
 
     },
     [TYPE.CONTENT_RANK_SUCCESS](state, response) {
-        state.ranks = response.data.sort().slice(4, 9);
+        state.ranks = response.data.sort().slice(3, 6);
+        console.log(state.ranks)
     },
     [TYPE.CONTENT_RANK_FAILURE](state) {
 

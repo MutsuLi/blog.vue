@@ -4,10 +4,11 @@
     <v-card-text>
       <div>Release Time: {{ReleaseTime}}</div>
       <div>Read: {{Read}}</div>
-      <v-chip-group v-model="tags" column>
+      <v-chip-group column>
         <v-chip
-          v-for="(tag, i) in tags"
+          v-for="(tag,i) in tags"
           :key="i"
+          :href="tag.href"
           class="ma-2"
           color="blue"
           outlined
@@ -37,11 +38,11 @@ export default {
     tags: [
       {
         text: "dotnet",
-        href: ""
+        href: "/passage"
       },
       {
         text: "database",
-        href: ""
+        href: "/passage"
       }
     ]
   })
