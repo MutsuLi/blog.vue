@@ -1,16 +1,21 @@
 <template>
-  <v-app>
-    <core-app-bar />
-    <core-view />
-    <!-- <core-drawer /> -->
-    <!-- <core-footer /> -->
-  </v-app>
+  <v-fade-transition mode="out-in">
+    <v-app>
+      <core-app-bar />
+      <core-view />
+      <!-- <core-drawer /> -->
+      <!-- <core-footer /> -->
+    </v-app>
+  </v-fade-transition>
 </template>
 
 <script>
+// Mixins
+import Meta from "@/mixins/meta";
+
 export default {
   name: "App",
-
+  mixins: [Meta],
   components: {
     // CoreNavigation: () => import("@/components/core/Navigation"),
     // CoreDrawer: () => import("@/components/core/Drawer"),
@@ -20,3 +25,20 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+.text-decoration-none
+  text-decoration: none
+
+  .wf-loading .material-icons
+    display: none
+
+  .v-application .markdown code
+    box-shadow: none
+    color: #c0341d
+    background-color: #fbe5e1
+
+  .v-application .markdown kbd > code
+    background: transparent
+    color: inherit
+</style>

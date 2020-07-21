@@ -4,19 +4,19 @@
     <v-card-text>
       <div>Release Time: {{ReleaseTime}}</div>
       <div>Read: {{Read}}</div>
-    </v-card-text>
-    <v-card-text>Tags</v-card-text>
-    <v-card-text>
-      <v-chip
-        v-for="(tag, i) in tags"
-        :key="i"
-        class="mr-2"
-        color="secondary"
-        label
-        small
-        tag
-        text-color="white"
-      >{{ tag.text }}</v-chip>
+      <v-chip-group v-model="tags" column>
+        <v-chip
+          v-for="(tag, i) in tags"
+          :key="i"
+          class="ma-2"
+          color="blue"
+          outlined
+          pill
+          small
+          tag
+          text-color="black"
+        >{{ tag.text }}</v-chip>
+      </v-chip-group>
     </v-card-text>
   </v-card>
 </template>
@@ -27,16 +27,26 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "PassageTags",
-  mounted() {
-    this.$store.dispatch("getContentTags");
-  },
+  // mounted() {
+  //   this.$store.dispatch("getContentTags");
+  // },
 
   data: () => ({
     Read: "1",
-    ReleaseTime: "2020-07-20"
-  }),
-  computed: {
-    ...mapGetters(["tags"])
-  }
+    ReleaseTime: "2020-07-20",
+    tags: [
+      {
+        text: "dotnet",
+        href: ""
+      },
+      {
+        text: "database",
+        href: ""
+      }
+    ]
+  })
+  // computed: {
+  //   ...mapGetters(["tags"])
+  // }
 };
 </script>

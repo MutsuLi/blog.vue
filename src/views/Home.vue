@@ -1,12 +1,12 @@
 <template>
-  <div id="home">
+  <v-app>
     <articles>
       <HomeCarousels />
       <banner />
     </articles>
     <!-- <about />-->
     <social />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -23,3 +23,20 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+.text-decoration-none
+  text-decoration: none
+
+  .wf-loading .material-icons
+    display: none
+
+  .v-application .markdown code
+    box-shadow: none
+    color: #c0341d
+    background-color: #fbe5e1
+
+  .v-application .markdown kbd > code
+    background: transparent
+    color: inherit
+</style>

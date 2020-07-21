@@ -80,8 +80,15 @@ const actions = {
         commit(TYPE.CONTENT_RANK_REQUEST)
         rootState.requesting = false
         let articles = require('@/data/Passages.json').data;
-        const categories: category[] = []
+        let categories: category[] = []
         let hashMap = new Set();
+        const defaultArr: category[] = [{
+            text: "dotnet",
+            href: '',
+        }, {
+            text: "database",
+            href: '',
+        }];
         for (const article of articles) {
             if ((typeof (article.bcategory) == "undefined") || article.bcategory == "") continue;
             if (hashMap.has(article.bcategory)) continue;
@@ -92,6 +99,7 @@ const actions = {
                 href: '',
             })
         }
+        categories = categories.concat(defaultArr)
         commit(TYPE.CONTENT_TAGS_SUCCESS, categories)
     }
 }
@@ -103,7 +111,7 @@ const mutations = {
     [TYPE.MENU_SUCCESS](state, response) {
         state.menus = response;
     },
-     [TYPE.CONTENT_REQUEST](state) {
+    [TYPE.CONTENT_REQUEST](state) {
 
     },
     [TYPE.CONTENT_SUCCESS](state, response) {

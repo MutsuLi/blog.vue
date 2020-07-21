@@ -1,16 +1,23 @@
-import Vue from 'vue'
-import vuetify from './plugins/vuetify'
-import './plugins/base'
-import App from './App.vue'
-import router from './router'
-import { createStore } from '@/store/index'
-import 'vuetify/dist/vuetify.min.css'; //css 需引入
-import { sync } from 'vuex-router-sync'
+// Packages
+import Vue from 'vue';
+import Vuetify from 'vuetify';
+// Bootstrap;=
+import '@/components';
+import '@/plugins';
+import App from './App.vue';
+import router from './router';
+import { createStore } from '@/store/index';
+import { createVuetify } from '@/vuetify/index';
+import { sync } from 'vuex-router-sync';
 
 
 // create store and router instances
-const store = createStore()
-sync(store, router)
+const store = createStore();
+const vuetify = createVuetify();
+
+store.state.app.currentVersion = Vuetify.version;
+sync(store, router);
+
 Vue.config.productionTip = false
 
 new Vue({
