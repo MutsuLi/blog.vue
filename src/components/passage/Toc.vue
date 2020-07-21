@@ -70,6 +70,7 @@ export default {
     ...mapGetters(["passage"]),
     structure: sync("documentation/structure"),
     toc() {
+      if (!this.passage.headings) return [];
       return this.passage.headings
         .map(title => {
           return {

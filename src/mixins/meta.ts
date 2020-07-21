@@ -6,24 +6,24 @@ export default {
   }),
 
   computed: {
-    title () {
+    title() {
       return this.meta.title || 'Vue Material Component Framework'
     },
-    description () {
+    description() {
       return this.meta.description
     },
-    keywords () {
+    keywords() {
       return this.meta.keywords
     },
   },
 
   watch: {
-    $route () {
+    $route() {
       this.setMeta()
     },
     meta: {
       deep: true,
-      handler () {
+      handler() {
         if (typeof document !== 'undefined') {
           document.title = `${this.title} — Vuetify.js`
         }
@@ -34,41 +34,41 @@ export default {
     },
   },
 
-  created () {
+  created() {
     if (process.env.VUE_ENV === 'client') return
 
     this.setMeta()
 
-    this.$ssrContext.title = `${this.title} — Vuetify.js`
-    this.$ssrContext.description = this.description
-    this.$ssrContext.keywords = this.keywords
+    //this.$ssrContext.title = `${this.title} — Vuetify.js`
+    //this.$ssrContext.description = this.description
+    //this.$ssrContext.keywords = this.keywords
   },
 
-  mounted () {
+  mounted() {
     this.bootstrapMeta()
   },
 
   methods: {
-    bootstrapMeta () {
+    bootstrapMeta() {
       if (typeof document === 'undefined') return
 
       this._title = document.title
       this._description = document.querySelector('meta[name="description"]')
       this._keywords = document.querySelector('meta[name="keywords"]')
 
-      this.setMeta()
+      //this.setMeta()
     },
-    setMeta () {
+    setMeta() {
       const [, lang, namespace, page] = this.$route.path.split('/')
 
       const key = namespace ? `${namespace}/${page}` : ''
-      const meta = this.$i18n.getLocaleMessage(lang).Meta || {}
-
+      // const meta = this.$i18n.getLocaleMessage(lang).Meta || {}
+      const meta = {}
       this.meta = meta[key] || this.getFallbackMeta(key) || {}
     },
-    getFallbackMeta (path) {
-      const fallbackmeta = this.$i18n.getLocaleMessage(this.$i18n.fallbackLocale).Meta || {}
-
+    getFallbackMeta(path) {
+      //const fallbackmeta = this.$i18n.getLocaleMessage(this.$i18n.fallbackLocale).Meta || {}
+      const fallbackmeta = {}
       if (process.env.NODE_ENV === 'development') {
         console.warn('Falling back to english meta for ' + (path || '/'))
       }

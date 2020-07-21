@@ -79,7 +79,6 @@ export default {
         code = `${this.namespace}.${this.page}.${code}`;
       }
     } else if (this.source) {
-      console.log(this.source)
       code = this.source.code;
     }
     // // Probably wants to make a list
@@ -107,6 +106,7 @@ export default {
 </script>
 
 <style lang="sass">
+
 .v-markdown:last-child p,
 .v-markdown:last-child
   margin-bottom: 0 !important
@@ -127,11 +127,12 @@ export default {
     margin: 8px 0
 
   .v-markdown code
-    box-shadow: none 
-    color: #333 
-    background-color: #f8f8f8
+    box-shadow: none !important
+    color: #fbe5e1 !important
+    background-color: #fbe5e1 !important
 
   .v-markdown kbd > code
     background: transparent !important
     color: inherit !important
 </style>
+

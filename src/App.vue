@@ -27,6 +27,7 @@ export default {
 </script>
 
 <style lang="sass">
+@import '~vuetify/src/styles/styles.sass'
 .text-decoration-none
   text-decoration: none
 
@@ -35,7 +36,7 @@ export default {
 
   .v-application .markdown code
     box-shadow: none
-    color: #c0341d
+    color: #fbe5e1
     background-color: #fbe5e1
 
   .v-application .markdown kbd > code
