@@ -106,7 +106,6 @@ export default {
 </script>
 
 <style lang="sass">
-
 .v-markdown:last-child p,
 .v-markdown:last-child
   margin-bottom: 0 !important

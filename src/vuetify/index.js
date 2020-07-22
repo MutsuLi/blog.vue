@@ -9,6 +9,7 @@ export function createVuetify () {
   const vuetify = new Vuetify({
     theme: {
       options: {
+        customProperties: true,
         themeCache: typeof document !== 'undefined' ? {
           get: key => localStorage.getItem(key),
           set: (key, value) => localStorage.setItem(key, value),

@@ -1,27 +1,15 @@
 <template>
-  <v-container
-    id="social"
-    tag="section"
-  >
+  <v-container id="social" tag="section">
     <v-row>
-      <v-col
-        cols="12"
-        md="4"
-      >
+      <v-col cols="12" md="4">
         <instagram />
       </v-col>
 
-      <v-col
-        cols="12"
-        md="4"
-      >
+      <v-col cols="12" md="4">
         <newest-posts />
       </v-col>
 
-      <v-col
-        cols="12"
-        md="4"
-      >
+      <v-col cols="12" md="4">
         <tags />
       </v-col>
     </v-row>
@@ -29,13 +17,13 @@
 </template>
 
 <script>
-  export default {
-    name: 'HomeSocial',
+export default {
+  name: "HomeSocial",
 
-    components: {
-      NewestPosts: () => import('@/components/NewestPosts'),
-      Instagram: () => import('@/components/Instagram'),
-      Tags: () => import('@/components/Tags'),
-    },
+  components: {
+    NewestPosts: () => import("@/components/home/NewestPosts"),
+    Instagram: () => import("@/components/home/Instagram"),
+    Tags: () => import("@/components/home/Tags")
   }
+};
 </script>

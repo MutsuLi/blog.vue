@@ -12,6 +12,8 @@
     <base-vuetify-logo />
     <v-spacer />
     <home-search />
+    <base-homepage/>
+    <base-support-menu />
 
     <v-spacer class="d-sm-none" />
   </v-app-bar>
@@ -26,7 +28,9 @@ export default {
   inject: ["theme"],
   components: {
     BaseVuetifyLogo: () => import("../base/VuetifyLogo"),
-    HomeSearch: () => import("../home/Search")
+    HomeSearch: () => import("../home/Search"),
+    BaseSupportMenu: () => import("../base/SupportMenu"),
+    BaseHomepage: () => import("../base/Homepage")
   },
   computed: {
     ...mapGetters(["menus"])

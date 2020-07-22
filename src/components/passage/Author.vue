@@ -23,7 +23,7 @@ export default {
   data: () => ({
     author: {
       name: "mutsuli",
-      title: "soft engineer",
+      title: "software engineer",
       info: "someone like you",
       passagesCount: 10
     },
