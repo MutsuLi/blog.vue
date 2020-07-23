@@ -27,7 +27,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "ArticleTags",
+  name: "PassageTags",
   // mounted() {
   //   this.$store.dispatch("getContentTags");
   // },

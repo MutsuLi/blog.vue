@@ -1,9 +1,9 @@
 <template>
-  <div id="Article">
+  <v-app>
     <article-content />
     <article-fab />
     <article-toc />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -12,7 +12,7 @@ export default {
   components: {
     ArticleFab: () => import("@/components/article/Fab"),
     ArticleContent: () => import("@/components/article/Content"),
-    ArticleToc: () => import("@/components/article/Toc")
-  }
+    ArticleToc: () => import("@/components/article/Toc"),
+  },
 };
 </script>

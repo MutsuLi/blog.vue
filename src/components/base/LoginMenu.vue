@@ -4,6 +4,7 @@
       v-if="!login"
       class="hidden-md-and-down"
       min-width="48"
+      href="/login"
       text
       style="min-width: 48px color:primary"
       @click="onClick($event, menu)"
@@ -14,6 +15,7 @@
       v-if="!login"
       class="hidden-md-and-down"
       min-width="48"
+      href="/join"
       text
       style="min-width: 48px color:primary"
       @click="onClick($event, menu)"
@@ -62,7 +64,7 @@
 export default {
   name: "BaseLoginMenu",
   data: () => ({
-    login: true,
+    login: false,
     user: {
       name: "mutsuli",
     },
