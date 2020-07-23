@@ -2,7 +2,7 @@ import * as TYPE from '../actionType/contentType'
 
 
 const state = {
-    passages: [],
+    articles: [],
     ranks: [],
     tags: [],
     menus: []
@@ -10,7 +10,7 @@ const state = {
 }
 
 const getters = {
-    passages: state => state.passages,
+    articles: state => state.articles,
     ranks: state => state.ranks,
     tags: state => state.tags,
     menus: state => state.menus
@@ -37,7 +37,7 @@ const actions = {
         rootState.requesting = true
         commit(TYPE.CONTENT_REQUEST)
         rootState.requesting = false
-        let response = require('@/data/Passages.json');
+        let response = require('@/data/Articles.json');
         commit(TYPE.CONTENT_SUCCESS, response)
         // contentApi.content().then((response) => {
         //     rootState.requesting = false
@@ -51,7 +51,7 @@ const actions = {
         rootState.requesting = true
         commit(TYPE.CONTENT_RANK_REQUEST)
         rootState.requesting = false
-        let response = require('@/data/Passages.json');
+        let response = require('@/data/Articles.json');
         commit(TYPE.CONTENT_RANK_SUCCESS, response)
         // commit(TYPE.CONTENT_RANK_REQUEST)
         // let param = {
@@ -71,7 +71,7 @@ const actions = {
         rootState.requesting = true
         commit(TYPE.CONTENT_RANK_REQUEST)
         rootState.requesting = false
-        let articles = require('@/data/Passages.json').data;
+        let articles = require('@/data/Articles.json').data;
         let categories: category[] = []
         let hashMap = new Set();
         const defaultArr: category[] = [{
@@ -109,19 +109,20 @@ const mutations = {
     [TYPE.CONTENT_SUCCESS](state, response) {
         let list = response.data;
         for (let i = 0; i < list.length; i++) {
-            let passage = list[i]
+            let article = list[i]
             let rowItem = {
-                ID: passage.bID,
-                category: passage.bcategory,
-                title: passage.btitle,
-                content: passage.bcontent,
-                createTime: passage.bCreateTime,
-                updateTime: passage.bUpdateTime,
-                submitter: passage.bsubmitter,
-                remark: passage.bRemark,
-                href: passage.href
+                ID: article.bID,
+                category: article.bcategory,
+                title: article.btitle,
+                content: article.bcontent,
+                createTime: article.bCreateTime,
+                updateTime: article.bUpdateTime,
+                submitter: article.bsubmitter,
+                remark: article.bRemark,
+                href: "/articles/" + article.bID,
+                traffic: article.btraffic
             }
-            state.passages.push(rowItem)
+            state.articles.push(rowItem)
         }
         // for(let key of state.sortKeys) {
         // 	// console.log(JSON.stringify(Object.values(response[key])))
@@ -143,7 +144,6 @@ const mutations = {
     },
     [TYPE.CONTENT_RANK_SUCCESS](state, response) {
         state.ranks = response.data.sort().slice(3, 6);
-        console.log(state.ranks)
     },
     [TYPE.CONTENT_RANK_FAILURE](state) {
 

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
-import Passage from '../views/Passage.vue'
+import Article from '../views/Article.vue'
 
 Vue.use(VueRouter)
 
@@ -13,9 +13,9 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/passage',
-    name: 'Passage',
-    component: Passage
+    path: '/article',
+    name: 'Article',
+    component: Article
   }
 ]
 

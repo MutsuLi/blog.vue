@@ -18,11 +18,11 @@ export default {
     BaseMarkdown: () => import("@/components/base/Markdown")
   },
   computed: {
-    ...mapGetters(["passage"]),
+    ...mapGetters(["article"]),
     text: () => {
       console.log(this);
-      let source = this.passage.content;
-      let code = this.passage.contentHtml;
+      let source = this.article.content;
+      let code = this.article.contentHtml;
       return { source, code };
     }
   },

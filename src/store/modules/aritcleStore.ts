@@ -25,7 +25,7 @@ const state = {
         tags: [],
         headings: []
     },
-    passage: {}
+    article: {}
 
 }
 
@@ -34,7 +34,7 @@ const getters = {
     breadcrumbs: state => state.breadcrumbs,
     author: state => state.author,
     passageInfo: state => state.passageInfo,
-    passage: state => state.passage
+    article: state => state.article
     // sortKeys: state => state.sortKeys,
     // sortIds: state => state.sortIds,
 }
@@ -44,8 +44,8 @@ const actions = {
         rootState.requesting = true
         commit(TYPE.CONTENT_RANK_REQUEST)
         rootState.requesting = false
-        let passage = require('@/data/detail.json');
-        commit(TYPE.CONTENT_PASSAGE_SUCCESS, passage)
+        let article = require('@/data/detail.json');
+        commit(TYPE.CONTENT_ARTICLE_SUCCESS, article)
     }
 }
 
@@ -53,7 +53,7 @@ const mutations = {
     [TYPE.CONTENT_FAILURE](state) {
 
     },
-    [TYPE.CONTENT_PASSAGE_SUCCESS](state, response) {
+    [TYPE.CONTENT_ARTICLE_SUCCESS](state, response) {
         const rendererMD = new marked.Renderer();
         const tagsArr: Array<object> = new Array();
         rendererMD.heading = (text, level) => {
@@ -66,24 +66,24 @@ const mutations = {
 
         let rawHtml = response.bcontent.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink);
         const innerHTML = marked(rawHtml, { renderer: rendererMD });
-        let passage = response;
+        let article = response;
         let result = {
-            ID: passage.bID,
-            category: passage.bcategory,
-            title: passage.btitle,
-            content: passage.bcontent,
+            ID: article.bID,
+            category: article.bcategory,
+            title: article.btitle,
+            content: article.bcontent,
             contentHtml: innerHTML,
-            createTime: passage.bCreateTime,
-            updateTime: passage.bUpdateTime,
-            submitter: passage.bsubmitter,
-            remark: passage.bRemark,
-            next: passage.next,
-            nextID: passage.nextID,
-            previousID: passage.previousID,
-            previous: passage.previous,
+            createTime: article.bCreateTime,
+            updateTime: article.bUpdateTime,
+            submitter: article.bsubmitter,
+            remark: article.bRemark,
+            next: article.next,
+            nextID: article.nextID,
+            previousID: article.previousID,
+            previous: article.previous,
             headings: tagsArr
         };
-        state.passage = result;
+        state.article = result;
 
     },
     // 标签信息

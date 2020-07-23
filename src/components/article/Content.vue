@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "PassageContent",
+  name: "ArticleContent",
   mounted() {
     this.$store.dispatch("getContentDetail");
   },

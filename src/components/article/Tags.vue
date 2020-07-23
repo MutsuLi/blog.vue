@@ -27,7 +27,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "PassageTags",
+  name: "ArticleTags",
   // mounted() {
   //   this.$store.dispatch("getContentTags");
   // },
@@ -38,11 +38,11 @@ export default {
     tags: [
       {
         text: "dotnet",
-        href: "/passage"
+        href: "/article"
       },
       {
         text: "database",
-        href: "/passage"
+        href: "/article"
       }
     ]
   })

@@ -9,7 +9,7 @@
     </v-list-item>
     <v-card-text>
       <v-row> </v-row>
-      <p>文章: {{author.passagesCount}}</p>
+      <p>文章: {{author.count}}</p>
       <div class="text--primary">{{author.info}}</div>
     </v-card-text>
     <v-card-actions>
@@ -19,13 +19,13 @@
 </template>
 <script>
 export default {
-  name: "PassageAuthor",
+  name: "ArticleAuthor",
   data: () => ({
     author: {
       name: "mutsuli",
       title: "software engineer",
       info: "someone like you",
-      passagesCount: 10
+      count: 10
     },
     ReleaseTime: "2020-07-20"
   })

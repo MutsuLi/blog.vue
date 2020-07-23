@@ -5,7 +5,7 @@
         :height="value.prominent ? 450 : 350"
         :elevation="hover ? 12 : 2"
         :class="{ 'on-hover': hover }"
-        href="#!"
+        :href="value.href"
       >
         <!-- <v-img
           :src="require(`@/assets/articles/${value.hero}`)"
@@ -14,38 +14,39 @@
         >-->
         <v-row v-if="!value.prominent" class="fill-height text-right ma-0">
           <v-col cols="12">
-            <v-chip
-              label
-              class="mx-0 mb-2 text-uppercase"
-              color="blue"
-              text-color="white"
-              small
-              @click.stop
-            >{{ value.category }}</v-chip>
-
-            <h3 class="title font-weight-bold mb-2" text-color="black">{{ value.title }}</h3>
-
-            <div class="caption" text-color="black">
-              {{ value.submitter }}
-              <br /> {{ value.createTime }}
-            </div>
-            <div>
-              <p
-                class="ma-0 body-1 font-weight-bold font-italic text-left"
-                text-color="black"
-              >{{ value.remark }}</p>
-            </div>
-          </v-col>
-
-          <v-col align-self="end">
-            <v-chip
-              class="text-uppercase ma-0"
-              color="primary"
-              :class="{ 'show-btns': hover }"
-              label
-              small
-              @click.stop
-            >Read More</v-chip>
+            <v-card-title class="title font-weight-bold mb-2" text-color="black">{{ value.title }}</v-card-title>
+            <v-card-text
+              class="text--primary ma-0 body-1 font-weight-bold text-left"
+            >{{ value.remark }}</v-card-text>
+            <v-card-text class="text--primary font-weight-bold text-left" text-color="black">
+              <span class="pr-2">
+                <v-icon>mdi-account-box</v-icon>
+                {{ value.submitter }}
+              </span>
+              <span class="pr-2">
+                <v-icon>mdi-clock-outline</v-icon>
+                {{ value.createTime }}
+              </span>
+              <span class="pr-2">
+                <v-icon>mdi-clock-outline</v-icon>
+                {{ value.updateTime }}
+              </span>
+              <span class="pr-2">
+                <v-icon>mdi-eye</v-icon>
+                {{ value.updateTime }}
+              </span>
+            </v-card-text>
+            <v-spacer/>
+            <v-card-actions>
+              <v-chip
+                label
+                class="mx-0 mb-2 text-uppercase"
+                color="blue"
+                text-color="white"
+                small
+                @click.stop
+              >{{ value.category }}</v-chip>
+            </v-card-actions>
           </v-col>
         </v-row>
         <!-- </v-img> -->
@@ -57,17 +58,19 @@
 <script>
 export default {
   name: "FeedCard",
-
+  components: {
+    BaseMarkdown: () => import("@/components/base/Markdown"),
+  },
   props: {
     size: {
       type: Number,
-      required: true
+      required: true,
     },
     value: {
       type: Object,
-      default: () => ({})
-    }
-  }
+      default: () => ({}),
+    },
+  },
 };
 </script>
 
@@ -76,7 +79,7 @@ export default {
   transition: 0.3s linear;
 } */
 .v-card {
-  transition: opacity 0.4s ease-in-out
+  transition: opacity 0.4s ease-in-out;
 }
 
 .v-card:not(.on-hover) {

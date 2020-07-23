@@ -27,7 +27,7 @@
 import { sync } from "vuex-pathify";
 
 export default {
-  name: "PassageFab",
+  name: "ArticleFab",
 
   data: () => ({ fab: true }),
 

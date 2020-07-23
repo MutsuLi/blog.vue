@@ -9,8 +9,8 @@
     app
     clipped
   >
-    <passage-author></passage-author>
-    <passage-tags></passage-tags>
+    <article-author></article-author>
+    <article-tags></article-tags>
     <template v-if="structure !== false">
       <ul class="pt-8 mb-6 documentation-toc">
         <li class="mb-4">
@@ -54,35 +54,35 @@ import { goTo } from "@/util/helpers";
 import { get, sync } from "vuex-pathify";
 import { mapGetters } from "vuex";
 export default {
-  name: "passageToc",
+  name: "ArticleToc",
   components: {
     BaseMarkdown: () => import("../base/Markdown"),
-    PassageAuthor: () => import("./Author"),
-    PassageTags: () => import("./Tags")
+    ArticleAuthor: () => import("./Author"),
+    ArticleTags: () => import("./Tags"),
   },
   data: () => ({
     activeIndex: 0,
     currentOffset: 0,
     internalToc: [],
-    tocTimeout: 0
+    tocTimeout: 0,
   }),
 
   computed: {
-    ...mapGetters(["passage"]),
+    ...mapGetters(["article"]),
     structure: sync("documentation/structure"),
     toc() {
-      if (!this.passage.headings) return [];
-      return this.passage.headings
-        .map(title => {
+      if (!this.article.headings) return [];
+      return this.article.headings
+        .map((title) => {
           return {
             id: kebabCase(title.text),
             subheader: title.subTitle,
             text: title.text,
-            visible: !title.subTitle
+            visible: !title.subTitle,
           };
         })
-        .filter(title => title.visible);
-    }
+        .filter((title) => title.visible);
+    },
   },
 
   watch: {
@@ -91,8 +91,8 @@ export default {
       handler(val) {
         if (!val.length) return;
         this.$nextTick(() => (this.internalToc = this.toc.slice()));
-      }
-    }
+      },
+    },
   },
 
   methods: {
@@ -105,7 +105,7 @@ export default {
 
       const list = this.toc.slice().reverse();
 
-      const index = list.findIndex(item => {
+      const index = list.findIndex((item) => {
         const section = document.getElementById(item.id);
         if (!section) return false;
         return section.offsetTop - 100 < this.currentOffset;
@@ -118,8 +118,8 @@ export default {
         window.pageYOffset || document.documentElement.offsetTop || 0;
       clearTimeout(this.timeout);
       this.timeout = setTimeout(this.findActiveIndex, 50);
-    }
-  }
+    },
+  },
 };
 </script>
 

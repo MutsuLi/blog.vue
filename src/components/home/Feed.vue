@@ -34,14 +34,14 @@ export default {
   }),
 
   computed: {
-    ...mapGetters(["passages"]),
+    ...mapGetters(["articles"]),
     pages() {
-      return Math.ceil(this.passages.length / 11);
+      return Math.ceil(this.articles.length / 11);
     },
     paginatedArticles() {
       const start = (this.page - 1) * 11;
       const stop = this.page * 11;
-      return this.passages.slice(start, stop);
+      return this.articles.slice(start, stop);
     }
   },
 
