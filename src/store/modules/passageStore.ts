@@ -1,14 +1,7 @@
-// import { contentApi, contentrankApi } from 'api'
 import * as TYPE from '../actionType/contentType'
 
 
-
-
 const state = {
-    // 默认排序
-    // sortKeys: ['douga', 'bangumi', 'music', 'dance', 'game', 'technology', 'life', 'kichiku', 'fashion', 'ad', 'ent', 'movie', 'teleplay'],
-    // sortIds: [1, 13, 3, 129, 4, 36, 160, 119, 155, 165, 5, 23, 11],
-    // sortValues: ['动画', '番剧', '音乐', '舞蹈', '游戏', '科技', '生活', '鬼畜', '时尚', '广告', '娱乐', '电影', 'TV剧'],
     passages: [],
     ranks: [],
     tags: [],

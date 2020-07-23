@@ -7,14 +7,14 @@
     clipped-right
     flat
   >
+    <v-spacer />
     <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
 
     <base-vuetify-logo />
-    <v-spacer />
-    <home-search />
-    <base-homepage/>
-    <base-support-menu />
+    <base-navigation-menu />
 
+    <home-search />
+    <base-Login-menu />
     <v-spacer class="d-sm-none" />
   </v-app-bar>
 </template>
@@ -30,10 +30,11 @@ export default {
     BaseVuetifyLogo: () => import("../base/VuetifyLogo"),
     HomeSearch: () => import("../home/Search"),
     BaseSupportMenu: () => import("../base/SupportMenu"),
-    BaseHomepage: () => import("../base/Homepage")
+    BaseNavigationMenu: () => import("../base/NavigationMenu"),
+    BaseLoginMenu: () => import("../base/LoginMenu"),
   },
   computed: {
-    ...mapGetters(["menus"])
+    ...mapGetters(["menus"]),
   },
   mounted() {
     this.$store.dispatch("getMenuList");
@@ -46,8 +47,8 @@ export default {
       if (item.to || !item.href) return;
 
       this.$vuetify.goTo(item.href.endsWith("!") ? 0 : item.href);
-    }
-  }
+    },
+  },
 };
 </script>
 

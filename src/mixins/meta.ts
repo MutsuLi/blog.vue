@@ -7,7 +7,7 @@ export default {
 
   computed: {
     title() {
-      return this.meta.title || 'Vue Material Component Framework'
+      return this.meta.title || 'MutsuLi'
     },
     description() {
       return this.meta.description
@@ -25,7 +25,7 @@ export default {
       deep: true,
       handler() {
         if (typeof document !== 'undefined') {
-          document.title = `${this.title} — Vuetify.js`
+          document.title = `${this.title}`
         }
 
         this._description.setAttribute('content', this.description)

@@ -1,9 +1,11 @@
 {
     "data": [{
-        "name": "home",
+        "name": "Home",
+        "icon": "mdi-home-circle",
         "href": "/"
     }, {
-        "name": "about",
-        "href": ""
+        "name": "Doc",
+        "icon": "mdi-file-document",
+        "href": "/"
     }]
 }

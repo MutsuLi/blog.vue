@@ -60,7 +60,7 @@ export default {
     };
   },
   components: {
-    BaseVersionsMenu: () => import("../base/VersionsMenu"),
+    // BaseVersionsMenu: () => import("../base/VersionsMenu"),
     BaseThemeToggle: () => import("../base/ThemeToggle"),
     BaseGroup: () => import("../base/Group"),
     BaseItem: () => import("../base/Item")

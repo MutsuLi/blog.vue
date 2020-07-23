@@ -1,5 +1,5 @@
 <template>
-  <v-menu bottom left max-height="calc(100% - 16px)" offset-y transition="slide-y-transition">
+  <v-menu bottom right max-height="calc(100% - 16px)" offset-y transition="slide-y-transition">
     <template v-slot:activator="{ on: menu }">
       <v-btn
         :aria-label="'Vuetify.AppToolbar.support'"
@@ -8,11 +8,7 @@
         style="min-width: 48px"
         v-on="menu"
       >
-        <base-nav-text class="hidden-sm-and-down">About</base-nav-text>
-
-        <v-icon class="hidden-sm-and-down" right>mdi-menu-down</v-icon>
-
-        <v-icon class="hidden-md-and-up">mdi-comment-question</v-icon>
+        <v-icon class="hidden-sm-and-down" middle>mdi-dots-horizontal</v-icon>
       </v-btn>
     </template>
 
@@ -33,19 +29,19 @@
 export default {
   name: "BaseSupportMenu",
 
-  data: vm => ({
+  data: (vm) => ({
     supports: [
       {
         href: "/",
         icon: "mdi-information",
-        text: "about"
+        text: "About",
       },
       {
         href: "https://github.com/okitasann",
         icon: "mdi-git",
-        text: "Github"
-      }
-    ]
-  })
+        text: "Github",
+      },
+    ],
+  }),
 };
 </script>

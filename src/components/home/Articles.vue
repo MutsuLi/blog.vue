@@ -7,13 +7,15 @@
 </template>
 
 <script>
-  export default {
-    name: 'HomeAbout',
-    mounted() {
-      this.$store.dispatch("getContentRows");
-    },
-    components: {
-      Feed: () => import('@/components/home/Feed'),
-    },
-  }
+
+
+export default {
+  name: "HomeAbout",
+  mounted() {
+    this.$store.dispatch("getContentRows");
+  },
+  components: {
+    Feed: () => import("@/components/home/Feed"),
+  },
+};
 </script>
