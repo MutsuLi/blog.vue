@@ -9,9 +9,6 @@
               class="text-center"
               cols="9"
             >Powered by .NET Core 3.1.4 © mutsuli {{ new Date().getFullYear() }}</v-col>
-            <base-btn class="mr-0" square title="Go to top" @click="$vuetify.goTo(0)">
-              <v-icon>mdi-chevron-up</v-icon>
-            </base-btn>
           </v-row>
         </v-container>
       </v-footer>
@@ -27,33 +24,33 @@ export default {
     items: [
       {
         href: "#!",
-        icon: "mdi-twitter"
+        icon: "mdi-twitter",
       },
       {
         href: "#!",
-        icon: "mdi-instagram"
+        icon: "mdi-instagram",
       },
       {
         href: "#!",
-        icon: "mdi-facebook"
+        icon: "mdi-facebook",
       },
       {
         href: "#!",
-        icon: "mdi-google-plus"
+        icon: "mdi-google-plus",
       },
       {
         href: "#!",
-        icon: "mdi-reddit"
+        icon: "mdi-reddit",
       },
       {
         href: "#!",
-        icon: "mdi-discord"
+        icon: "mdi-discord",
       },
       {
         href: "#!",
-        icon: "mdi-pinterest"
-      }
-    ]
-  })
+        icon: "mdi-pinterest",
+      },
+    ],
+  }),
 };
 </script>

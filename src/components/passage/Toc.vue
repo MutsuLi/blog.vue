@@ -5,6 +5,7 @@
     :floating="structure === false"
     :right="!$vuetify.rtl"
     :width="350"
+    height="80%"
     app
     clipped
   >

@@ -4,7 +4,7 @@
       <core-app-bar />
       <core-view />
       <!-- <core-drawer /> -->
-      <!-- <core-footer /> -->
+      <core-footer />
     </v-app>
   </v-fade-transition>
 </template>
@@ -19,10 +19,10 @@ export default {
   components: {
     // CoreNavigation: () => import("@/components/core/Navigation"),
     // CoreDrawer: () => import("@/components/core/Drawer"),
-    // CoreFooter: () => import("@/components/core/Footer"),
+    CoreFooter: () => import("@/components/core/Footer"),
     CoreAppBar: () => import("@/components/core/AppBar"),
-    CoreView: () => import("@/components/core/View")
-  }
+    CoreView: () => import("@/components/core/View"),
+  },
 };
 </script>
 

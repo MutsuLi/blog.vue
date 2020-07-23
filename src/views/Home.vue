@@ -2,10 +2,10 @@
   <v-app>
     <articles>
       <HomeCarousels />
-      <banner />
+      <!-- <banner /> -->
     </articles>
     <!-- <about />-->
-    <social />
+    <!-- <social /> -->
   </v-app>
 </template>
 
@@ -18,9 +18,9 @@ export default {
     // About: () => import('@/components/home/About'),
     Articles: () => import("@/components/home/Articles"),
     Banner: () => import("@/components/home/Banner"),
-    Social: () => import("@/components/home/Social")
+    // Social: () => import("@/components/home/Social")
     //CoreFooter: () => import("@/components/core/Footer")
-  }
+  },
 };
 </script>
 

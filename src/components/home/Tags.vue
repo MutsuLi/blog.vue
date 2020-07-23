@@ -1,7 +1,6 @@
 <template>
   <v-container class="pa-0">
     <base-subheading>Tags</base-subheading>
-
     <v-chip
       v-for="(tag, i) in tags"
       :key="i"
@@ -25,7 +24,7 @@ export default {
     this.$store.dispatch("getContentTags");
   },
   computed: {
-    ...mapGetters(["tags"])
-  }
+    ...mapGetters(["tags"]),
+  },
 };
 </script>

@@ -2,14 +2,6 @@
   <v-container id="social" tag="section">
     <v-row>
       <v-col cols="12" md="4">
-        <instagram />
-      </v-col>
-
-      <v-col cols="12" md="4">
-        <newest-posts />
-      </v-col>
-
-      <v-col cols="12" md="4">
         <tags />
       </v-col>
     </v-row>
@@ -21,9 +13,8 @@ export default {
   name: "HomeSocial",
 
   components: {
-    NewestPosts: () => import("@/components/home/NewestPosts"),
     Instagram: () => import("@/components/home/Instagram"),
-    Tags: () => import("@/components/home/Tags")
-  }
+    Tags: () => import("@/components/home/Tags"),
+  },
 };
 </script>
