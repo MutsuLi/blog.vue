@@ -38,11 +38,11 @@ export default {
     tags: [
       {
         text: "dotnet",
-        href: "/article"
+        href: "/articles"
       },
       {
         text: "database",
-        href: "/article"
+        href: "/articles"
       }
     ]
   })

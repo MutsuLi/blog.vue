@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
-import Article from '../views/Article.vue'
+import Articles from '../views/Article.vue'
 import Login from '../views/Login.vue'
 import Join from '../views/Join.vue'
 
@@ -15,9 +15,9 @@ const routes: Array<RouteConfig> = [
     component: Home
   },
   {
-    path: '/article',
-    name: 'Article',
-    component: Article
+    path: '/articles',
+    name: 'Articles',
+    component: Articles
   },
   {
     path: '/login',
