@@ -64,31 +64,31 @@
 export default {
   name: "BaseLoginMenu",
   data: () => ({
-    login: false,
+    login: true,
     user: {
       name: "mutsuli",
     },
     userMenu: [
-      {
-        href: "/",
-        icon: "mdi-home-account",
-        text: "My Page",
-      },
+      // {
+      //   href: "/",
+      //   icon: "mdi-home-account",
+      //   text: "My Page",
+      // },
       {
         href: "/",
         icon: "mdi-lead-pencil",
         text: "write",
       },
-      {
-        href: "/",
-        icon: "mdi-file-edit-outline",
-        text: "My Aritcle",
-      },
-      {
-        href: "/",
-        icon: "mdi-cogs",
-        text: "Setting",
-      },
+      // {
+      //   href: "/",
+      //   icon: "mdi-file-edit-outline",
+      //   text: "My Aritcle",
+      // },
+      // {
+      //   href: "/",
+      //   icon: "mdi-cogs",
+      //   text: "Setting",
+      // },
       {
         href: "/",
         icon: "mdi-power",

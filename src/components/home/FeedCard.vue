@@ -33,7 +33,7 @@
               </span>
               <span class="pr-2">
                 <v-icon>mdi-eye</v-icon>
-                {{ value.updateTime }}
+                {{ value.traffic }}
               </span>
             </v-card-text>
             <v-spacer/>
