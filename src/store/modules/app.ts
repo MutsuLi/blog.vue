@@ -1,6 +1,6 @@
 // Utilities
 import { make } from 'vuex-pathify'
-import bucket from '@/plugins/cosmicjs'
+// import bucket from '@/plugins/cosmicjs'
 
 const state = {
   currentVersion: null,
@@ -16,14 +16,14 @@ const actions = {
   fetchSponsors: async ({ commit, state }) => {
     if (state.supporters.length > 0) return
 
-    const { objects: items } = await bucket.getObjects({
-      type: 'sponsors',
-      props: 'title,metadata',
-      sort: 'created_at',
-      'metadata[status]': true,
-    })
+    // const { objects: items } = await bucket.getObjects({
+    //   type: 'sponsors',
+    //   props: 'title,metadata',
+    //   sort: 'created_at',
+    //   'metadata[status]': true,
+    // })
 
-    commit('SET_SUPPORTERS', items)
+    // commit('SET_SUPPORTERS', items)
   },
   init: ({ dispatch }) => {
     dispatch('fetchSponsors')

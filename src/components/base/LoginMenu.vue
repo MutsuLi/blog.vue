@@ -49,6 +49,7 @@
         <base-item
           v-for="each in userMenu"
           :key="each.text"
+          :href="each.href"
           v-bind="each"
           no-markdown
           @click="$ga.event('toolbar', 'click', 'each', each.text)"
@@ -75,7 +76,7 @@ export default {
       //   text: "My Page",
       // },
       {
-        href: "/",
+        href: "/write",
         icon: "mdi-lead-pencil",
         text: "write",
       },
