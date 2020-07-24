@@ -26,19 +26,23 @@ export default {
 };
 </script>
 
-<style lang="sass">
-.text-decoration-none
-  text-decoration: none
+<style lang="scss">
+.text-decoration-none {
+  text-decoration: none;
+}
 
-  .wf-loading .material-icons
-    display: none
+.wf-loading .material-icons {
+  display: none;
+}
 
-  .v-application .markdown code
-    box-shadow: none
-    color: #fbe5e1 
-    background-color: #fbe5e1 
+.v-application .markdown code {
+  box-shadow: none;
+  color: #fbe5e1;
+  background-color: #fbe5e1;
+}
 
-  .v-application .markdown kbd > code
-    background: transparent
-    color: inherit
+.v-application .markdown kbd > code {
+  background: transparent;
+  color: inherit;
+}
 </style>

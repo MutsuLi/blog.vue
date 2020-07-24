@@ -7,7 +7,7 @@ import { get, sync } from "vuex-pathify";
 marked.setOptions({
   headerIds: false,
   breaks: true,
-  smartLists: true
+  smartLists: true,
 });
 
 export default {
@@ -16,26 +16,26 @@ export default {
   props: {
     code: {
       type: [Array, String],
-      default: ""
+      default: "",
     },
     source: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     tag: {
       type: String,
-      default: "div"
-    }
+      default: "div",
+    },
   },
 
   data: () => ({
-    timeout: null
+    timeout: null,
   }),
 
   computed: {
     //lang: sync("route/params@lang"),
     namespace: get("documentation/namespace"),
-    page: get("documentation/page")
+    page: get("documentation/page"),
   },
 
   mounted() {
@@ -55,7 +55,7 @@ export default {
           'a.v-markdown--link[href^="#"]'
         );
 
-        Array.prototype.forEach.call(links, el => {
+        Array.prototype.forEach.call(links, (el) => {
           el.addEventListener("click", this.onLinkClick);
         });
       }, 300);
@@ -64,7 +64,7 @@ export default {
       e.preventDefault();
 
       this.$router.push(e.target.getAttribute("href"));
-    }
+    },
   },
 
   render(h, context) {
@@ -99,39 +99,43 @@ export default {
     return h(this.tag, {
       staticClass: "v-markdown",
       class: { "mb-6": true },
-      domProps: { innerHTML }
+      domProps: { innerHTML },
     });
-  }
+  },
 };
 </script>
 
-<style lang="sass">
+<style lang="scss">
 .v-markdown:last-child p,
-.v-markdown:last-child
-  margin-bottom: 0 !important
+.v-markdown:last-child {
+  margin-bottom: 0 !important;
+}
+.v-markdown--link {
+  text-decoration: none;
+  font-weight: 500;
+}
 
-  .v-markdown--link
-    text-decoration: none
-    font-weight: 500
+// .v-icon.v-icon {
+//   font-size: 14px;
+//   margin-left: 4px;
+//   vertical-align: baseline;
+// }
 
-    &:hover
-      text-decoration: underline
+.v-markdown > h4 {
+  margin: 8px 0;
+}
 
-    .v-icon.v-icon
-      font-size: 14px
-      margin-left: 4px
-      vertical-align: baseline
-
-  .v-markdown > h4
-    margin: 8px 0
-
-  .v-markdown code
-    box-shadow: none !important
-    color: #fbe5e1 !important
-    background-color: #fbe5e1 !important
-
-  .v-markdown kbd > code
-    background: transparent !important
-    color: inherit !important
+.v-markdown code {
+  display: block;
+  word-wrap: normal;
+  overflow: auto;
+  box-shadow: none !important;
+  color: #c0341d !important;
+  background-color: #fbe5e1 !important;
+}
+.v-markdown kbd > code {
+  background: transparent !important;
+  color: inherit !important;
+}
 </style>
 

@@ -1,9 +1,10 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '../views/Home.vue'
-import Articles from '../views/Article.vue'
-import Login from '../views/Login.vue'
-import Join from '../views/Join.vue'
+import Vue from 'vue';
+import VueRouter, { RouteConfig } from 'vue-router';
+import Home from '../views/Home.vue';
+import Articles from '../views/Article.vue';
+import Login from '../views/Login.vue';
+import Join from '../views/Join.vue';
+import Write from '../views/Write.vue';
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes: Array<RouteConfig> = [
     path: '/Join',
     name: 'Join',
     component: Join
+  },
+  {
+    path: '/Write',
+    name: 'Write',
+    component: Write
   }
 ]
 

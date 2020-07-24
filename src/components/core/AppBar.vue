@@ -52,17 +52,13 @@ export default {
 };
 </script>
 
-<style lang="sass">
-.theme--light,
-.theme--dark
-  #core-app-bar
-    border-width: 0 0 thin 0
-    border-style: solid
+<style lang="scss">
+.theme--light {
+  border-bottom-color: #0000001f !important;
+}
 
-    &.theme--light
-      border-bottom-color: #0000001F !important
-
-      &.theme--dark
-        border-bottom-color: #FFFFFF1F !important
+.theme--dark {
+  border-bottom-color: #ffffff1f !important;
+}
 </style>
 

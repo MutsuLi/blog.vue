@@ -66,7 +66,9 @@ export default {
   name: "AccountRegister",
   data: () => ({
     valid: true,
-    name: "",
+    show: false,
+    username: "",
+    password: "",
     nameRules: [
       (v) => !!v || "Name is required",
       (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
@@ -84,7 +86,6 @@ export default {
     select: null,
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
     checkbox: false,
-    show: false,
   }),
 
   methods: {

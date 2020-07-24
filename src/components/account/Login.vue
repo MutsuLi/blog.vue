@@ -42,7 +42,7 @@
     <v-row justify="center">
       <v-col cols="12" sm="10" md="8" lg="6">
         <v-card>
-          <v-card-text class="" align="center"> 
+          <v-card-text class align="center">
             New to GitHub?
             <a href="/join">Create an account.</a>
           </v-card-text>
@@ -59,8 +59,10 @@ export default {
     BaseVuetifyLogo: () => import("../base/VuetifyLogo"),
   },
   data: () => ({
+    show: false,
     valid: true,
-    name: "",
+    username: "",
+    password: "",
     nameRules: [
       (v) => !!v || "Name or E-mail is required",
       (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
