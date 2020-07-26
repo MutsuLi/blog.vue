@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <user-edit-tab></user-edit-tab>
+    <user-article-tab></user-article-tab>
   </v-app>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: "Write",
   components: {
-    UserEditTab: () => import("@/components/user/EditTab"),
+    UserArticleTab: () => import("@/components/user/ArticleTab"),
   },
 };
 </script>

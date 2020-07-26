@@ -37,7 +37,7 @@ const actions = {
         rootState.requesting = true
         commit(TYPE.CONTENT_REQUEST)
         rootState.requesting = false
-        let response = require('@/data/Articles.json');
+        let response = require('@/data/articles.json');
         commit(TYPE.CONTENT_SUCCESS, response)
         // contentApi.content().then((response) => {
         //     rootState.requesting = false
@@ -51,7 +51,7 @@ const actions = {
         rootState.requesting = true
         commit(TYPE.CONTENT_RANK_REQUEST)
         rootState.requesting = false
-        let response = require('@/data/Articles.json');
+        let response = require('@/data/articles.json');
         commit(TYPE.CONTENT_RANK_SUCCESS, response)
         // commit(TYPE.CONTENT_RANK_REQUEST)
         // let param = {
@@ -71,7 +71,7 @@ const actions = {
         rootState.requesting = true
         commit(TYPE.CONTENT_RANK_REQUEST)
         rootState.requesting = false
-        let articles = require('@/data/Articles.json').data;
+        let articles = require('@/data/articles.json').data;
         let categories: category[] = []
         let hashMap = new Set();
         const defaultArr: category[] = [{
