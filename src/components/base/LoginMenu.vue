@@ -77,8 +77,10 @@ export default {
       // },
       {
         href: "/write",
+        to: "write",
         icon: "mdi-lead-pencil",
         text: "write",
+        blank: false,
       },
       // {
       //   href: "/",
@@ -92,8 +94,10 @@ export default {
       // },
       {
         href: "/",
+        to: "",
         icon: "mdi-power",
         text: "Sign Out",
+        blank: false
       },
     ],
   }),

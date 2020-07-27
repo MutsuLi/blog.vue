@@ -35,11 +35,13 @@ export default {
         href: "/",
         icon: "mdi-information",
         text: "About",
+        blank: false,
       },
       {
         href: "https://github.com/okitasann",
         icon: "mdi-git",
         text: "Github",
+        blank: true,
       },
     ],
   }),

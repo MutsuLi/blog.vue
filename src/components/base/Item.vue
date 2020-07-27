@@ -104,8 +104,10 @@ export default {
       };
 
       if (this.href) {
+        if(attrs.blank){
         attrs.target = "_blank";
         attrs.rel = "noopener";
+        }
         attrs.href = this.href;
       }
 
@@ -113,10 +115,10 @@ export default {
     },
     path() {
       if (!this.to) return this.to;
-      const lang = this.$route.params.lang || this.$i18n.fallbackLocale;
+      // const lang = this.$route.params.lang || this.$i18n.fallbackLocale;
 
       return {
-        path: `/${lang}/${this.to}/`,
+        path: this.to,
       };
     },
   },
