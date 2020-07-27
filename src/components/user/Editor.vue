@@ -1,8 +1,28 @@
 <template>
   <v-container class="mx-auto">
-    <v-text-field v-model="title" :rules="titleRules" label="title" required outlined rounded></v-text-field>
-    <v-text-field v-model="tag" :rules="tagRules" label="tag" required outlined rounded></v-text-field>
-    <mavon-editor ref="editor" v-model="doc" style="min-height: 800px"></mavon-editor>
+    <v-text-field
+      class="input-title"
+      v-model="title"
+      :rules="titleRules"
+      label="title"
+      required
+      outlined
+      rounded
+    ></v-text-field>
+    <v-text-field
+      class="input-tag"
+      v-model="tag"
+      :rules="tagRules"
+      label="tag"
+      required
+      outlined
+      rounded
+    ></v-text-field>
+
+    <mavon-editor ref="editor" class="me-editor" v-model="doc" :subfield="false" fixed></mavon-editor>
+    <div class="text-right">
+      <v-btn color="primary" @click="submit" bottom position="right">Submit</v-btn>
+    </div>
   </v-container>
 </template>
 
@@ -28,5 +48,17 @@ export default {
 };
 </script>
 
-<style>
+<style scope lang="scss">
+.input-title {
+  width: 35%;
+}
+.input-tag {
+  width: 35%;
+}
+.me-editor {
+  z-index: -1;
+  width: 100%;
+  height: 75vh;
+  position: absolute;
+}
 </style>

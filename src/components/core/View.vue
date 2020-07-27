@@ -2,7 +2,7 @@
   <v-main>
     <v-responsive
       class="mx-auto overflow-visible"
-      max-width="60%"
+      max-width="66%"
     >
       <v-container>
         <!-- <documentation-breadcrumbs /> -->

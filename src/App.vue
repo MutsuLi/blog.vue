@@ -17,11 +17,10 @@ export default {
   name: "App",
   mixins: [Meta],
   components: {
-    // CoreNavigation: () => import("@/components/core/Navigation"),
     // CoreDrawer: () => import("@/components/core/Drawer"),
-    CoreFooter: () => import("@/components/core/Footer"),
     CoreAppBar: () => import("@/components/core/AppBar"),
     CoreView: () => import("@/components/core/View"),
+    CoreFooter: () => import("@/components/core/Footer"),
   },
 };
 </script>

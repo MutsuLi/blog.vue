@@ -5,6 +5,7 @@
     app
     clipped-left
     clipped-right
+    hide-on-scroll
     flat
   >
     <v-spacer />
