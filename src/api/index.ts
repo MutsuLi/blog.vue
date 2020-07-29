@@ -7,24 +7,31 @@ export const blogsApi = {
 			return response.data;
 		})
 	},
-	info(param) {
-		return axios.get(url.blogs, param).then((response) => {
+	info(params) {
+		let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
+		return axios.get(url.blogs, { params, headers }).then((response) => {
 			return response.data;
 		})
 	}
 }
 
 export const loginApi = {
-	login(param) {
-		return axios.get(url.login, param).then((response) => {
+	getToken(params) {
+		return axios.get(url.getToken, params).then((response) => {
+			return response.data
+		})
+	},
+	refreshToken(params) {
+		return axios.get(url.refreshToken, params).then((response) => {
 			return response.data
 		})
 	}
 }
 
 export const userApi = {
-	user(param) {
-		return axios.get(url.user, param).then((response) => {
+	user(params) {
+		let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
+		return axios.get(url.user, { params, headers }).then((response) => {
 			return response.data
 		})
 	}
