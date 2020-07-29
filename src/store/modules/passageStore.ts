@@ -6,7 +6,6 @@ const state = {
     ranks: [],
     tags: [],
     menus: []
-
 }
 
 const getters = {
