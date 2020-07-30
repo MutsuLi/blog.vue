@@ -3,8 +3,8 @@ const serverRoot = `${process.env.NODE_ENV === 'production' ? 'https://www.lyben
 
 export const user = serverRoot + 'user';
 
-export const getToken = serverRoot + 'login/JWTToken3.0';
+export const getToken = 'login/JWTToken3.0';
 
-export const refreshToken = serverRoot + 'login/RefreshToken';
+export const refreshToken ='login/RefreshToken';
 
-export const blogs = serverRoot + 'blogs';
+export const blogs = 'blogs';

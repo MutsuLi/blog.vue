@@ -92,9 +92,9 @@ function apiAxios(method, url, params, response) {
         // `headers` 是即将被发送的自定义请求头
         withCredentials: false
     }).then(function (res) {
-        response(null, res.data);
+        response(res);
     }).catch(function (err) {
-        response(err, null);
+        response(err);
     });
 }
 

@@ -35,10 +35,10 @@ const actions = {
     getContentRows({ commit, state, rootState }) {
         rootState.requesting = true;
         commit(TYPE.ARTICLE_REQUEST);
-        contentApi.blogsApi.list().then((response) => {
+        contentApi.blogsApi.list().then((res) => {
             rootState.requesting = false;
-            console.log(response);
-            commit(TYPE.ARTICLE_SUCCESS, response);
+            console.log(res);
+            commit(TYPE.ARTICLE_SUCCESS, res.response);
         }, (error) => {
             console.log(error);
             rootState.requesting = false;
@@ -105,6 +105,7 @@ const mutations = {
 
     },
     [TYPE.ARTICLE_SUCCESS](state, response) {
+        console.log(response);
         let list = response.data;
         for (let i = 0; i < list.length; i++) {
             let article = list[i]
