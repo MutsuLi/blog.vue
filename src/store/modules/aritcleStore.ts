@@ -42,18 +42,18 @@ const getters = {
 const actions = {
     getContentDetail({ commit, state, rootState }, bID) {
         rootState.requesting = true
-        commit(TYPE.CONTENT_RANK_REQUEST)
+        commit(TYPE.ARTICLE_DETAIL_REQUEST)
         rootState.requesting = false
         let article = require('@/data/detail.json');
-        commit(TYPE.CONTENT_ARTICLE_SUCCESS, article)
+        commit(TYPE.ARTICLE_DETAIL_SUCCESS, article)
     }
 }
 
 const mutations = {
-    [TYPE.CONTENT_FAILURE](state) {
+    [TYPE.ARTICLE_DETAIL_REQUEST](state) {
 
     },
-    [TYPE.CONTENT_ARTICLE_SUCCESS](state, response) {
+    [TYPE.ARTICLE_DETAIL_SUCCESS](state, response) {
         const rendererMD = new marked.Renderer();
         const tagsArr: Array<object> = new Array();
         rendererMD.heading = (text, level) => {

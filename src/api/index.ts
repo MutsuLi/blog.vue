@@ -1,10 +1,14 @@
 import * as url from './urlConfig'
+import * as http from './http'
 import axios from 'axios'
 
 export const blogsApi = {
 	list() {
-		return axios.get(url.blogs).then((response) => {
-			return response.data;
+		// return axios.get(url.blogs).then((response) => {
+		// 	return response.data;
+		// })
+		return http.default.get(url.blogs, null, (err, data) => {
+			return (err, data);
 		})
 	},
 	info(params) {
@@ -18,12 +22,12 @@ export const blogsApi = {
 export const loginApi = {
 	getToken(params) {
 		return axios.get(url.getToken, params).then((response) => {
-			return response.data
+			return response.data;
 		})
 	},
 	refreshToken(params) {
 		return axios.get(url.refreshToken, params).then((response) => {
-			return response.data
+			return response.data;
 		})
 	}
 }
@@ -32,7 +36,7 @@ export const userApi = {
 	user(params) {
 		let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
 		return axios.get(url.user, { params, headers }).then((response) => {
-			return response.data
+			return response.data;
 		})
 	}
 }

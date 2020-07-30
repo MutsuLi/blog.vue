@@ -1,5 +1,5 @@
 import * as TYPE from '../actionType/contentType'
-
+import * as contentApi from '../../api/index'
 
 const state = {
     articles: [],
@@ -33,18 +33,17 @@ const actions = {
         // })
     },
     getContentRows({ commit, state, rootState }) {
-        rootState.requesting = true
-        commit(TYPE.CONTENT_REQUEST)
-        rootState.requesting = false
-        let response = require('@/data/articles.json');
-        commit(TYPE.CONTENT_SUCCESS, response)
-        // contentApi.content().then((response) => {
-        //     rootState.requesting = false
-        //     commit(TYPE.CONTENT_SUCCESS, response)
-        // }, (error) => {
-        //     rootState.requesting = false
-        //     commit(TYPE.CONTENT_FAILURE)
-        // })
+        rootState.requesting = true;
+        commit(TYPE.ARTICLE_REQUEST);
+        contentApi.blogsApi.list().then((response) => {
+            rootState.requesting = false;
+            console.log(response);
+            commit(TYPE.ARTICLE_SUCCESS, response);
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false;
+            commit(TYPE.ARTICLE_FAILURE);
+        })
     },
     getContentRank({ commit, state, rootState }, categoryId) {
         rootState.requesting = true
@@ -102,10 +101,10 @@ const mutations = {
     [TYPE.MENU_SUCCESS](state, response) {
         state.menus = response;
     },
-    [TYPE.CONTENT_REQUEST](state) {
+    [TYPE.ARTICLE_REQUEST](state) {
 
     },
-    [TYPE.CONTENT_SUCCESS](state, response) {
+    [TYPE.ARTICLE_SUCCESS](state, response) {
         let list = response.data;
         for (let i = 0; i < list.length; i++) {
             let article = list[i]
@@ -134,7 +133,7 @@ const mutations = {
         // 	state.rows.push(Object.values(response[key]))
         // }
     },
-    [TYPE.CONTENT_FAILURE](state) {
+    [TYPE.ARTICLE_FAILURE](state) {
 
     },
     // 排行榜信息
