@@ -65,7 +65,7 @@
 export default {
   name: "BaseLoginMenu",
   data: () => ({
-    login: true,
+    login: false,
     user: {
       name: "mutsuli",
     },

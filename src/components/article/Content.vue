@@ -10,7 +10,7 @@
 export default {
   name: "ArticleContent",
   mounted() {
-    this.$store.dispatch("getContentDetail");
+    this.$store.dispatch("getAritcileDetail");
   },
   components: {
     BaseTitle: () => import("../base/Title"),

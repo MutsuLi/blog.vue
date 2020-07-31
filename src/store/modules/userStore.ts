@@ -1,10 +1,10 @@
 import * as TYPE from '../actionType/contentType';
 import * as contentApi from '../../api';
-
+import { getToken, setToken, removeToken } from '@/util/auth'
 
 const state = {
     user: {},
-    token: []
+    token: getToken()
 }
 
 const getters = {
@@ -13,28 +13,26 @@ const getters = {
 }
 
 const actions = {
-    getUserInfo({ commit, state, rootState }) {
-        // rootState.requesting = true;
-        // commit(TYPE.USERINFO_REQUEST);
-        // rootState.requesting = false;
-        // let response = require('@/data/menu.json').data;
-        // commit(TYPE.USERINFO_SUCCESS, response);
-        // contentApi.loginApi().then((response) => {
-        //     rootState.requesting = false
-        //     commit(TYPE.CONTENT_SUCCESS, response)
-        // }, (error) => {
-        //     rootState.requesting = false
-        //     commit(TYPE.CONTENT_FAILURE)
-        // })
-    },
-    getToken({ commit, state, rootState }) {
+    getUserInfo({ commit, state, rootState }, params) {
         rootState.requesting = true;
         commit(TYPE.TOKEN_REQUEST);
-        let params = { name: rootState.id, pass: rootState.password };
-        contentApi.loginApi.getToken(params).then((response) => {
+        let requestParams = { name: params.userid, pass: params.password };
+        contentApi.loginApi.getToken(requestParams).then((res) => {
             rootState.requesting = false;
-            console.log(response);
-            commit(TYPE.TOKEN_SUCCESS, response)
+            commit(TYPE.TOKEN_SUCCESS, res.response)
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false
+            commit(TYPE.TOKEN_FAILURE)
+        })
+    },
+    getToken({ commit, state, rootState }, params) {
+        rootState.requesting = true;
+        commit(TYPE.TOKEN_REQUEST);
+        let requestParams = { name: params.userid, pass: params.password };
+        contentApi.loginApi.getToken(requestParams).then((res) => {
+            rootState.requesting = false;
+            commit(TYPE.TOKEN_SUCCESS, res.response)
         }, (error) => {
             console.log(error);
             rootState.requesting = false
@@ -44,11 +42,10 @@ const actions = {
     refreshToken({ commit, state, rootState }) {
         rootState.requesting = true;
         commit(TYPE.REFRESH_TOKEN_REQUEST);
-        let params = { name: rootState.id, pass: rootState.password };
+        let params = { token: state.token };
         contentApi.loginApi.refreshToken(params).then((response) => {
             rootState.requesting = false;
-            console.log(response);
-            commit(TYPE.REFRESH_TOKEN_SUCCESS, response)
+            commit(TYPE.REFRESH_TOKEN_SUCCESS, response);
         }, (error) => {
             console.log(error);
             rootState.requesting = false
@@ -58,7 +55,22 @@ const actions = {
 }
 
 const mutations = {
+    [TYPE.TOKEN_REQUEST](state) {
 
+    },
+    [TYPE.TOKEN_SUCCESS](state, res) {
+        setToken(res.token);
+    }, [TYPE.TOKEN_FAILURE](state, response) {
+
+    },
+    [TYPE.REFRESH_TOKEN_REQUEST](state) {
+
+    },
+    [TYPE.REFRESH_TOKEN_SUCCESS](state, res) {
+        setToken(res.token);
+    }, [TYPE.REFRESH_TOKEN_FAILURE](state, response) {
+
+    }
 }
 
 export default {

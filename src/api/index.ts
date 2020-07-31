@@ -4,7 +4,6 @@ import axios from 'axios'
 
 export const blogsApi = {
 	list() {
-		console.log(url.blogs);
 		let option = {
 			url: url.blogs,
 			baseURL: "/api/",
@@ -13,11 +12,11 @@ export const blogsApi = {
 		return axios.get(url.blogs, option).then((response) => {
 			return response.data;
 		})
-		// return http.default.get(url.blogs, null, (err, res) => {
-		// 	return {err} ?? res;
-		// });
+		// return http.default.get(url.blogs, null, null).then((response) => {
+		// 	return response.data;
+		// })
 	},
-	info(params) {
+	detail(params) {
 		let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
 		return axios.get(url.blogs, { params, headers }).then((response) => {
 			return response.data;
@@ -27,7 +26,13 @@ export const blogsApi = {
 
 export const loginApi = {
 	getToken(params) {
-		return axios.get(url.getToken, params).then((response) => {
+		let option = {
+			url: url.getToken,
+			baseURL: "/api/",
+			params,
+			withCredentials: false
+		}
+		return axios.get(url.getToken, option).then((response) => {
 			return response.data;
 		});
 	},

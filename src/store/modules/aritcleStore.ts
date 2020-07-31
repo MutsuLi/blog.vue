@@ -1,6 +1,7 @@
 // import { contentApi, contentrankApi } from 'api'
 import * as TYPE from '../actionType/contentType'
 import { parseLink } from "@/util/helpers";
+import * as contentApi from '../../api/index'
 
 //
 import marked from "marked";
@@ -40,12 +41,18 @@ const getters = {
 }
 
 const actions = {
-    getContentDetail({ commit, state, rootState }, bID) {
-        rootState.requesting = true
-        commit(TYPE.ARTICLE_DETAIL_REQUEST)
-        rootState.requesting = false
-        let article = require('@/data/detail.json');
-        commit(TYPE.ARTICLE_DETAIL_SUCCESS, article)
+    getAritcileDetail({ commit, state, rootState }, bID) {
+        rootState.requesting = true;
+        commit(TYPE.ARTICLE_DETAIL_REQUEST);
+        contentApi.blogsApi.detail({bID}).then((res) => {
+            rootState.requesting = false;
+            console.log(res);
+            commit(TYPE.ARTICLE_SUCCESS, res.response);
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false;
+            commit(TYPE.ARTICLE_FAILURE);
+        })
     }
 }
 

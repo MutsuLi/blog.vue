@@ -79,37 +79,56 @@ axios.interceptors.response.use(
   另外，不同的项目的处理方法也是不一致的，这里出错就是简单的alert
 */
 
-function apiAxios(method, url, params, response) {
-    if (params) {
-        params = filterNull(params);
-    }
-    axios({
-        method: method,
-        url: url,
-        data: method === "POST" || method === "PUT" ? params : null,
-        params: method === "GET" || method === "DELETE" ? params : null,
+function apiAxios() {
+    return axios.create({
         baseURL: root,
         // `headers` 是即将被发送的自定义请求头
         withCredentials: false
-    }).then(function (res) {
-        response(res);
-    }).catch(function (err) {
-        response(err);
-    });
+    })
 }
 
 // 返回在vue模板中的调用接口
 export default {
-    get: function (url, params, response) {
-        return apiAxios("GET", url, params, response);
+    get: function (url, params, headers) {
+        if (params) {
+            params = filterNull(params);
+        }
+        return apiAxios().get(url, {
+            data: null,
+            params: params,
+            headers
+        });
     },
-    post: function (url, params, response) {
-        return apiAxios("POST", url, params, response);
+    // data: method === "POST" || method === "PUT" ? params : null,
+    // params: method === "GET" || method === "DELETE" ? params : null,
+    post: function (url, params, headers) {
+        if (params) {
+            params = filterNull(params);
+        }
+        return apiAxios().post(url, {
+            data: params,
+            parms: null,
+            headers
+        })
     },
-    put: function (url, params, response) {
-        return apiAxios("PUT", url, params, response);
+    put: function (url, params, headers) {
+        if (params) {
+            params = filterNull(params);
+        }
+        return apiAxios().put(url, {
+            data: params,
+            parms: null,
+            headers
+        })
     },
-    delete: function (url, params, response) {
-        return apiAxios("DELETE", url, params, response);
-    }
+    delete: function (url, params, headers) {
+        if (params) {
+            params = filterNull(params);
+        }
+        return apiAxios().delete(url, {
+            data: null,
+            params,
+            headers
+        })
+    },
 };
