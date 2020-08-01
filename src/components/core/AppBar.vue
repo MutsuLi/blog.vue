@@ -39,6 +39,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getMenuList");
+    this.$store.dispatch("getUserInfo", this.$store.token);
   },
   methods: {
     ...mapMutations(["toggleDrawer"]),

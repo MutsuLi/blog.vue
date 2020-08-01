@@ -44,9 +44,15 @@ export const loginApi = {
 }
 
 export const userApi = {
-	user(params) {
-		let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
-		return axios.get(url.user, { params, headers }).then((response) => {
+	info(params) {
+		let option = {
+			url: url.user,
+			baseURL: "/api/",
+			params,
+			withCredentials: false
+		}
+		// let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
+		return axios.get(url.user, option).then((response) => {
 			return response.data;
 		});
 	}

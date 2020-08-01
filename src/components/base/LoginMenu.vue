@@ -1,7 +1,7 @@
 <template>
   <v-row align="center">
     <v-btn
-      v-if="!login"
+      v-if="!isLogin"
       class="hidden-md-and-down"
       min-width="48"
       href="/login"
@@ -12,7 +12,7 @@
       <div>Sign in</div>
     </v-btn>
     <v-btn
-      v-if="!login"
+      v-if="!isLogin"
       class="hidden-md-and-down"
       min-width="48"
       href="/join"
@@ -23,7 +23,7 @@
       <div>Sign up</div>
     </v-btn>
     <v-menu
-      v-if="login"
+      v-if="isLogin"
       bottom
       left
       max-height="calc(100% - 32px)"
@@ -61,14 +61,11 @@
 
 <script>
 // Utilities
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "BaseLoginMenu",
   data: () => ({
-    login: false,
-    user: {
-      name: "mutsuli",
-    },
     userMenu: [
       // {
       //   href: "/",
@@ -97,9 +94,15 @@ export default {
         to: "",
         icon: "mdi-power",
         text: "Sign Out",
-        blank: false
+        blank: false,
       },
     ],
   }),
+  computed: {
+    ...mapGetters(["user","token"]),
+    isLogin() {
+      return this.token;
+    },
+  },
 };
 </script>
