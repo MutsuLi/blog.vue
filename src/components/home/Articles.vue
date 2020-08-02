@@ -7,12 +7,10 @@
 </template>
 
 <script>
-
-
 export default {
   name: "HomeAbout",
   mounted() {
-    this.$store.dispatch("getContentRows");
+    this.$store.dispatch("getContentRows", { page: 1, pageSize: 11 });
   },
   components: {
     Feed: () => import("@/components/home/Feed"),

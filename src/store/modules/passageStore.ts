@@ -2,7 +2,11 @@ import * as TYPE from '../actionType/contentType'
 import * as contentApi from '../../api/index'
 
 const state = {
-    articles: [],
+    articles: {
+        totalPage: 0,
+        totalCount: 0,
+        list: []
+    },
     ranks: [],
     tags: [],
     menus: []
@@ -32,12 +36,11 @@ const actions = {
         //     commit(TYPE.CONTENT_FAILURE)
         // })
     },
-    getContentRows({ commit, state, rootState }) {
+    getContentRows({ commit, state, rootState }, params) {
         rootState.requesting = true;
         commit(TYPE.ARTICLES_REQUEST);
-        contentApi.blogsApi.list().then((res) => {
+        contentApi.blogsApi.list(params).then((res) => {
             rootState.requesting = false;
-            console.log(res);
             commit(TYPE.ARTICLES_SUCCESS, res.response);
         }, (error) => {
             console.log(error);
@@ -105,8 +108,8 @@ const mutations = {
 
     },
     [TYPE.ARTICLES_SUCCESS](state, response) {
-        console.log(response);
         let list = response.data;
+        let data = [];
         for (let i = 0; i < list.length; i++) {
             let article = list[i]
             let rowItem = {
@@ -121,18 +124,11 @@ const mutations = {
                 href: "/articles/" + article.bID,
                 traffic: article.btraffic
             }
-            state.articles.push(rowItem)
+            data.push(rowItem)
         }
-        // for(let key of state.sortKeys) {
-        // 	// console.log(JSON.stringify(Object.values(response[key])))
-        // 	let rowItem = {
-        // 		categoty: 0,
-        // 		key: response[key],
-        // 		data: Object.values(response[key])
-        // 	}
-        // 	// state.rows.push(rowItem)
-        // 	state.rows.push(Object.values(response[key]))
-        // }
+        state.articles.list = data;
+        state.articles.totalCount = response.dataCount;
+        state.articles.totalPage = response.pageCount;
     },
     [TYPE.ARTICLES_FAILURE](state) {
 

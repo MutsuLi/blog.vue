@@ -3,11 +3,12 @@ import * as http from './http'
 import axios from 'axios'
 
 export const blogsApi = {
-	list() {
+	list(params) {
 		let option = {
 			url: url.blogs,
 			baseURL: "/api/",
-			withCredentials: false
+			withCredentials: false,
+			params
 		}
 		return axios.get(url.blogs, option).then((response) => {
 			return response.data;

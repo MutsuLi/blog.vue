@@ -12,7 +12,12 @@
       />
     </v-row>
     <v-row align="center">
-      <v-pagination v-model="page" :length="pages" :total-visible="7" circle></v-pagination>
+      <v-pagination
+        v-model="page"
+        :length="pages"
+        :total-visible="7"
+        circle
+      ></v-pagination>
     </v-row>
   </v-container>
 </template>
@@ -25,30 +30,29 @@ export default {
   name: "Feed",
 
   components: {
-    FeedCard: () => import("@/components/home/FeedCard")
+    FeedCard: () => import("@/components/home/FeedCard"),
   },
 
   data: () => ({
     layout: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    page: 1
+    page: 1,
   }),
-
   computed: {
     ...mapGetters(["articles"]),
     pages() {
-      return Math.ceil(this.articles.length / 11);
+      return this.articles.totalPage;
     },
     paginatedArticles() {
-      const start = (this.page - 1) * 11;
-      const stop = this.page * 11;
-      return this.articles.slice(start, stop);
-    }
+      return this.articles.list;
+    },
   },
 
   watch: {
     page() {
+      console.log("getContentRows:" + this.page);
+      this.$store.dispatch("getContentRows", { page: this.page, pageSize: 11 });
       window.scrollTo(0, 0);
-    }
-  }
+    },
+  },
 };
 </script>
