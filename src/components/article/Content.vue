@@ -7,14 +7,21 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "ArticleContent",
   mounted() {
-    this.$store.dispatch("getAritcileDetail");
+    this.$store.dispatch("getAritcileDetail", {
+      bID: this.$route.params.bID,
+      token: this.token,
+    });
+  },
+  computed: {
+    ...mapGetters(["token"]),
   },
   components: {
     BaseTitle: () => import("../base/Title"),
-    BaseText: () => import("./Text")
-  }
+    BaseText: () => import("./Text"),
+  },
 };
 </script>

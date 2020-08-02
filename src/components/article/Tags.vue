@@ -2,8 +2,8 @@
   <v-card class="mx-auto" max-width="344" outlined>
     <v-card-title>Article's Info</v-card-title>
     <v-card-text>
-      <div>Release Time: {{ReleaseTime}}</div>
-      <div>Read: {{Read}}</div>
+      <div>Release Time: {{article.createTime}}</div>
+      <div>Read: {{article.traffic}}</div>
       <v-chip-group column>
         <v-chip
           v-for="(tag,i) in tags"
@@ -38,16 +38,16 @@ export default {
     tags: [
       {
         text: "dotnet",
-        href: "/articles"
+        href: "/articles",
       },
       {
         text: "database",
-        href: "/articles"
-      }
-    ]
-  })
-  // computed: {
-  //   ...mapGetters(["tags"])
-  // }
+        href: "/articles",
+      },
+    ],
+  }),
+  computed: {
+    ...mapGetters(["article"]),
+  },
 };
 </script>

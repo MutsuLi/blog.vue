@@ -17,8 +17,12 @@ export const blogsApi = {
 		// })
 	},
 	detail(params) {
-		let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
-		return axios.get(url.blogs, { params, headers }).then((response) => {
+		let option = {
+			baseURL: "/api/",
+			withCredentials: false,
+			headers: { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token }
+		}
+		return axios.get(url.blogs + '/' + params.bID, option).then((response) => {
 			return response.data;
 		});
 	}

@@ -69,7 +69,7 @@ export default {
     },
     useridRules: [
       (v) => !!v || "Name or E-mail is required",
-      (v) => (v && v.length <= 4) || "Name must be less than 4 characters",
+      (v) => (v && v.length >= 4) || "Name must be at least 4 characters",
     ],
     passwordRules: [
       (v) => !!v || "Password is required",

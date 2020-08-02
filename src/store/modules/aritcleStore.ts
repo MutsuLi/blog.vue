@@ -41,17 +41,18 @@ const getters = {
 }
 
 const actions = {
-    getAritcileDetail({ commit, state, rootState }, bID) {
+    getAritcileDetail({ commit, state, rootState }, params) {
         rootState.requesting = true;
+        let requestParams = { token: params.token, bID: params.bID };
         commit(TYPE.ARTICLE_DETAIL_REQUEST);
-        contentApi.blogsApi.detail({bID}).then((res) => {
+        contentApi.blogsApi.detail(requestParams).then((res) => {
             rootState.requesting = false;
-            console.log(res);
-            commit(TYPE.ARTICLE_SUCCESS, res.response);
+            console.log("TYPE.ARTICLE_DETAIL_SUCCESS");
+            commit(TYPE.ARTICLE_DETAIL_SUCCESS, res.response);
         }, (error) => {
             console.log(error);
             rootState.requesting = false;
-            commit(TYPE.ARTICLE_FAILURE);
+            commit(TYPE.ARTICLE_DETAIL_FAILURE);
         })
     }
 }
@@ -91,6 +92,8 @@ const mutations = {
             headings: tagsArr
         };
         state.article = result;
+
+    }, [TYPE.ARTICLE_DETAIL_FAILURE](state) {
 
     },
     // 标签信息

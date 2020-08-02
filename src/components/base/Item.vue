@@ -53,6 +53,10 @@ export default {
       type: String,
       default: "",
     },
+    text: {
+      type: String,
+      default: "",
+    },
     href: {
       type: String,
       default: undefined,
@@ -104,13 +108,12 @@ export default {
       };
 
       if (this.href) {
-        if(attrs.blank){
-        attrs.target = "_blank";
-        attrs.rel = "noopener";
+        if (attrs.blank) {
+          attrs.target = "_blank";
+          attrs.rel = "noopener";
         }
         attrs.href = this.href;
       }
-
       return attrs;
     },
     path() {

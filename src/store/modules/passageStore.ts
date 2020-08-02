@@ -34,15 +34,15 @@ const actions = {
     },
     getContentRows({ commit, state, rootState }) {
         rootState.requesting = true;
-        commit(TYPE.ARTICLE_REQUEST);
+        commit(TYPE.ARTICLES_REQUEST);
         contentApi.blogsApi.list().then((res) => {
             rootState.requesting = false;
             console.log(res);
-            commit(TYPE.ARTICLE_SUCCESS, res.response);
+            commit(TYPE.ARTICLES_SUCCESS, res.response);
         }, (error) => {
             console.log(error);
             rootState.requesting = false;
-            commit(TYPE.ARTICLE_FAILURE);
+            commit(TYPE.ARTICLES_FAILURE);
         })
     },
     getContentRank({ commit, state, rootState }, categoryId) {
@@ -101,10 +101,10 @@ const mutations = {
     [TYPE.MENU_SUCCESS](state, response) {
         state.menus = response;
     },
-    [TYPE.ARTICLE_REQUEST](state) {
+    [TYPE.ARTICLES_REQUEST](state) {
 
     },
-    [TYPE.ARTICLE_SUCCESS](state, response) {
+    [TYPE.ARTICLES_SUCCESS](state, response) {
         console.log(response);
         let list = response.data;
         for (let i = 0; i < list.length; i++) {
@@ -134,7 +134,7 @@ const mutations = {
         // 	state.rows.push(Object.values(response[key]))
         // }
     },
-    [TYPE.ARTICLE_FAILURE](state) {
+    [TYPE.ARTICLES_FAILURE](state) {
 
     },
     // 排行榜信息

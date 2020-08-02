@@ -46,14 +46,36 @@
       </template>
       <v-list dense nav>
         <!-- <v-subheader v-text="'Vuetify.AppToolbar.getHelp'" /> -->
-        <base-item
+        <v-list-item href="/write">
+          <v-list-item-icon>
+            <v-icon>mdi-lead-pencil</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>
+              <span>Write</span>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item @click="logout">
+          <v-list-item-icon>
+            <v-icon>mdi-power</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>
+              <span>Sign out</span>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <!-- <base-item
           v-for="each in userMenu"
           :key="each.text"
           :href="each.href"
           v-bind="each"
           no-markdown
           @click="$ga.event('toolbar', 'click', 'each', each.text)"
-        />
+          v-on:click="logout()"
+        />-->
       </v-list>
     </v-menu>
   </v-row>
@@ -66,6 +88,7 @@ import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "BaseLoginMenu",
   data: () => ({
+    redirect: undefined,
     userMenu: [
       // {
       //   href: "/",
@@ -90,8 +113,8 @@ export default {
       //   text: "Setting",
       // },
       {
-        href: "/",
-        to: "",
+        href: "/logout",
+        to: "logout",
         icon: "mdi-power",
         text: "Sign Out",
         blank: false,
@@ -99,9 +122,30 @@ export default {
     ],
   }),
   computed: {
-    ...mapGetters(["user","token"]),
+    ...mapGetters(["user", "token"]),
     isLogin() {
       return this.token;
+    },
+  },
+  watch: {
+    $route: {
+      handler: function (route) {
+        const query = route.query;
+        if (query) {
+          this.redirect = query.redirect;
+        }
+      },
+      immediate: true,
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("resetToken").then(() => {
+        this.$router.push({
+          path: this.redirect || "/",
+          query: this.otherQuery,
+        });
+      });
     },
   },
 };
