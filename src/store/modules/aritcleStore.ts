@@ -47,12 +47,23 @@ const actions = {
         commit(TYPE.ARTICLE_DETAIL_REQUEST);
         contentApi.blogsApi.detail(requestParams).then((res) => {
             rootState.requesting = false;
-            console.log("TYPE.ARTICLE_DETAIL_SUCCESS");
             commit(TYPE.ARTICLE_DETAIL_SUCCESS, res.response);
         }, (error) => {
             console.log(error);
             rootState.requesting = false;
             commit(TYPE.ARTICLE_DETAIL_FAILURE);
+        })
+    },
+    postArticle({ commit, state, rootState }, params) {
+        rootState.requesting = true;
+        commit(TYPE.ARTICLE_POST_REQUEST);
+        contentApi.blogsApi.post(params).then((res) => {
+            rootState.requesting = false;
+            commit(TYPE.ARTICLE_POST_SUCCESS, res.response);
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false;
+            commit(TYPE.ARTICLE_POST_FAILURE);
         })
     }
 }
@@ -99,7 +110,16 @@ const mutations = {
     // 标签信息
     [TYPE.CONTENT_TAGS_SUCCESS](state, response) {
         state.tags = response;
-    }
+    },
+    [TYPE.ARTICLE_POST_REQUEST](state) {
+
+    }, [TYPE.ARTICLE_POST_SUCCESS](state, response) {
+        console.log("ARTICLE_POST_SUCCESS");
+        console.log(response)
+
+    }, [TYPE.ARTICLE_POST_FAILURE](state) {
+
+    },
 }
 
 export default {

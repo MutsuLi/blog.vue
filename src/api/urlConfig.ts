@@ -7,4 +7,9 @@ export const getToken = 'login/JWTToken3.0';
 
 export const refreshToken = 'login/RefreshToken';
 
-export const blogs = 'blogs';
+export const blogs={
+    list:"blogs",
+    post:"blogs/post"
+}
+
+

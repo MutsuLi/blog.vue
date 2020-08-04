@@ -6,7 +6,7 @@
       </v-col>
       <feed-card
         v-for="(article, i) in paginatedArticles"
-        :key="article.title"
+        :key="article.bId"
         :size="layout[i]"
         :value="article"
       />
@@ -49,7 +49,6 @@ export default {
 
   watch: {
     page() {
-      console.log("getContentRows:" + this.page);
       this.$store.dispatch("getContentRows", { page: this.page, pageSize: 11 });
       window.scrollTo(0, 0);
     },

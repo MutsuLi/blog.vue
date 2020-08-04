@@ -5,12 +5,11 @@ import axios from 'axios'
 export const blogsApi = {
 	list(params) {
 		let option = {
-			url: url.blogs,
 			baseURL: "/api/",
 			withCredentials: false,
 			params
 		}
-		return axios.get(url.blogs, option).then((response) => {
+		return axios.get(url.blogs.list, option).then((response) => {
 			return response.data;
 		})
 		// return http.default.get(url.blogs, null, null).then((response) => {
@@ -23,7 +22,18 @@ export const blogsApi = {
 			withCredentials: false,
 			headers: { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token }
 		}
-		return axios.get(url.blogs + '/' + params.bID, option).then((response) => {
+		return axios.get(url.blogs.list + '/' + params.bID, option).then((response) => {
+			return response.data;
+		});
+	},
+	post(params) {
+		let option = {
+			baseURL: "/api/",
+			withCredentials: false,
+			headers: { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token },
+			params
+		}
+		return axios.get(url.blogs.post, option).then((response) => {
 			return response.data;
 		});
 	}
@@ -32,7 +42,6 @@ export const blogsApi = {
 export const loginApi = {
 	getToken(params) {
 		let option = {
-			url: url.getToken,
 			baseURL: "/api/",
 			params,
 			withCredentials: false
@@ -51,7 +60,6 @@ export const loginApi = {
 export const userApi = {
 	info(params) {
 		let option = {
-			url: url.user,
 			baseURL: "/api/",
 			params,
 			withCredentials: false
