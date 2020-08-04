@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 export default {
@@ -65,12 +66,7 @@ export default {
     titleRules: [(v) => !!v || "title is required"],
   }),
   computed: {
-    info() {
-      return true;
-    },
-    error() {
-      return true;
-    },
+    ...mapGetters(["token", "user"]),
   },
   methods: {
     save(value, render) {
@@ -81,23 +77,26 @@ export default {
         return;
       }
       let articleBody = {
+        token: this.token,
         title: this.title,
+        submitter: this.user.username,
         tag: this.tag,
+        tagName: this.tag,
         content: value,
       };
+      console.log(this.user);
       console.log(articleBody);
-      this.$store
-        .dispatch("postArticle", articleBody)
-        .then(() => {
-          this.color = this.success;
-          this.$router.push({
-            path: this.redirect || "/",
-            query: this.otherQuery,
-          });
-        })
-        .catch((err) => {
-          console.log(err + "login fail");
-        });
+      this.$store.dispatch("postArticle", articleBody);
+      // .then(() => {
+      //   this.color = this.success;
+      //   this.$router.push({
+      //     path: this.redirect || "/",
+      //     query: this.otherQuery,
+      //   });
+      // })
+      // .catch((err) => {
+      //   console.log(err + "login fail");
+      // });
     },
   },
 };

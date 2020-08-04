@@ -31,9 +31,9 @@ export const blogsApi = {
 			baseURL: "/api/",
 			withCredentials: false,
 			headers: { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token },
-			params
 		}
-		return axios.get(url.blogs.post, option).then((response) => {
+		return axios.post(url.blogs.post, params, option).then((response) => {
+			console.log(response);
 			return response.data;
 		});
 	}

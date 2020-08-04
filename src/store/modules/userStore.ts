@@ -73,10 +73,12 @@ const mutations = {
 
     },
     [TYPE.USERINFO_SUCCESS](state, res) {
+        console.log("TYPE.USERINFO_SUCCESS");
+        console.log(res);
         let user = {
             uId: res.uID,
             userid: res.uLoginName,
-            username: res.uRealName,
+            username: res.uName,
             name: res.name,
             gender: res.gender,
             age: res.age,
