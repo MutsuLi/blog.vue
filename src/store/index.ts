@@ -6,15 +6,16 @@ import pathify from 'vuex-pathify'
 // Modules
 import * as modules from './modules'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-export function createStore () {
-  const store = new Vuex.Store({
-    modules,
-    plugins: [pathify.plugin],
-  })
+// export function createStore () {
+const store = new Vuex.Store({
+  modules,
+  plugins: [pathify.plugin],
+})
 
-  store.dispatch('app/init')
+//store.dispatch('app/init')
 
-  return store
-}
+//   return store
+// }
+export default store;

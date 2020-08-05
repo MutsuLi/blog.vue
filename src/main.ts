@@ -6,13 +6,12 @@ import '@/components';
 import '@/plugins';
 import App from './App.vue';
 import router from './router';
-import { createStore } from '@/store/index';
+import store from '@/store/index';
 import { createVuetify } from '@/vuetify/index';
 import { sync } from 'vuex-router-sync';
 
 
 // create store and router instances
-const store = createStore();
 const vuetify = createVuetify();
 
 store.state.app.currentVersion = Vuetify.version;

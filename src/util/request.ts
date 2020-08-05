@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { createStore } from '@/store'
+import store from '@/store'
 import { getToken } from '@/util/auth'
 
-const store = createStore();
 
 // create an axios instance
 const service = axios.create({

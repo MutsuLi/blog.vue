@@ -1,8 +1,7 @@
-import { createStore } from '@/store/index';
+import store from '@/store/index';
 import axios from 'axios'
 // import applicationUserManager from "../Auth/applicationusermanager";
 
-const store = createStore();
 // 配置API接口地址
 var root1 = "http://localhost:58427/api";//测试本地，用CORS跨域
 var root = "/api/";//用proxy实现本地代理跨域（生产环境使用的是nginx）

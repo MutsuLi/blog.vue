@@ -1,15 +1,14 @@
 import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
+import Router from 'vue-router'
 import Home from '../views/Home.vue';
 import Articles from '../views/Article.vue';
 import Login from '../views/Login.vue';
 import Join from '../views/Join.vue';
 import Write from '../views/Write.vue';
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-
-const routes: Array<RouteConfig> = [
+export const constantRoutes = [
   {
     path: '',
     name: 'Home',
@@ -35,16 +34,19 @@ const routes: Array<RouteConfig> = [
     name: 'Write',
     component: Write
   }
-]
+];
 
-const router = new VueRouter({
+const createRouter = () => new Router({
   mode: 'history',
-  routes
-})
+  routes: constantRoutes
+});
 
-const originalPush = VueRouter.prototype.push
-   VueRouter.prototype.push = function push(location) {
-   return originalPush.call(this, location).catch(err => err)
+
+const router = createRouter();
+
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
 }
 
 export default router
