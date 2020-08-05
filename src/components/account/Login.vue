@@ -98,7 +98,6 @@ export default {
         this.$store
           .dispatch("getToken", fields)
           .then(() => {
-            this.$store.dispatch('getUserInfo');
             this.$router.push({
               path: this.redirect || "/",
               query: this.otherQuery,

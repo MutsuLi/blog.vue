@@ -65,6 +65,9 @@ export default {
     ],
     titleRules: [(v) => !!v || "title is required"],
   }),
+  mounted() {
+    this.$store.dispatch("getUserInfo");
+  },
   computed: {
     ...mapGetters(["token", "user"]),
   },
@@ -84,9 +87,8 @@ export default {
         tagName: this.tag,
         content: value,
       };
-      console.log(this.user);
       console.log(articleBody);
-      this.$store.dispatch("postArticle", articleBody);
+      // this.$store.dispatch("postArticle", articleBody);
       // .then(() => {
       //   this.color = this.success;
       //   this.$router.push({
