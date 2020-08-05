@@ -57,7 +57,15 @@ const actions = {
     postArticle({ commit, state, rootState }, params) {
         rootState.requesting = true;
         commit(TYPE.ARTICLE_POST_REQUEST);
-        contentApi.blogsApi.post(params).then((res) => {
+        let requestParams = {
+            token: params.token,
+            bcontent: params.content,
+            bsubmitter: params.submitter,
+            bcategory: params.tag,
+            bcategoryId: 2,
+            btitle: params.title
+        }
+        contentApi.blogsApi.post(requestParams).then((res) => {
             rootState.requesting = false;
             commit(TYPE.ARTICLE_POST_SUCCESS, res.response);
         }, (error) => {
