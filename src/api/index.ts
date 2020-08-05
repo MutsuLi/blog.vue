@@ -71,3 +71,16 @@ export const userApi = {
 	}
 }
 
+export const tagApi = {
+	list(params) {
+		let option = {
+			baseURL: "/api/",
+			params,
+			withCredentials: false
+		}
+		// let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
+		return axios.get(url.tag.list, option).then((response) => {
+			return response.data;
+		});
+	}
+}

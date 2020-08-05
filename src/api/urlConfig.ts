@@ -12,4 +12,9 @@ export const blogs={
     post:"blogs/post"
 }
 
+export const tag={
+    list:"tag",
+    post:"tag/post"
+}
+
 

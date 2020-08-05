@@ -48,53 +48,54 @@ const actions = {
             commit(TYPE.ARTICLES_FAILURE);
         })
     },
-    getContentRank({ commit, state, rootState }, categoryId) {
-        rootState.requesting = true
-        commit(TYPE.CONTENT_RANK_REQUEST)
-        rootState.requesting = false
-        let response = require('@/data/articles.json');
-        commit(TYPE.CONTENT_RANK_SUCCESS, response)
-        // commit(TYPE.CONTENT_RANK_REQUEST)
-        // let param = {
-        //     categoryId: categoryId
-        // }
-        // contentrankApi.contentrank(param).then((response) => {
-        //     rootState.requesting = false
-        //     if (categoryId === 1) {
-        //         console.log(response)
-        //     }
-        //     commit(TYPE.CONTENT_RANK_SUCCESS, response)
-        // }, (error) => {
-        //     rootState.requesting = false
-        //     commit(TYPE.CONTENT_RANK_FAILURE)
-        // })
-    }, getContentTags({ commit, state, rootState }) {
-        rootState.requesting = true
-        commit(TYPE.CONTENT_RANK_REQUEST)
-        rootState.requesting = false
-        let articles = require('@/data/articles.json').data;
-        let categories: category[] = []
-        let hashMap = new Set();
-        const defaultArr: category[] = [{
-            text: "dotnet",
-            href: '',
-        }, {
-            text: "database",
-            href: '',
-        }];
-        for (const article of articles) {
-            if ((typeof (article.bcategory) == "undefined") || article.bcategory == "") continue;
-            if (hashMap.has(article.bcategory)) continue;
-            hashMap.add(article.bcategory);
-            const text = article.bcategory;
-            categories.push({
-                text,
-                href: '',
-            })
-        }
-        categories = categories.concat(defaultArr)
-        commit(TYPE.CONTENT_TAGS_SUCCESS, categories)
-    }
+    // getContentRank({ commit, state, rootState }, categoryId) {
+    //     rootState.requesting = true
+    //     commit(TYPE.CONTENT_RANK_REQUEST)
+    //     rootState.requesting = false
+    //     let response = require('@/data/articles.json');
+    //     commit(TYPE.CONTENT_RANK_SUCCESS, response)
+    //     // commit(TYPE.CONTENT_RANK_REQUEST)
+    //     // let param = {
+    //     //     categoryId: categoryId
+    //     // }
+    //     // contentrankApi.contentrank(param).then((response) => {
+    //     //     rootState.requesting = false
+    //     //     if (categoryId === 1) {
+    //     //         console.log(response)
+    //     //     }
+    //     //     commit(TYPE.CONTENT_RANK_SUCCESS, response)
+    //     // }, (error) => {
+    //     //     rootState.requesting = false
+    //     //     commit(TYPE.CONTENT_RANK_FAILURE)
+    //     // })
+    // }
+    // , getContentTags({ commit, state, rootState }) {
+    //     rootState.requesting = true
+    //     commit(TYPE.CONTENT_RANK_REQUEST)
+    //     rootState.requesting = false
+    //     let articles = require('@/data/articles.json').data;
+    //     let categories: category[] = []
+    //     let hashMap = new Set();
+    //     const defaultArr: category[] = [{
+    //         text: "dotnet",
+    //         href: '',
+    //     }, {
+    //         text: "database",
+    //         href: '',
+    //     }];
+    //     for (const article of articles) {
+    //         if ((typeof (article.bcategory) == "undefined") || article.bcategory == "") continue;
+    //         if (hashMap.has(article.bcategory)) continue;
+    //         hashMap.add(article.bcategory);
+    //         const text = article.bcategory;
+    //         categories.push({
+    //             text,
+    //             href: '',
+    //         })
+    //     }
+    //     categories = categories.concat(defaultArr)
+    //     commit(TYPE.CONTENT_TAGS_SUCCESS, categories)
+    // }
 }
 
 const mutations = {
@@ -113,7 +114,7 @@ const mutations = {
         for (let i = 0; i < list.length; i++) {
             let article = list[i]
             let rowItem = {
-                ID: article.bID,
+                ID: article.bId,
                 category: article.bcategory,
                 title: article.btitle,
                 content: article.bcontent,
@@ -121,7 +122,7 @@ const mutations = {
                 updateTime: article.bUpdateTime,
                 submitter: article.bsubmitter,
                 remark: article.bRemark,
-                href: "/articles/" + article.bID,
+                href: "/articles/" + article.bId,
                 traffic: article.btraffic
             }
             data.push(rowItem)
@@ -143,10 +144,10 @@ const mutations = {
     [TYPE.CONTENT_RANK_FAILURE](state) {
 
     },
-    // 标签信息
-    [TYPE.CONTENT_TAGS_SUCCESS](state, response) {
-        state.tags = response;
-    }
+    // // 标签信息
+    // [TYPE.CONTENT_TAGS_SUCCESS](state, response) {
+    //     state.tags = response;
+    // }
 }
 
 export default {

@@ -67,6 +67,7 @@ export default {
   }),
   mounted() {
     this.$store.dispatch("getUserInfo");
+    this.$store.dispatch("getTagList", { page: 1, pageSize: 25 });
   },
   computed: {
     ...mapGetters(["token", "user"]),

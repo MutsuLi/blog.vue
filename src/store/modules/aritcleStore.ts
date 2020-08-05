@@ -26,7 +26,8 @@ const state = {
         tags: [],
         headings: []
     },
-    article: {}
+    article: {},
+    tag: []
 
 }
 
@@ -35,7 +36,8 @@ const getters = {
     breadcrumbs: state => state.breadcrumbs,
     author: state => state.author,
     passageInfo: state => state.passageInfo,
-    article: state => state.article
+    article: state => state.article,
+    tag: state => state.tag,
     // sortKeys: state => state.sortKeys,
     // sortIds: state => state.sortIds,
 }
@@ -72,6 +74,18 @@ const actions = {
             console.log(error);
             rootState.requesting = false;
             commit(TYPE.ARTICLE_POST_FAILURE);
+        })
+    },
+    getTagList({ commit, state, rootState }, params) {
+        rootState.requesting = true;
+        commit(TYPE.TAG_LIST_REQUEST);
+        contentApi.tagApi.list(params).then((res) => {
+            rootState.requesting = false;
+            commit(TYPE.TAG_LIST_SUCCESS, res.response);
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false;
+            commit(TYPE.TAG_LIST_FAILURE);
         })
     }
 }
@@ -115,9 +129,26 @@ const mutations = {
     }, [TYPE.ARTICLE_DETAIL_FAILURE](state) {
 
     },
-    // 标签信息
-    [TYPE.CONTENT_TAGS_SUCCESS](state, response) {
-        state.tags = response;
+    [TYPE.TAG_LIST_REQUEST](state) {
+    },
+    [TYPE.TAG_LIST_SUCCESS](state, response) {
+        let list = response.data;
+        let data = [];
+        for (let i = 0; i < list.length; i++) {
+            let rowItem = {
+                id: list.tId,
+                name: list.tName,
+                displayname: list.tDispalyName,
+                description: list.tDescription,
+                submitter: list.submitter,
+                icon: list.tIcon,
+                modifyTime: list.tModifyTime,
+                createTime: list.tCreateTime
+            };
+            data.push(rowItem)
+        }
+        state.tag = data;
+    }, [TYPE.TAG_LIST_FAILURE](state) {
     },
     [TYPE.ARTICLE_POST_REQUEST](state) {
 
