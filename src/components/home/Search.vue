@@ -1,6 +1,6 @@
 <template>
-  <v-responsive :max-width="450" class="mr-auto mr-md-4 transition-swing">
-    <v-text-field
+  <v-responsive class="mr-auto mr-md-4 transition-swing">
+    <!-- <v-text-field
       id="doc-search"
       ref="search"
       v-model="search"
@@ -15,126 +15,76 @@
       @blur="onBlur"
       @focus="onFocus"
       @keydown.esc="onEsc"
-    />
+    />-->
+    <v-autocomplete
+      id="doc-search"
+      ref="search"
+      v-model="model"
+      :items="this.articleSearch"
+      item-text="text"
+      item-value="value"
+      :loading="isLoading"
+      :search-input.sync="search"
+      :background-color="!theme.isDark ? 'grey lighten-3' : undefined"
+      hide-no-data
+      hide-selected
+      placeholder="Start typing to Search"
+      prepend-icon="mdi-magnify"
+      allow-overflow
+      clearable
+      dense
+      clear-icon="mdi-close-circle"
+      return-object
+    ></v-autocomplete>
   </v-responsive>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "HomeSearch",
-
   inject: ["theme"],
-
   data: () => ({
     docSearch: {},
     isFocused: false,
-    isSearching: false,
+    isLoading: false,
     label: 'Search ("/" to focus)',
     search: "",
     timeout: null,
+    model: null,
   }),
 
   watch: {
-    isSearching(val) {
-      if (val) {
-        this.$refs.search.focus();
-
-        return;
-      }
-
-      this.resetSearch();
-    },
     search(val) {
-      if (val) return;
-
-      this.docSearch.autocomplete.autocomplete.close();
-      this.docSearch.autocomplete.autocomplete.setVal("");
+      val && val !== this.select && this.querySelections(val);
     },
   },
-
-  mounted() {
-    document.onkeydown = (e) => {
-      e = e || window.event;
-
-      if (e.key === "/" && e.target !== this.$refs.search.$refs.input) {
-        e.preventDefault();
-
-        this.$refs.search.focus();
-      }
-    };
-
-    //   import(
-    //     /* webpackChunkName: "docsearch" */
-    //     'docsearch.js/dist/cdn/docsearch.min.css'
-    //   )
-    //   import(
-    //     /* webpackChunkName: "docsearch" */
-    //     'docsearch.js'
-    //   ).then(this.init)
+  computed: {
+    ...mapGetters(["articleSearch"]),
+    fields() {
+      if (!this.model) return [];
+      return Object.keys(this.model).map((key) => {
+        return {
+          key,
+          value: this.model[key] || "n/a",
+        };
+      });
+    },
   },
-
-  beforeDestroy() {
-    document.onkeydown = null;
-
-    this.docSearch.autocomplete.autocomplete.close();
-    this.docSearch.autocomplete.autocomplete.setVal("");
-  },
-
   methods: {
-    async init({ default: docsearch }) {
-      const vm = this;
-
-      this.docSearch = docsearch({
-        apiKey: "259d4615e283a1bbaa3313b4eff7881c",
-        autocompleteOptions: {
-          appendTo: "#documentation-app-bar",
-          autoselect: true,
-          clearOnSelected: true,
-          hint: false,
-          debug: process.env.NODE_ENV === "development",
-        },
-        handleSelected(input, event, suggestion) {
-          vm.$router.push(suggestion.url.split(".com").pop());
-          vm.resetSearch(400);
-        },
-        indexName: "vuetifyjs",
-        inputSelector: "#doc-search",
-      });
-
-      const { search } = this.$route.query;
-
-      if (!search) return;
-
-      this.search = search;
-      this.$refs.search.focus();
-
-      await this.$nextTick();
-
-      // Dispatch an event to trigger agolia search menu
-      const event = new Event("input");
-
-      this.$refs.search.$refs.input.dispatchEvent(event);
-    },
-    onBlur() {
-      this.resetSearch();
-    },
-    onEsc() {
-      this.$refs.search.blur();
-    },
-    onFocus() {
-      clearTimeout(this.timeout);
-
-      this.isFocused = true;
-    },
-    resetSearch(timeout = 0) {
-      clearTimeout(this.timeout);
-
-      this.$nextTick(() => {
-        this.search = undefined;
-        this.isSearching = false;
-
-        this.timeout = setTimeout(() => (this.isFocused = false), timeout);
-      });
+    querySelections(val) {
+      if (this.isLoading) return;
+      this.isLoading = true;
+      this.$store
+        .dispatch("getSearchRows", {
+          page: 1,
+          pageSize: 25,
+          key: val,
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => (this.isLoading = false));
     },
   },
 };

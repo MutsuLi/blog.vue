@@ -7,6 +7,7 @@ const state = {
         totalCount: 0,
         list: []
     },
+    articleSearch: [{ text: "text", value: "value" }],
     ranks: [],
     tags: [],
     menus: []
@@ -16,7 +17,8 @@ const getters = {
     articles: state => state.articles,
     ranks: state => state.ranks,
     tags: state => state.tags,
-    menus: state => state.menus
+    menus: state => state.menus,
+    articleSearch: state => state.articleSearch
     // sortKeys: state => state.sortKeys,
     // sortIds: state => state.sortIds,
 }
@@ -48,6 +50,18 @@ const actions = {
             commit(TYPE.ARTICLES_FAILURE);
         })
     },
+    getSearchRows({ commit, state, rootState }, params) {
+        rootState.requesting = true;
+        commit(TYPE.ARTICLES_SEARCH_REQUEST);
+        contentApi.blogsApi.list(params).then((res) => {
+            rootState.requesting = false;
+            commit(TYPE.ARTICLES_SEARCH_SUCCESS, res.response);
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false;
+            commit(TYPE.ARTICLES_SEARCH_FAILURE);
+        })
+    }
     // getContentRank({ commit, state, rootState }, categoryId) {
     //     rootState.requesting = true
     //     commit(TYPE.CONTENT_RANK_REQUEST)
@@ -132,6 +146,24 @@ const mutations = {
         state.articles.totalPage = response.pageCount;
     },
     [TYPE.ARTICLES_FAILURE](state) {
+
+    }, [TYPE.ARTICLES_SEARCH_REQUEST](state) {
+
+    },
+    [TYPE.ARTICLES_SEARCH_SUCCESS](state, response) {
+        let list = response.data;
+        let data = [];
+        for (let i = 0; i < list.length; i++) {
+            let article = list[i]
+            let rowItem = {
+                text: article.btitle,
+                value: "/articles/" + article.bId,
+            }
+            data.push(rowItem)
+        }
+        state.articleSearch = data;
+    },
+    [TYPE.ARTICLES_SEARCH_FAILURE](state) {
 
     },
     // 排行榜信息
