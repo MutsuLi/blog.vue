@@ -26,7 +26,7 @@ export default {
     this.$store.dispatch("getMenuList");
   },
   components: {
-    BaseSupportMenu: () => import("../base/SupportMenu")
+    BaseSupportMenu: () => import("../base/SupportMenu"),
   },
   computed: {
     ...mapGetters(["menus"]),

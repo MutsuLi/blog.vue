@@ -21,10 +21,11 @@
         item-value="value"
         :search-input.sync="search"
         clear-icon="mdi-close-circle"
+        placeholder="Start typing to Search"
         clearable
         hide-no-data
         hide-details
-        label="choose a tag"
+        label="tag"
         outlined
         dense
         return-object
