@@ -6,6 +6,7 @@
         :elevation="hover ? 12 : 2"
         :class="{ 'on-hover': hover }"
         :href="value.href"
+        outlined
       >
         <!-- <v-img
           :src="require(`@/assets/articles/${value.hero}`)"

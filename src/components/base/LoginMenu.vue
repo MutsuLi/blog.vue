@@ -1,5 +1,5 @@
 <template>
-  <v-row align="center">
+  <v-row align="center" class="hidden-sm-and-down">
     <v-btn
       v-if="!isLogin"
       class="hidden-md-and-down"

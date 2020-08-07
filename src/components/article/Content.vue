@@ -16,6 +16,11 @@ export default {
       token: this.token,
     });
   },
+  watch: {
+    $route(to, from) {
+      this.$router.go(0);
+    },
+  },
   computed: {
     ...mapGetters(["token"]),
   },

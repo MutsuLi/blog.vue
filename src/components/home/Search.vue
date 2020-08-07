@@ -1,29 +1,15 @@
 <template>
-  <v-responsive class="mr-auto mr-md-4 transition-swing">
-    <!-- <v-text-field
-      id="doc-search"
-      ref="search"
-      v-model="search"
-      :background-color="!theme.isDark ? 'grey lighten-3' : undefined"
-      :label="label"
-      dense
-      flat
-      hide-details
-      prepend-inner-icon="mdi-magnify"
-      rounded
-      solo
-      @blur="onBlur"
-      @focus="onFocus"
-      @keydown.esc="onEsc"
-    />-->
+  <v-responsive class="transition-swing mt-6 mr-4 hidden-sm-and-down">
     <v-autocomplete
       id="doc-search"
       ref="search"
+      class="search"
       v-model="model"
       :items="this.articleSearch"
       item-text="text"
       item-value="value"
       :loading="isLoading"
+      @keyup.enter="redirectPage"
       :search-input.sync="search"
       :background-color="!theme.isDark ? 'grey lighten-3' : undefined"
       hide-no-data
@@ -33,6 +19,8 @@
       allow-overflow
       clearable
       dense
+      flat
+      solo-inverted
       clear-icon="mdi-close-circle"
       return-object
     ></v-autocomplete>
@@ -53,7 +41,6 @@ export default {
     timeout: null,
     model: null,
   }),
-
   watch: {
     search(val) {
       val && val !== this.select && this.querySelections(val);
@@ -86,6 +73,11 @@ export default {
         })
         .finally(() => (this.isLoading = false));
     },
+    redirectPage() {
+      this.$router.push({
+        path: this.$refs.search.internalValue.value,
+      });
+    },
   },
 };
 </script>
@@ -100,25 +92,20 @@ export default {
   width: 100%;
 }
 
-#app .algolia-docsearch-suggestion--title {
-  margin-bottom: 0;
-}
+// .search {
+//   flex: 1 1 auto;
+//   // position: sticky !important;
+//   margin: 0;
+// }
 
 .algolia-autocomplete a {
   text-decoration: none !important;
 }
 
-> span {
-  left: -36px !important;
-  top: 0 !important;
-}
 :before {
   display: none;
 }
 :after {
   display: none;
-}
-.ds-dataset-1 {
-  border: none !important;
 }
 </style>

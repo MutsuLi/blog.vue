@@ -69,6 +69,7 @@ const actions = {
         }
         contentApi.blogsApi.post(requestParams).then((res) => {
             rootState.requesting = false;
+            console.log(res);
             commit(TYPE.ARTICLE_POST_SUCCESS, res.response);
         }, (error) => {
             console.log(error);
@@ -132,18 +133,21 @@ const mutations = {
     [TYPE.TAG_LIST_REQUEST](state) {
     },
     [TYPE.TAG_LIST_SUCCESS](state, response) {
+        console.log("TAG_LIST_SUCCESS");
+        console.log(response);
         let list = response.data;
         let data = [];
         for (let i = 0; i < list.length; i++) {
+            let tag = list[i]
             let rowItem = {
-                id: list.tId,
-                name: list.tName,
-                displayname: list.tDispalyName,
-                description: list.tDescription,
-                submitter: list.submitter,
-                icon: list.tIcon,
-                modifyTime: list.tModifyTime,
-                createTime: list.tCreateTime
+                id: tag.tId,
+                name: tag.tName,
+                displayname: tag.tDispalyName,
+                description: tag.tDescription,
+                submitter: tag.submitter,
+                icon: tag.tIcon,
+                modifyTime: tag.tModifyTime,
+                createTime: tag.tCreateTime
             };
             data.push(rowItem)
         }

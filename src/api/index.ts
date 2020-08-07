@@ -35,7 +35,9 @@ export const blogsApi = {
 		return axios.post(url.blogs.post, params, option).then((response) => {
 			console.log(response);
 			return response.data;
-		});
+		}).catch((err) => {
+			return err;
+		})
 	}
 }
 

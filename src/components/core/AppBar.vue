@@ -5,7 +5,6 @@
     app
     clipped-left
     clipped-right
-    hide-on-scroll
     flat
   >
     <v-spacer />
@@ -52,6 +51,9 @@ export default {
 </script>
 
 <style lang="scss">
+#core-app-bar {
+  z-index: 1502;
+}
 .theme--light {
   border-bottom-color: #0000001f !important;
 }

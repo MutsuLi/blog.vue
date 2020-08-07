@@ -10,15 +10,25 @@
         required
         outlined
       ></v-text-field>
-      <v-text-field
+      <v-autocomplete
         class="input-tag"
-        v-model="tag"
-        ref="tag"
-        :rules="tagRules"
-        label="tag"
-        required
+        ref="search"
+        v-model="model"
+        :loading="isLoading"
+        :items="paginatedTag"
+        color="primary"
+        item-text="text"
+        item-value="value"
+        :search-input.sync="search"
+        clear-icon="mdi-close-circle"
+        clearable
+        hide-no-data
+        hide-details
+        label="choose a tag"
         outlined
-      ></v-text-field>
+        dense
+        return-object
+      ></v-autocomplete>
     </v-form>
 
     <v-snackbar v-model="snackbar" :color="color" light :timeout="timeout" top>
@@ -38,6 +48,7 @@
       transition="scale-transition"
       type="error"
     >I'm an error alert.</v-alert>-->
+
     <mavon-editor ref="editor" class="me-editor" v-model="doc" :subfield="false" @save="save" fixed></mavon-editor>
   </v-container>
 </template>
@@ -50,31 +61,52 @@ export default {
   name: "userEditor",
   components: { mavonEditor },
   data: () => ({
+    model: null,
     title: "",
-    tag: "",
+    // tag: "",
     doc: "",
     text: "",
     color: "",
+    search: "",
     timeout: 5000,
     error: "red lighten-3",
     success: "green lighten-3",
     snackbar: false,
-    tagRules: [
-      (v) => !!v || "tag is required",
-      (v) => (v && v.length >= 2) || "tag must be less than 10 characters",
-    ],
+    // tagRules: [
+    //   (v) => !!v || "tag is required",
+    //   (v) => (v && v.length >= 2) || "tag must be less than 10 characters",
+    // ],
     titleRules: [(v) => !!v || "title is required"],
+    isLoading: false,
   }),
   mounted() {
     this.$store.dispatch("getUserInfo");
     this.$store.dispatch("getTagList", { page: 1, pageSize: 25 });
   },
+  watch: {
+    search(val) {
+      val && val !== this.select && this.querySelections(val);
+    },
+  },
   computed: {
-    ...mapGetters(["token", "user"]),
+    ...mapGetters(["token", "user", "tag"]),
+    paginatedTag() {
+      let list = this.tag;
+      let data = [];
+      for (let i = 0; i < list.length; i++) {
+        let each = list[i];
+        let rowItem = {
+          text: each.displayname,
+          value: each.id,
+        };
+        data.push(rowItem);
+      }
+      return data;
+    },
   },
   methods: {
     save(value, render) {
-      if (!this.$refs.form.validate()) {
+      if (!this.$refs.form.validate() || !this.$refs.search.internalValue) {
         this.text = "Please fill in title and tag.";
         this.color = this.error;
         this.snackbar = true;
@@ -88,18 +120,34 @@ export default {
         tagName: this.tag,
         content: value,
       };
-      console.log(articleBody);
-      // this.$store.dispatch("postArticle", articleBody);
-      // .then(() => {
-      //   this.color = this.success;
-      //   this.$router.push({
-      //     path: this.redirect || "/",
-      //     query: this.otherQuery,
-      //   });
-      // })
-      // .catch((err) => {
-      //   console.log(err + "login fail");
-      // });
+
+      this.$store
+        .dispatch("postArticle", articleBody)
+        .then(() => {
+          this.text = "Save aritcle successfully.";
+          this.color = this.success;
+          this.snackbar = true;
+          // this.$router.push({
+          //   path: "/",
+          // });
+        })
+        .catch((err) => {
+          console.log(err + "post fail");
+        });
+    },
+    querySelections(val) {
+      if (this.isLoading) return;
+      this.isLoading = true;
+      this.$store
+        .dispatch("getTagList", {
+          page: 1,
+          pageSize: 25,
+          key: val,
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => (this.isLoading = false));
     },
   },
 };
@@ -108,14 +156,15 @@ export default {
 <style scope lang="scss">
 .input-title {
   width: 35%;
+  z-index: 1501;
 }
 .input-tag {
   width: 35%;
+  z-index: 1501;
 }
 .me-editor {
-  z-index: -1;
-  width: 100%;
-  height: 75vh;
+  height: 100vh;
+  margin-top: 2%;
   position: absolute;
 }
 </style>

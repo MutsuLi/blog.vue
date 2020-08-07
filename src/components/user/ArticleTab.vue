@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card outlined>
       <user-editor></user-editor>
     </v-card>
   </v-container>
@@ -12,7 +12,7 @@ export default {
   name: "userArticleTab",
   components: {
     UserEditor: () => import("./Editor"),
-    UserPreview: () => import("./Preview"),
+    // UserPreview: () => import("./Preview"),
   },
   data() {
     return {
