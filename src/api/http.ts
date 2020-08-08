@@ -1,11 +1,16 @@
 import store from '@/store/index';
 import axios from 'axios'
 // import applicationUserManager from "../Auth/applicationusermanager";
+import router from '../router';
+import { removeToken, getToken } from '@/util/auth'
 
 // 配置API接口地址
-var root1 = "http://localhost:58427/api";//测试本地，用CORS跨域
 var root = "/api/";//用proxy实现本地代理跨域（生产环境使用的是nginx）
-// 引用axios
+const instance = axios.create({
+    baseURL: root,
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    withCredentials: false
+})
 
 // 自定义判断元素类型JS
 function toType(obj) {
@@ -32,13 +37,13 @@ function filterNull(o) {
 }
 
 // http request 拦截器
-var storeTemp = store;
-axios.interceptors.request.use(
+instance.interceptors.request.use(
     config => {
-        console.log(config.params)
-        if (storeTemp.state.token) {
+        console.log(config);
+        if (getToken()) {
             // 判断是否存在token，如果存在的话，则每个http header都加上token
-            config.headers.Authorization = "Bearer " + storeTemp.state.token;
+            console.log(config.headers)
+            config.headers.Authorization = "Bearer " + getToken();
         }
         return config;
     },
@@ -47,7 +52,7 @@ axios.interceptors.request.use(
     }
 );
 // http response 拦截器
-axios.interceptors.response.use(
+instance.interceptors.response.use(
     response => {
         return response;
     },
@@ -56,15 +61,16 @@ axios.interceptors.response.use(
             switch (error.response.status) {
                 case 401:
                     // 返回 401 清除token信息并跳转到登录页面
-                    store.commit("saveToken", "");
-                    window.localStorage.removeItem("USER_NAME");
-                // applicationUserManager.login();
-                //   router.replace({
-                //   path: "/login",
-                //   query: { redirect: router.currentRoute.fullPath }
-                // });
+                    console.log("removeToken")
+                    removeToken();
+                    // applicationUserManager.login();
+                    router.replace({
+                        path: "/login",
+                        query: { redirect: router.currentRoute.fullPath }
+                    });
             }
         }
+        console.log(error)
         return Promise.reject(error.response.data); // 返回接口返回的错误信息
     }
 );
@@ -88,46 +94,46 @@ function apiAxios() {
 
 // 返回在vue模板中的调用接口
 export default {
-    get: function (url, params, headers) {
+    get: function (url, params) {
         if (params) {
             params = filterNull(params);
         }
-        return apiAxios().get(url, {
+        return instance.get(url, {
             data: null,
             params: params,
-            headers
-        });
+            //headers
+        }).then();
     },
     // data: method === "POST" || method === "PUT" ? params : null,
     // params: method === "GET" || method === "DELETE" ? params : null,
-    post: function (url, params, headers) {
+    post: function (url, params) {
         if (params) {
             params = filterNull(params);
         }
-        return apiAxios().post(url, {
+        return instance.post(url, {
             data: params,
             parms: null,
-            headers
+            //headers
         })
     },
-    put: function (url, params, headers) {
+    put: function (url, params) {
         if (params) {
             params = filterNull(params);
         }
-        return apiAxios().put(url, {
+        return instance.put(url, {
             data: params,
             parms: null,
-            headers
+            // headers
         })
     },
-    delete: function (url, params, headers) {
+    delete: function (url, params) {
         if (params) {
             params = filterNull(params);
         }
         return apiAxios().delete(url, {
             data: null,
             params,
-            headers
+            // headers
         })
     },
 };

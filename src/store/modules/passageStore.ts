@@ -7,7 +7,7 @@ const state = {
         totalCount: 0,
         list: []
     },
-    articleSearch: [{ text: "text", value: "value" }],
+    articleSearch: [{ text: "", value: "" }],
     ranks: [],
     tags: [],
     menus: []
