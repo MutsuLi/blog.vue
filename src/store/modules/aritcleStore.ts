@@ -43,11 +43,11 @@ const getters = {
 }
 
 const actions = {
-    getAritcileDetail({ commit, state, rootState }, params) {
+    async getAritcileDetail({ commit, state, rootState }, params) {
         rootState.requesting = true;
         let requestParams = { token: params.token, bID: params.bID };
         commit(TYPE.ARTICLE_DETAIL_REQUEST);
-        contentApi.blogsApi.detail(requestParams).then((res) => {
+        await contentApi.blogsApi.detail(requestParams).then((res) => {
             rootState.requesting = false;
             commit(TYPE.ARTICLE_DETAIL_SUCCESS, res.response);
         }, (error) => {
@@ -56,18 +56,19 @@ const actions = {
             commit(TYPE.ARTICLE_DETAIL_FAILURE);
         })
     },
-    postArticle({ commit, state, rootState }, params) {
+    async postArticle({ commit, state, rootState }, params) {
         rootState.requesting = true;
         commit(TYPE.ARTICLE_POST_REQUEST);
+        console.log(params)
         let requestParams = {
-            token: params.token,
             bcontent: params.content,
+            bSubmitterId: params.submitterId,
             bsubmitter: params.submitter,
-            bcategory: params.tag,
-            bcategoryId: 2,
+            bcategory: params.tagName,
+            bcategoryId: params.tag,
             btitle: params.title
         }
-        contentApi.blogsApi.post(requestParams).then((res) => {
+        await contentApi.blogsApi.post(requestParams).then((res) => {
             rootState.requesting = false;
             console.log(res);
             commit(TYPE.ARTICLE_POST_SUCCESS, res.response);
@@ -77,10 +78,10 @@ const actions = {
             commit(TYPE.ARTICLE_POST_FAILURE);
         })
     },
-    getTagList({ commit, state, rootState }, params) {
+    async getTagList({ commit, state, rootState }, params) {
         rootState.requesting = true;
         commit(TYPE.TAG_LIST_REQUEST);
-        contentApi.tagApi.list(params).then((res) => {
+        await contentApi.tagApi.list(params).then((res) => {
             rootState.requesting = false;
             commit(TYPE.TAG_LIST_SUCCESS, res.response);
         }, (error) => {
@@ -123,7 +124,8 @@ const mutations = {
             nextID: article.nextID,
             previousID: article.previousID,
             previous: article.previous,
-            headings: tagsArr
+            headings: tagsArr,
+            readCount: article.btraffic
         };
         state.article = result;
 

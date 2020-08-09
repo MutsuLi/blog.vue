@@ -12,7 +12,7 @@ export const blogsApi = {
 		// return axios.get(url.blogs.list, option).then((response) => {
 		// 	return response.data;
 		// })
-		return http.default.get(url.blogs.list, params).then((response) => {
+		return http.default.get(url.blogs.list, { params }).then((response) => {
 			console.log("list.get")
 			console.log(response)
 			return response.data;
@@ -28,7 +28,7 @@ export const blogsApi = {
 		// 	return response.data;
 		// });
 
-		return http.default.get(url.blogs.list + '/' + params.bID, null).then((response) => {
+		return http.default.get(url.blogs.list + '/' + params.bID, {}).then((response) => {
 			console.log("detail.get")
 			console.log(response)
 			return response.data;
@@ -36,11 +36,11 @@ export const blogsApi = {
 	},
 	post(params) {
 		// let option = {
-		// 	baseURL: "/api/",
+		// 	baseURL: "/apis/",
 		// 	withCredentials: false,
 		// 	headers: { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token },
 		// }
-		return http.default.post(url.blogs.post, params).then((response) => {
+		return http.default.post(url.blogs.post, params, {}).then((response) => {
 			console.log(response);
 			return response.data;
 		}).catch((err) => {
@@ -57,13 +57,13 @@ export const loginApi = {
 		// 	withCredentials: false
 		// }
 		console.log("getToken")
-		return http.default.get(url.getToken, params).then((response) => {
+		return http.default.get(url.getToken, { params }).then((response) => {
 			console.log(response)
 			return response.data;
 		});
 	},
 	refreshToken(params) {
-		return http.default.get(url.refreshToken, params).then((response) => {
+		return http.default.get(url.refreshToken, { params }).then((response) => {
 			return response.data;
 		});
 	}
@@ -77,7 +77,7 @@ export const userApi = {
 		// 	withCredentials: false
 		// }
 		// let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
-		return http.default.get(url.user, null).then((response) => {
+		return http.default.get(url.user, { params }).then((response) => {
 			return response.data;
 		});
 	}
@@ -91,7 +91,7 @@ export const tagApi = {
 		// 	withCredentials: false
 		// }
 		// let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
-		return http.default.get(url.tag.list, null).then((response) => {
+		return http.default.get(url.tag.list, {}).then((response) => {
 			return response.data;
 		});
 	}

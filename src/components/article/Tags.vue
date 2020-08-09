@@ -2,8 +2,8 @@
   <v-card class="mx-auto" max-width="344" outlined>
     <v-card-title>Article's Info</v-card-title>
     <v-card-text>
-      <div>Release Time: {{article.createTime}}</div>
-      <div>Read: {{article.traffic}}</div>
+      <div>Release Time: {{ReleaseTime}}</div>
+      <div>Read: {{ReadCount}}</div>
       <v-chip-group column>
         <v-chip
           v-for="(tag,i) in tags"
@@ -31,23 +31,24 @@ export default {
   // mounted() {
   //   this.$store.dispatch("getContentTags");
   // },
-
-  data: () => ({
-    Read: "1",
-    ReleaseTime: "2020-07-20",
-    tags: [
-      {
-        text: "dotnet",
-        href: "/articles",
-      },
-      {
-        text: "database",
-        href: "/articles",
-      },
-    ],
-  }),
   computed: {
     ...mapGetters(["article"]),
+    tags() {
+      return this.article
+        ? [
+            {
+              text: this.article.category,
+              href: "/articles",
+            },
+          ]
+        : [];
+    },
+    ReleaseTime() {
+      return this.article ? this.article.createTime : "";
+    },
+    ReadCount() {
+      return this.article ? this.article.readCount : "";
+    },
   },
 };
 </script>

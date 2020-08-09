@@ -106,7 +106,7 @@ export default {
     },
   },
   methods: {
-    save(value, render) {
+    async save(value, render) {
       if (!this.$refs.form.validate() || !this.$refs.search.internalValue) {
         this.text = "Please fill in title and tag.";
         this.color = this.error;
@@ -114,27 +114,28 @@ export default {
         return;
       }
       let articleBody = {
-        token: this.token,
         title: this.title,
+        submitterId:this.user.uId,
         submitter: this.user.username,
-        tag: this.tag,
-        tagName: this.tag,
+        tag: this.$refs.search.internalValue.value,
+        tagName: this.$refs.search.internalValue.text,
         content: value,
       };
-
-      this.$store
+      console.log(this.$refs.search.internalValue);
+      await this.$store
         .dispatch("postArticle", articleBody)
         .then(() => {
           this.text = "Save aritcle successfully.";
           this.color = this.success;
           this.snackbar = true;
-          // this.$router.push({
-          //   path: "/",
-          // });
         })
         .catch((err) => {
           console.log(err + "post fail");
         });
+
+      this.$router.push({
+        path: "/",
+      });
     },
     querySelections(val) {
       if (this.isLoading) return;

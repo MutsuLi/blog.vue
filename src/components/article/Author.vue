@@ -8,7 +8,7 @@
       </v-list-item-content>
     </v-list-item>
     <v-card-text>
-      <v-row> </v-row>
+      <v-row></v-row>
       <p>文章: {{author.count}}</p>
       <div class="text--primary">{{author.info}}</div>
     </v-card-text>
@@ -18,6 +18,7 @@
   </v-card>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "ArticleAuthor",
   data: () => ({
@@ -25,9 +26,12 @@ export default {
       name: "mutsuli",
       title: "software engineer",
       info: "someone like you",
-      count: 10
+      count: 10,
     },
-    ReleaseTime: "2020-07-20"
-  })
+  }),
+  async mounted() {
+    await this.$store.dispatch("getUserInfo");
+  },
+  computed: {},
 };
 </script>

@@ -6,11 +6,12 @@ import { removeToken, getToken } from '@/util/auth'
 
 // 配置API接口地址
 var root = "/api/";//用proxy实现本地代理跨域（生产环境使用的是nginx）
-const instance = axios.create({
+const defaultHeader = {
     baseURL: root,
     headers: { "Content-Type": "application/json; charset=utf-8" },
     withCredentials: false
-})
+}
+const instance = axios.create(defaultHeader)
 
 // 自定义判断元素类型JS
 function toType(obj) {
@@ -91,44 +92,37 @@ function apiAxios() {
 
 // 返回在vue模板中的调用接口
 export default {
-    get: function (url, params) {
+    get: function (url, option) {
+        console.log(option)
+        if (option.params) {
+            option.params = filterNull(option.params);
+        }
+        Object.assign(option, {
+            headers: defaultHeader
+        });
+        return instance.get(url, option).then();
+    },
+    post: function (url, params, headers) {
         if (params) {
             params = filterNull(params);
         }
-        return instance.get(url, {
-            data: null,
-            params: params,
-            //headers
-        }).then();
+        return instance.post(url, params, headers)
     },
-    post: function (url, params) {
-        if (params) {
-            params = filterNull(params);
-        }
-        return instance.post(url, {
-            data: params,
-            parms: null,
-            //headers
-        })
-    },
-    put: function (url, params) {
+    put: function (url, params, headers) {
         if (params) {
             params = filterNull(params);
         }
         return instance.put(url, {
             data: params,
-            parms: null,
-            // headers
-        })
+        }, headers)
     },
-    delete: function (url, params) {
-        if (params) {
-            params = filterNull(params);
+    delete: function (url, option) {
+        if (option.params) {
+            option.params = filterNull(option.params);
         }
-        return apiAxios().delete(url, {
-            data: null,
-            params,
-            // headers
-        })
+        Object.assign(option, {
+            headers: defaultHeader
+        });
+        return apiAxios().delete(url, option)
     },
 };

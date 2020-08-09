@@ -3,6 +3,7 @@
     <base-text>
       <slot />
     </base-text>
+    <article-up-next />
   </section>
 </template>
 
@@ -27,6 +28,7 @@ export default {
   components: {
     BaseTitle: () => import("../base/Title"),
     BaseText: () => import("./Text"),
+    ArticleUpNext: () => import("./upnext"),
   },
 };
 </script>
