@@ -80,9 +80,9 @@ export default {
     titleRules: [(v) => !!v || "title is required"],
     isLoading: false,
   }),
-  mounted() {
-    this.$store.dispatch("getUserInfo");
-    this.$store.dispatch("getTagList", { page: 1, pageSize: 25 });
+  async mounted() {
+    await this.$store.dispatch("getUserInfo");
+    await this.$store.dispatch("getTagList", { page: 1, pageSize: 25 });
   },
   watch: {
     search(val) {

@@ -39,7 +39,6 @@ function filterNull(o) {
 // http request 拦截器
 instance.interceptors.request.use(
     config => {
-        console.log(config);
         if (getToken()) {
             // 判断是否存在token，如果存在的话，则每个http header都加上token
             console.log(config.headers)
@@ -60,17 +59,15 @@ instance.interceptors.response.use(
         if (error.response) {
             switch (error.response.status) {
                 case 401:
-                    // 返回 401 清除token信息并跳转到登录页面
-                    console.log("removeToken")
-                    removeToken();
-                    // applicationUserManager.login();
-                    router.replace({
-                        path: "/login",
-                        query: { redirect: router.currentRoute.fullPath }
-                    });
+                    // // 返回 401 清除token信息并跳转到登录页面
+                    store.dispatch('resetToken').then(() => {
+                        router.replace({
+                            path: "/login",
+                            query: { redirect: router.currentRoute.fullPath }
+                        });
+                    })
             }
         }
-        console.log(error)
         return Promise.reject(error.response.data); // 返回接口返回的错误信息
     }
 );
@@ -104,8 +101,6 @@ export default {
             //headers
         }).then();
     },
-    // data: method === "POST" || method === "PUT" ? params : null,
-    // params: method === "GET" || method === "DELETE" ? params : null,
     post: function (url, params) {
         if (params) {
             params = filterNull(params);

@@ -14,11 +14,11 @@ const getters = {
 }
 
 const actions = {
-    getUserInfo({ commit, state, rootState }, params) {
+    async getUserInfo({ commit, state, rootState }, params) {
         rootState.requesting = true;
         commit(TYPE.USERINFO_REQUEST);
         let requestParams = { token: state.token };
-        contentApi.userApi.info(requestParams).then((res) => {
+        await contentApi.userApi.info(requestParams).then((res) => {
             rootState.requesting = false;
             if (!res.success) return commit(TYPE.USERINFO_FAILURE, new model.user());
             return commit(TYPE.USERINFO_SUCCESS, res.response);
@@ -28,12 +28,12 @@ const actions = {
             return commit(TYPE.USERINFO_FAILURE);
         })
     },
-    getToken({ commit, state, rootState }, params) {
+    async getToken({ commit, state, rootState }, params) {
         console.log("before getToken:" + JSON.stringify(state))
         rootState.requesting = true;
         commit(TYPE.TOKEN_REQUEST);
         let requestParams = { name: params.userid, pass: params.password };
-        contentApi.loginApi.getToken(requestParams).then((res) => {
+        await contentApi.loginApi.getToken(requestParams).then((res) => {
             rootState.requesting = false;
             return commit(TYPE.TOKEN_SUCCESS, res.response)
         }, (error) => {
@@ -42,11 +42,11 @@ const actions = {
             return commit(TYPE.TOKEN_FAILURE)
         })
     },
-    refreshToken({ commit, state, rootState }) {
+    async refreshToken({ commit, state, rootState }) {
         rootState.requesting = true;
         commit(TYPE.REFRESH_TOKEN_REQUEST);
         let params = { token: state.token };
-        contentApi.loginApi.refreshToken(params).then((response) => {
+        await contentApi.loginApi.refreshToken(params).then((response) => {
             rootState.requesting = false;
             return commit(TYPE.REFRESH_TOKEN_SUCCESS, response);
         }, (error) => {
@@ -55,7 +55,7 @@ const actions = {
             return commit(TYPE.REFRESH_TOKEN_FAILURE)
         })
     },
-    resetToken({ commit, state, rootState }) {
+    async resetToken({ commit, state, rootState }) {
         removeToken();
         commit('SET_TOKEN', "");
         commit('SET_USER', "");

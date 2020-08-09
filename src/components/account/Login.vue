@@ -91,21 +91,17 @@ export default {
     },
   },
   methods: {
-    submit() {
+    async submit() {
       let valid = this.$refs.loginForm.validate();
       const fields = this.fields;
       if (valid) {
-        this.$store
-          .dispatch("getToken", fields)
-          .then(() => {
-            this.$router.push({
-              path: this.redirect || "/",
-              query: this.otherQuery,
-            });
-          })
-          .catch((err) => {
-            console.log(err + "login fail");
-          });
+        await this.$store.dispatch("getToken", fields).catch((err) => {
+          console.log(err + "login fail");
+        });
+        this.$router.push({
+          path: this.redirect || "/",
+          query: this.otherQuery,
+        });
       } else {
         console.log("error submit!!");
         return false;
