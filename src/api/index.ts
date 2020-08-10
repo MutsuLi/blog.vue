@@ -4,44 +4,17 @@ import axios from 'axios'
 
 export const blogsApi = {
 	list(params) {
-		// let option = {
-		// 	baseURL: "/api/",
-		// 	withCredentials: false,
-		// 	params
-		// }
-		// return axios.get(url.blogs.list, option).then((response) => {
-		// 	return response.data;
-		// })
 		return http.default.get(url.blogs.list, { params }).then((response) => {
-			console.log("list.get")
-			console.log(response)
 			return response.data;
 		})
 	},
 	detail(params) {
-		// let option = {
-		// 	baseURL: "/api/",
-		// 	withCredentials: false,
-		// 	headers: { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token }
-		// }
-		// return axios.get(url.blogs.list + '/' + params.bID, option).then((response) => {
-		// 	return response.data;
-		// });
-
 		return http.default.get(url.blogs.list + '/' + params.bID, {}).then((response) => {
-			console.log("detail.get")
-			console.log(response)
 			return response.data;
 		})
 	},
 	post(params) {
-		// let option = {
-		// 	baseURL: "/apis/",
-		// 	withCredentials: false,
-		// 	headers: { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token },
-		// }
 		return http.default.post(url.blogs.post, params, {}).then((response) => {
-			console.log(response);
 			return response.data;
 		})
 	}
@@ -49,14 +22,7 @@ export const blogsApi = {
 
 export const loginApi = {
 	getToken(params) {
-		// let option = {
-		// 	baseURL: "/api/",
-		// 	params,
-		// 	withCredentials: false
-		// }
-		console.log("getToken")
 		return http.default.get(url.getToken, { params }).then((response) => {
-			console.log(response)
 			return response.data;
 		});
 	},
@@ -75,6 +41,11 @@ export const userApi = {
 	},
 	infoById(params) {
 		return http.default.get(url.user.infoById + '/' + params.uId, {}).then((response) => {
+			return response.data;
+		});
+	},
+	register(params) {
+		return http.default.post(url.user.register, params, {}).then((response) => {
 			return response.data;
 		});
 	}

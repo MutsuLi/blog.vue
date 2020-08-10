@@ -103,7 +103,7 @@ const mutations = {
         console.log("TYPE.USERINFO_SUCCESS");
         let user = {
             uId: res.uId,
-            userid: res.uLoginId,
+            userid: res.uEmail,
             username: res.uName,
             title: res.uTitle,
             description: res.uDescription,
@@ -128,11 +128,10 @@ const mutations = {
         console.log("TYPE.AUTHOR_SUCCESS");
         let author = {
             uId: res.uId,
-            userid: res.uLoginId,
+            userid: res.uEmail,
             username: res.uName,
             title: res.uTitle,
             description: res.uDescription,
-            name: res.uName,
             gender: res.gender,
             age: res.age,
             status: res.uStatus,

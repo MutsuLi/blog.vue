@@ -3,7 +3,8 @@ const serverRoot = `${process.env.NODE_ENV === 'production' ? 'https://www.lyben
 
 export const user = {
     infoByToken: 'user/GetInfoByToken',
-    infoById: "user/get"
+    infoById: "user/get",
+    register: "user/post"
 }
 
 export const getToken = 'login/JWTToken3.0';

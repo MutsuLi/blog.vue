@@ -70,8 +70,8 @@ export default {
     username: "",
     password: "",
     nameRules: [
-      (v) => !!v || "Name is required",
-      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+      (v) => !!v || "UserName is required",
+      (v) => (v && v.length <= 10) || "UserName must be less than 10 characters",
     ],
     email: "",
     emailRules: [
