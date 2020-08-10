@@ -32,7 +32,16 @@
       ></v-autocomplete>
     </v-form>
 
-    <v-snackbar v-model="snackbar" :color="color" light :timeout="timeout" top>
+    <v-snackbar
+      v-model="snackbar"
+      :color="color"
+      class="tips"
+      light
+      :timeout="timeout"
+      right
+      top
+      absolute
+    >
       {{ text }}
       <template v-slot:action="{ attrs }">
         <v-btn color="white" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
@@ -58,6 +67,7 @@
 import { mapGetters } from "vuex";
 import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
+import { redirect } from "@/router/util";
 export default {
   name: "userEditor",
   components: { mavonEditor },
@@ -115,27 +125,31 @@ export default {
       }
       let articleBody = {
         title: this.title,
-        submitterId:this.user.uId,
+        submitterId: this.user.uId,
         submitter: this.user.username,
         tag: this.$refs.search.internalValue.value,
         tagName: this.$refs.search.internalValue.text,
         content: value,
       };
-      console.log(this.$refs.search.internalValue);
+      let isRedirect = false;
       await this.$store
         .dispatch("postArticle", articleBody)
         .then(() => {
           this.text = "Save aritcle successfully.";
           this.color = this.success;
           this.snackbar = true;
+          isRedirect = true;
         })
         .catch((err) => {
-          console.log(err + "post fail");
+          this.text = "Save aritcle unsuccessfully." + err.msg;
+          this.color = this.error;
+          this.snackbar = true;
         });
-
-      this.$router.push({
-        path: "/",
-      });
+      if (isRedirect) {
+        this.$router.push({
+          path: "/",
+        });
+      }
     },
     querySelections(val) {
       if (this.isLoading) return;
@@ -168,5 +182,8 @@ export default {
   height: 100vh;
   margin-top: 2%;
   position: absolute;
+}
+.tips {
+  z-index: 2000;
 }
 </style>

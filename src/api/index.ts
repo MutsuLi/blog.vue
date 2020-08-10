@@ -43,8 +43,6 @@ export const blogsApi = {
 		return http.default.post(url.blogs.post, params, {}).then((response) => {
 			console.log(response);
 			return response.data;
-		}).catch((err) => {
-			return err;
 		})
 	}
 }
@@ -70,14 +68,13 @@ export const loginApi = {
 }
 
 export const userApi = {
-	info(params) {
-		// let option = {
-		// 	baseURL: "/api/",
-		// 	params,
-		// 	withCredentials: false
-		// }
-		// let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
-		return http.default.get(url.user, { params }).then((response) => {
+	infoByToken(params) {
+		return http.default.get(url.user.infoByToken, { params }).then((response) => {
+			return response.data;
+		});
+	},
+	infoById(params) {
+		return http.default.get(url.user.infoById + '/' + params.uId, {}).then((response) => {
 			return response.data;
 		});
 	}

@@ -4,13 +4,28 @@ import * as model from '../dataModel/model';
 import { getToken, setToken, removeToken } from '@/util/auth'
 
 const state = {
-    user: {},
-    token: getToken()
+    user: {
+        uId: "",
+        userid: "",
+        username: "",
+        title: "",
+        description: "",
+        name: "",
+        gender: "",
+        age: "",
+        status: "",
+        remark: "",
+        createTime: "",
+        updateTime: "",
+    },
+    token: getToken(),
+    author: {}
 }
 
 const getters = {
     user: state => state.user,
-    token: state => state.token
+    token: state => state.token,
+    author: state => state.author,
 }
 
 const actions = {
@@ -18,7 +33,7 @@ const actions = {
         rootState.requesting = true;
         commit(TYPE.USERINFO_REQUEST);
         let requestParams = { token: state.token };
-        await contentApi.userApi.info(requestParams).then((res) => {
+        await contentApi.userApi.infoByToken(requestParams).then((res) => {
             rootState.requesting = false;
             if (!res.success) return commit(TYPE.USERINFO_FAILURE, new model.user());
             return commit(TYPE.USERINFO_SUCCESS, res.response);
@@ -26,6 +41,18 @@ const actions = {
             console.log(error);
             rootState.requesting = false;
             return commit(TYPE.USERINFO_FAILURE);
+        })
+    }, async getUserInfoById({ commit, state, rootState }, params) {
+        rootState.requesting = true;
+        commit(TYPE.AUTHOR_REQUEST);
+        await contentApi.userApi.infoById(params).then((res) => {
+            rootState.requesting = false;
+            if (!res.success) return commit(TYPE.AUTHOR_FAILURE, new model.user());
+            return commit(TYPE.AUTHOR_SUCCESS, res.response);
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false;
+            return commit(TYPE.AUTHOR_FAILURE);
         })
     },
     async getToken({ commit, state, rootState }, params) {
@@ -78,6 +105,8 @@ const mutations = {
             uId: res.uId,
             userid: res.uLoginId,
             username: res.uName,
+            title: res.uTitle,
+            description: res.uDescription,
             name: res.uName,
             gender: res.gender,
             age: res.age,
@@ -91,6 +120,31 @@ const mutations = {
     }, [TYPE.USERINFO_FAILURE](state, res) {
         console.log(JSON.stringify(res));
         state.user = res;
+    },
+    [TYPE.AUTHOR_REQUEST](state) {
+
+    },
+    [TYPE.AUTHOR_SUCCESS](state, res) {
+        console.log("TYPE.AUTHOR_SUCCESS");
+        let author = {
+            uId: res.uId,
+            userid: res.uLoginId,
+            username: res.uName,
+            title: res.uTitle,
+            description: res.uDescription,
+            name: res.uName,
+            gender: res.gender,
+            age: res.age,
+            status: res.uStatus,
+            remark: res.uRemark,
+            createTime: res.uCreateTime,
+            updateTime: res.uUpdateTime,
+        };
+        state.author = author;
+
+    }, [TYPE.AUTHOR_FAILURE](state, res) {
+        console.log(JSON.stringify(res));
+        state.author = res;
     },
     [TYPE.TOKEN_REQUEST](state) {
 

@@ -5,8 +5,8 @@
         :height="value.prominent ? 450 : 350"
         :elevation="hover ? 12 : 2"
         :class="{ 'on-hover': hover }"
-        :href="value.href"
         outlined
+        @click="showDetail(value)"
       >
         <!-- <v-img
           :src="require(`@/assets/articles/${value.hero}`)"
@@ -22,7 +22,7 @@
             <v-card-text class="text--primary font-weight-bold text-left" text-color="black">
               <span class="pr-2">
                 <v-icon>mdi-account-box</v-icon>
-                {{ value.submitter }}
+                {{ value.uName }}
               </span>
               <span class="pr-2">
                 <v-icon>mdi-clock-outline</v-icon>
@@ -37,7 +37,7 @@
                 {{ value.traffic }}
               </span>
             </v-card-text>
-            <v-spacer/>
+            <v-spacer />
             <v-card-actions>
               <v-chip
                 label
@@ -70,6 +70,15 @@ export default {
     value: {
       type: Object,
       default: () => ({}),
+    },
+  },
+  methods: {
+    showDetail(value) {
+      console.log("uId:" + value.uId);
+      this.$router.push({
+        path: value.href,
+        query: { uId: value.uId },
+      });
     },
   },
 };

@@ -3,14 +3,13 @@
     <v-list-item>
       <v-list-item-avatar color="grey" size="48"></v-list-item-avatar>
       <v-list-item-content>
-        <v-list-item-title class="headline">{{author.name}}</v-list-item-title>
+        <v-list-item-title class="headline">{{author.username}}</v-list-item-title>
         <v-list-item-subtitle>{{author.title}}</v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
     <v-card-text>
       <v-row></v-row>
-      <p>文章: {{author.count}}</p>
-      <div class="text--primary">{{author.info}}</div>
+      <div class="text--primary">{{author.description}}</div>
     </v-card-text>
     <v-card-actions>
       <v-btn text color="deep-purple accent-4">Learn More</v-btn>
@@ -21,17 +20,17 @@
 import { mapGetters } from "vuex";
 export default {
   name: "ArticleAuthor",
-  data: () => ({
-    author: {
-      name: "mutsuli",
-      title: "software engineer",
-      info: "someone like you",
-      count: 10,
+  mounted() {},
+  computed: {
+    ...mapGetters(["article", "author"]),
+    async Author() {
+      // if (this.article.uId) {
+      //   await this.$store.dispatch("getUserInfoById", {
+      //     uId: this.article.uId,
+      //   });
+      // }
+      return this.author;
     },
-  }),
-  async mounted() {
-    await this.$store.dispatch("getUserInfo");
   },
-  computed: {},
 };
 </script>

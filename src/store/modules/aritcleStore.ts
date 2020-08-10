@@ -14,12 +14,12 @@ marked.setOptions({
 const state = {
     toc: null,
     breadcrumbs: [],
-    author: {
-        passagesCount: 10,
-        name: "",
-        id: 20200715,
-        info: ""
-    },
+    // author: {
+    //     passagesCount: 10,
+    //     name: "",
+    //     id: 20200715,
+    //     info: ""
+    // },
     passageInfo: {
         readNum: 100,
         releaseTime: "2020-07-17 16:16:00",
@@ -34,7 +34,7 @@ const state = {
 const getters = {
     toc: state => state.toc,
     breadcrumbs: state => state.breadcrumbs,
-    author: state => state.author,
+    // author: state => state.author,
     passageInfo: state => state.passageInfo,
     article: state => state.article,
     tag: state => state.tag,
@@ -62,7 +62,7 @@ const actions = {
         console.log(params)
         let requestParams = {
             bcontent: params.content,
-            bSubmitterId: params.submitterId,
+            bsubmitterId: params.submitterId,
             bsubmitter: params.submitter,
             bcategory: params.tagName,
             bcategoryId: params.tag,
@@ -70,12 +70,11 @@ const actions = {
         }
         await contentApi.blogsApi.post(requestParams).then((res) => {
             rootState.requesting = false;
-            console.log(res);
+            if (res.status != 200) {
+                rootState.requesting = false;
+                commit(TYPE.ARTICLE_POST_FAILURE, res);
+            }
             commit(TYPE.ARTICLE_POST_SUCCESS, res.response);
-        }, (error) => {
-            console.log(error);
-            rootState.requesting = false;
-            commit(TYPE.ARTICLE_POST_FAILURE);
         })
     },
     async getTagList({ commit, state, rootState }, params) {
@@ -84,7 +83,7 @@ const actions = {
         await contentApi.tagApi.list(params).then((res) => {
             rootState.requesting = false;
             commit(TYPE.TAG_LIST_SUCCESS, res.response);
-        }, (error) => {
+        }).catch((error) => {
             console.log(error);
             rootState.requesting = false;
             commit(TYPE.TAG_LIST_FAILURE);
@@ -111,14 +110,15 @@ const mutations = {
         const innerHTML = marked(rawHtml, { renderer: rendererMD });
         let article = response;
         let result = {
-            ID: article.bID,
+            id: article.id,
             category: article.bcategory,
             title: article.btitle,
             content: article.bcontent,
             contentHtml: innerHTML,
             createTime: article.bCreateTime,
             updateTime: article.bUpdateTime,
-            submitter: article.bsubmitter,
+            uId: article.bsubmitterId,
+            uName: article.bsubmitter,
             remark: article.bRemark,
             next: article.next,
             nextID: article.nextID,
@@ -129,8 +129,8 @@ const mutations = {
         };
         state.article = result;
 
-    }, [TYPE.ARTICLE_DETAIL_FAILURE](state) {
-
+    }, [TYPE.ARTICLE_DETAIL_FAILURE](state, error) {
+        throw error;
     },
     [TYPE.TAG_LIST_REQUEST](state) {
     },
@@ -162,8 +162,8 @@ const mutations = {
         console.log("ARTICLE_POST_SUCCESS");
         console.log(response)
 
-    }, [TYPE.ARTICLE_POST_FAILURE](state) {
-
+    }, [TYPE.ARTICLE_POST_FAILURE](state, error) {
+        return error;
     },
 }
 

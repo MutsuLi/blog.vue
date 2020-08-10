@@ -134,7 +134,8 @@ const mutations = {
                 content: article.bcontent,
                 createTime: article.bCreateTime,
                 updateTime: article.bUpdateTime,
-                submitter: article.bsubmitter,
+                uId: article.bsubmitterId,
+                uName: article.bsubmitter,
                 remark: article.bRemark,
                 href: "/articles/" + article.bId,
                 traffic: article.btraffic

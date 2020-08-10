@@ -4,6 +4,8 @@
     <v-card-text>
       <div>Release Time: {{ReleaseTime}}</div>
       <div>Read: {{ReadCount}}</div>
+    </v-card-text>
+    <v-card-text>
       <v-chip-group column>
         <v-chip
           v-for="(tag,i) in tags"

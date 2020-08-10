@@ -16,6 +16,9 @@ export default {
       bID: this.$route.params.bID,
       token: this.token,
     });
+    this.$store.dispatch("getUserInfoById", {
+      uId: this.$route.query.uId,
+    });
   },
   watch: {
     $route(to, from) {

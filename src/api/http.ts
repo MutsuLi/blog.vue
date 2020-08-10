@@ -106,7 +106,7 @@ export default {
         if (params) {
             params = filterNull(params);
         }
-        return instance.post(url, params, headers)
+        return instance.post(url, params, headers);
     },
     put: function (url, params, headers) {
         if (params) {
