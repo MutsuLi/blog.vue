@@ -55,6 +55,20 @@ const actions = {
             return commit(TYPE.AUTHOR_FAILURE);
         })
     },
+    async register({ commit, state, rootState }, params) {
+        rootState.requesting = true;
+        commit(TYPE.REGISTER_REQUEST);
+        let requestParams = { uEmail: params.userid, uPassword: params.password, uName: params.username };
+        await contentApi.userApi.register(requestParams).then((res) => {
+            console.log(res);
+            rootState.requesting = false;
+            return commit(TYPE.REGISTER_SUCCESS, res.response);
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false;
+            return commit(TYPE.REGISTER_FAILURE);
+        })
+    },
     async getToken({ commit, state, rootState }, params) {
         console.log("before getToken:" + JSON.stringify(state))
         rootState.requesting = true;
@@ -95,6 +109,16 @@ const mutations = {
     },
     SET_USER(state, user) {
         state.user = user
+    }, [TYPE.REGISTER_REQUEST](state) {
+
+    },
+    [TYPE.REGISTER_SUCCESS](state, res) {
+        console.log("TYPE.REGISTER_SUCCESS");
+        console.log(res)
+
+    }, [TYPE.REGISTER_FAILURE](state, res) {
+        console.log(JSON.stringify(res));
+        state.user = res;
     },
     [TYPE.USERINFO_REQUEST](state) {
 

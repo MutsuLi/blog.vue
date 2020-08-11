@@ -7,55 +7,60 @@
     </v-row>
     <v-row justify="center">
       <v-col cols="12" sm="10" md="8" lg="6">
-        <v-card ref="form">
-          <v-card-text>
-            <!-- <v-form ref="form" v-model="valid" lazy-validation> -->
-            <v-text-field
-              v-model="username"
-              :rules="nameRules"
-              label="UserName"
-              required
-              outlined
-              rounded
-            ></v-text-field>
-
-            <v-text-field
-              v-model="email"
-              :rules="emailRules"
-              label="E-mail"
-              required
-              outlined
-              rounded
-            ></v-text-field>
-
-            <v-text-field
-              v-model="password"
-              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show ? 'text' : 'password'"
-              :rules="passwordRules"
-              name="input-10-2"
-              label="Password"
-              class="input-group--focused"
-              @click:append="show = !show"
-              required
-              outlined
-              rounded
-            ></v-text-field>
-
-            <!-- <v-text-field
+        <v-form ref="registerForm">
+          <v-card>
+            <v-card-text>
+              <!-- <v-form ref="form" v-model="valid" lazy-validation> -->
+              <v-text-field
+                v-model="fields.username"
+                :rules="nameRules"
+                label="UserName"
+                required
+                outlined
+                rounded
+              ></v-text-field>
+              <v-text-field
+                v-model="fields.userid"
+                :rules="emailRules"
+                label="E-mail"
+                required
+                outlined
+                rounded
+              ></v-text-field>
+              <v-text-field
+                v-model="fields.password"
+                :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show ? 'text' : 'password'"
+                :rules="passwordRules"
+                name="input-10-2"
+                label="Password"
+                class="input-group--focused"
+                @click:append="show = !show"
+                required
+                outlined
+                rounded
+              ></v-text-field>
+              <!-- <v-text-field
             v-model="Captcha"
             :rules="Captcha"
             label="E-mail"
             required
             outlined
             rounded
-            ></v-text-field>-->
-          </v-card-text>
-          <v-divider class="mt-12"></v-divider>
-          <v-card-actions>
-            <v-btn :disabled="!valid" x-large block color="primary" @click="submit">Create account</v-btn>
-          </v-card-actions>
-        </v-card>
+              ></v-text-field>-->
+            </v-card-text>
+            <v-divider class="mt-12"></v-divider>
+            <v-card-actions>
+              <v-btn
+                :disabled="!valid"
+                x-large
+                block
+                color="primary"
+                @click="register"
+              >Create account</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-form>
       </v-col>
     </v-row>
   </v-container>
@@ -67,11 +72,15 @@ export default {
   data: () => ({
     valid: true,
     show: false,
-    username: "",
-    password: "",
+    fields: {
+      userid: "",
+      username: "",
+      password: "",
+    },
     nameRules: [
       (v) => !!v || "UserName is required",
-      (v) => (v && v.length <= 10) || "UserName must be less than 10 characters",
+      (v) =>
+        (v && v.length <= 10) || "UserName must be less than 10 characters",
     ],
     email: "",
     emailRules: [
@@ -80,7 +89,7 @@ export default {
     ],
     passwordRules: [
       (v) => !!v || "Password is required",
-      (v) => (v && v.length >= 12) || "Password must be at least 12 characters",
+      (v) => (v && v.length >= 6) || "Password must be at least 6 characters",
     ],
 
     select: null,
@@ -89,14 +98,24 @@ export default {
   }),
 
   methods: {
-    submit() {
-      this.$refs.form.validate();
-    },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
+    async register() {
+      let valid = this.$refs.registerForm.validate();
+      const params = {
+        userid: this.fields.userid,
+        username: this.fields.username,
+        password: this.fields.password,
+      };
+      if (valid) {
+        await this.$store.dispatch("register", params).catch((err) => {
+          console.log(err + "register fail");
+        });
+        this.$router.push({
+          path: "/login",
+        });
+      } else {
+        console.log("error submit!!");
+        return false;
+      }
     },
   },
 };
