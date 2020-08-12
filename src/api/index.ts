@@ -1,6 +1,5 @@
-import * as url from './urlConfig'
-import * as http from './http'
-import axios from 'axios'
+import * as url from './urlConfig';
+import * as http from './http';
 
 export const blogsApi = {
 	list(params) {
@@ -56,5 +55,10 @@ export const tagApi = {
 		return http.default.get(url.tag.list, { params }).then((response) => {
 			return response.data;
 		});
+	},
+	post(params) {
+		return http.default.post(url.tag.post, params, {}).then((response) => {
+			return response.data;
+		})
 	}
 }

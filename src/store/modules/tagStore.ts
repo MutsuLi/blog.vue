@@ -25,6 +25,26 @@ const actions = {
             rootState.requesting = false;
             commit(TYPE.TAG_LIST_FAILURE);
         })
+    },
+    async postTag({ commit, state, rootState }, params) {
+        rootState.requesting = true;
+        commit(TYPE.TAG_POST_REQUEST);
+        let requestParams = {
+            tName: params.name,
+            tDispalyName: params.displayName,
+            tDescription: params.description,
+            tsubmitter: params.submitter,
+            tsubmitterId: params.submitterId,
+        }
+        await contentApi.tagApi.post(requestParams).then((res) => {
+            rootState.requesting = false;
+            console.log("TYPE.TAG_POST_SUCCESS");
+            commit(TYPE.TAG_POST_SUCCESS, res.response);
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false;
+            commit(TYPE.TAG_POST_FAILURE);
+        })
     }
 }
 
@@ -52,7 +72,16 @@ const mutations = {
         }
         state.tag = data;
     }, [TYPE.TAG_LIST_FAILURE](state) {
-    }
+    }, [TYPE.TAG_POST_REQUEST](state) {
+
+    }, [TYPE.TAG_POST_SUCCESS](state, response) {
+        console.log("TAG_POST_SUCCESS");
+        console.log(response);
+
+    }, [TYPE.TAG_POST_FAILURE](state, error) {
+        console.log(error);
+        return error;;
+    },
 }
 
 export default {
