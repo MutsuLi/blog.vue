@@ -5,6 +5,7 @@ import Articles from '../views/Article.vue';
 import Login from '../views/Login.vue';
 import Join from '../views/Join.vue';
 import Write from '../views/Write.vue';
+import Tag from '../views/Tag.vue';
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export const constantRoutes = [
     path: '/write',
     name: 'Write',
     component: Write
+  },
+  {
+    path: '/tag',
+    name: 'Tag',
+    component: Tag
   }
 ];
 

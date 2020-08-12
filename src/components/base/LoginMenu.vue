@@ -57,6 +57,17 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item href="/tag">
+          <v-list-item-icon>
+            <v-icon>mdi-tag</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>
+              <span>tag</span>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item @click="logout">
           <v-list-item-icon>
             <v-icon>mdi-power</v-icon>

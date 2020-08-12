@@ -62,9 +62,9 @@ instance.interceptors.response.use(
                 case 401:
                     // // 返回 401 清除token信息并跳转到登录页面
                     store.dispatch('resetToken').then(() => {
-                        router.replace({
+                        router.push({
                             path: "/login",
-                            query: { redirect: router.currentRoute.fullPath }
+                            query: { redirect: router.currentRoute.query.redirect || router.currentRoute.fullPath }
                         });
                     })
             }

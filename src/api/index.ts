@@ -53,13 +53,7 @@ export const userApi = {
 
 export const tagApi = {
 	list(params) {
-		// let option = {
-		// 	baseURL: "/api/",
-		// 	params,
-		// 	withCredentials: false
-		// }
-		// let headers = { "Content-Type": "application/json; charset=utf-8", "Authorization": "Bearer " + params.token };
-		return http.default.get(url.tag.list, {}).then((response) => {
+		return http.default.get(url.tag.list, { params }).then((response) => {
 			return response.data;
 		});
 	}

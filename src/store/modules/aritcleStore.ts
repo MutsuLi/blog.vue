@@ -14,32 +14,21 @@ marked.setOptions({
 const state = {
     toc: null,
     breadcrumbs: [],
-    // author: {
-    //     passagesCount: 10,
-    //     name: "",
-    //     id: 20200715,
-    //     info: ""
-    // },
     passageInfo: {
         readNum: 100,
         releaseTime: "2020-07-17 16:16:00",
         tags: [],
         headings: []
     },
-    article: {},
-    tag: []
+    article: {}
 
 }
 
 const getters = {
     toc: state => state.toc,
     breadcrumbs: state => state.breadcrumbs,
-    // author: state => state.author,
     passageInfo: state => state.passageInfo,
-    article: state => state.article,
-    tag: state => state.tag,
-    // sortKeys: state => state.sortKeys,
-    // sortIds: state => state.sortIds,
+    article: state => state.article
 }
 
 const actions = {
@@ -75,18 +64,10 @@ const actions = {
                 commit(TYPE.ARTICLE_POST_FAILURE, res);
             }
             commit(TYPE.ARTICLE_POST_SUCCESS, res.response);
-        })
-    },
-    async getTagList({ commit, state, rootState }, params) {
-        rootState.requesting = true;
-        commit(TYPE.TAG_LIST_REQUEST);
-        await contentApi.tagApi.list(params).then((res) => {
-            rootState.requesting = false;
-            commit(TYPE.TAG_LIST_SUCCESS, res.response);
-        }).catch((error) => {
+        }, (error) => {
             console.log(error);
             rootState.requesting = false;
-            commit(TYPE.TAG_LIST_FAILURE);
+            commit(TYPE.ARTICLE_POST_FAILURE);
         })
     }
 }
@@ -131,30 +112,6 @@ const mutations = {
 
     }, [TYPE.ARTICLE_DETAIL_FAILURE](state, error) {
         throw error;
-    },
-    [TYPE.TAG_LIST_REQUEST](state) {
-    },
-    [TYPE.TAG_LIST_SUCCESS](state, response) {
-        console.log("TAG_LIST_SUCCESS");
-        console.log(response);
-        let list = response.data;
-        let data = [];
-        for (let i = 0; i < list.length; i++) {
-            let tag = list[i]
-            let rowItem = {
-                id: tag.tId,
-                name: tag.tName,
-                displayname: tag.tDispalyName,
-                description: tag.tDescription,
-                submitter: tag.submitter,
-                icon: tag.tIcon,
-                modifyTime: tag.tModifyTime,
-                createTime: tag.tCreateTime
-            };
-            data.push(rowItem)
-        }
-        state.tag = data;
-    }, [TYPE.TAG_LIST_FAILURE](state) {
     },
     [TYPE.ARTICLE_POST_REQUEST](state) {
 
