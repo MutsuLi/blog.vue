@@ -8,7 +8,7 @@
 export default {
   name: "Setting",
   components: {
-    userSetting: () => import("@/components/user/Setting"),
+    userSetting: () => import("@/components/user/Setting/Tab"),
   },
 };
 </script>
