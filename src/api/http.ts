@@ -112,9 +112,7 @@ export default {
         if (params) {
             params = filterNull(params);
         }
-        return instance.put(url, {
-            data: params,
-        }, headers)
+        return instance.put(url, params, headers)
     },
     delete: function (url, option) {
         if (option.params) {

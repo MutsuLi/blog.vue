@@ -46,6 +46,18 @@
       </template>
       <v-list dense nav>
         <!-- <v-subheader v-text="'Vuetify.AppToolbar.getHelp'" /> -->
+
+        <v-list-item href="/setting">
+          <v-list-item-icon>
+            <v-icon>mdi-account-cog</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>
+              <span>Setting</span>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item href="/write">
           <v-list-item-icon>
             <v-icon>mdi-lead-pencil</v-icon>

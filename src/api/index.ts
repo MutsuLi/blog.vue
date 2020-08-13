@@ -47,6 +47,10 @@ export const userApi = {
 		return http.default.post(url.user.register, params, {}).then((response) => {
 			return response.data;
 		});
+	}, update(params) {
+		return http.default.put(url.user.update, params, {}).then((response) => {
+			return response.data;
+		});
 	}
 }
 

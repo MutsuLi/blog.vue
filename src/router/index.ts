@@ -6,6 +6,7 @@ import Login from '../views/Login.vue';
 import Join from '../views/Join.vue';
 import Write from '../views/Write.vue';
 import Tag from '../views/Tag.vue';
+import Setting from '../views/Setting.vue';
 
 Vue.use(Router)
 
@@ -39,6 +40,10 @@ export const constantRoutes = [
     path: '/tag',
     name: 'Tag',
     component: Tag
+  }, {
+    path: '/setting',
+    name: 'Setting',
+    component: Setting
   }
 ];
 

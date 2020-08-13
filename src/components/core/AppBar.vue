@@ -1,12 +1,5 @@
 <template>
-  <v-app-bar
-    id="core-app-bar"
-    :color="!theme.isDark ? 'white' : undefined"
-    app
-    clipped-left
-    clipped-right
-    flat
-  >
+  <v-app-bar id="core-app-bar" app clipped-left clipped-right flat>
     <v-spacer />
     <v-app-bar-nav-icon class="hidden-lg-and-up" @click="drawer = !drawer" />
 
@@ -53,6 +46,8 @@ export default {
 <style lang="scss">
 #core-app-bar {
   z-index: 1502;
+  border-width: 0 0 thin 0;
+  border-style: solid;
 }
 .theme--light {
   border-bottom-color: #0000001f !important;

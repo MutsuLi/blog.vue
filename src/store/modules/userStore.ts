@@ -68,6 +68,18 @@ const actions = {
             rootState.requesting = false;
             return commit(TYPE.REGISTER_FAILURE);
         })
+    }, async updateUserInfo({ commit, state, rootState }, params) {
+        rootState.requesting = true;
+        commit(TYPE.REGISTER_REQUEST);
+        await contentApi.userApi.update(params).then((res) => {
+            console.log(res);
+            rootState.requesting = false;
+            return commit(TYPE.REGISTER_SUCCESS, res.response);
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false;
+            return commit(TYPE.REGISTER_FAILURE);
+        })
     },
     async getToken({ commit, state, rootState }, params) {
         console.log("before getToken:" + JSON.stringify(state))
@@ -144,6 +156,12 @@ const mutations = {
     }, [TYPE.USERINFO_FAILURE](state, res) {
         console.log(JSON.stringify(res));
         state.user = res;
+    }, [TYPE.USER_UPDATE_REQUEST](state, res) {
+
+    }, [TYPE.USER_UPDATE_SUCCESS](state, res) {
+
+    }, [TYPE.USER_UPDATE_FAILURE](state, res) {
+
     },
     [TYPE.AUTHOR_REQUEST](state) {
 
