@@ -128,7 +128,7 @@ const mutations = {
         for (let i = 0; i < list.length; i++) {
             let article = list[i]
             let rowItem = {
-                ID: article.bId,
+                ID: article.id,
                 category: article.bcategory,
                 title: article.btitle,
                 content: article.bcontent,
@@ -137,7 +137,7 @@ const mutations = {
                 uId: article.bsubmitterId,
                 uName: article.bsubmitter,
                 remark: article.bRemark,
-                href: "/articles/" + article.bId,
+                href: "/articles/" + article.id,
                 traffic: article.btraffic
             }
             data.push(rowItem)
@@ -158,10 +158,11 @@ const mutations = {
             let article = list[i]
             let rowItem = {
                 text: article.btitle,
-                value: "/articles/" + article.bId,
+                value: "/articles/" + article.id,
             }
             data.push(rowItem)
         }
+        console.log(data)
         state.articleSearch = data;
     },
     [TYPE.ARTICLES_SEARCH_FAILURE](state) {

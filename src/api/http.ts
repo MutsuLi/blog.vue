@@ -42,7 +42,7 @@ instance.interceptors.request.use(
     config => {
         if (getToken()) {
             // 判断是否存在token，如果存在的话，则每个http header都加上token
-            console.log(config.headers)
+            //console.log(config.headers)
             config.headers.Authorization = "Bearer " + getToken();
         }
         return config;
@@ -93,7 +93,7 @@ function apiAxios() {
 // 返回在vue模板中的调用接口
 export default {
     get: function (url, option) {
-        console.log(option)
+        //console.log(option)
         if (option.params) {
             option.params = filterNull(option.params);
         }

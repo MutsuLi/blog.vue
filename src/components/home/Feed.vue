@@ -12,12 +12,7 @@
       />
     </v-row>
     <v-row align="center">
-      <v-pagination
-        v-model="page"
-        :length="pages"
-        :total-visible="7"
-        circle
-      ></v-pagination>
+      <v-pagination v-model="page" :length="pages" :total-visible="7" circle></v-pagination>
     </v-row>
   </v-container>
 </template>
@@ -34,7 +29,7 @@ export default {
   },
 
   data: () => ({
-    layout: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    layout: [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
     page: 1,
   }),
   computed: {
