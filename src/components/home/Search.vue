@@ -65,7 +65,7 @@ export default {
       this.$store
         .dispatch("getSearchRows", {
           page: 1,
-          pageSize: 25,
+          pageSize: 10,
           key: val,
         })
         .catch((err) => {
