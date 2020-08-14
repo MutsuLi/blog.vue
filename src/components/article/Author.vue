@@ -11,9 +11,9 @@
       <v-row></v-row>
       <div class="text--primary">{{author.description}}</div>
     </v-card-text>
-    <v-card-actions>
+    <!-- <v-card-actions>
       <v-btn text color="deep-purple accent-4">Learn More</v-btn>
-    </v-card-actions>
+    </v-card-actions> -->
   </v-card>
 </template>
 <script>

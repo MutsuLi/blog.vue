@@ -7,10 +7,21 @@
     </v-card-text>
     <v-card-text>
       <v-chip-group column>
-        <v-chip
+        <!-- <v-chip
           v-for="(tag,i) in tags"
           :key="i"
           :href="tag.href"
+          class="ma-2"
+          color="blue"
+          outlined
+          pill
+          small
+          tag
+          text-color="black"
+        >{{ tag.text }}</v-chip> -->
+        <v-chip
+          v-for="(tag,i) in tags"
+          :key="i"
           class="ma-2"
           color="blue"
           outlined
