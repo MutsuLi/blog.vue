@@ -14,7 +14,8 @@ export const refreshToken = 'login/RefreshToken';
 
 export const blogs = {
     list: "blogs",
-    post: "blogs/post"
+    post: "blogs/post",
+    rank: "blogs/rank"
 }
 
 export const tag = {

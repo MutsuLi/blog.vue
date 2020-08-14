@@ -4,6 +4,7 @@
       <!-- <HomeCarousels /> -->
       <!-- <banner /> -->
     </articles>
+    <home-drawer />
     <!-- <about />-->
     <!-- <social /> -->
   </v-app>
@@ -17,7 +18,7 @@ export default {
     // HomeCarousels: () => import("@/components/home/Carousels"),
     // About: () => import('@/components/home/About'),
     Articles: () => import("@/components/home/Articles"),
-    Banner: () => import("@/components/home/Banner"),
+    HomeDrawer: () => import("@/components/home/Drawer/index"),
     // Social: () => import("@/components/home/Social")
     //CoreFooter: () => import("@/components/core/Footer")
   },

@@ -8,7 +8,7 @@ const state = {
         list: []
     },
     articleSearch: [{ text: "", value: "" }],
-    ranks: [],
+    ranks: [{ text: "", value: "" }],
     tags: [],
     menus: []
 }
@@ -19,8 +19,6 @@ const getters = {
     tags: state => state.tags,
     menus: state => state.menus,
     articleSearch: state => state.articleSearch
-    // sortKeys: state => state.sortKeys,
-    // sortIds: state => state.sortIds,
 }
 
 const actions = {
@@ -61,28 +59,20 @@ const actions = {
             rootState.requesting = false;
             commit(TYPE.ARTICLES_SEARCH_FAILURE);
         })
+    },
+    getBlogRank({ commit, state, rootState }, params) {
+        rootState.requesting = true;
+        commit(TYPE.ARTICLES_RANK_REQUEST);
+        contentApi.blogsApi.rank(params).then((res) => {
+            rootState.requesting = false;
+            commit(TYPE.ARTICLES_RANK_SUCCESS, res.response);
+        }, (error) => {
+            console.log(error);
+            rootState.requesting = false;
+            commit(TYPE.ARTICLES_RANK_FAILURE);
+        })
+
     }
-    // getContentRank({ commit, state, rootState }, categoryId) {
-    //     rootState.requesting = true
-    //     commit(TYPE.CONTENT_RANK_REQUEST)
-    //     rootState.requesting = false
-    //     let response = require('@/data/articles.json');
-    //     commit(TYPE.CONTENT_RANK_SUCCESS, response)
-    //     // commit(TYPE.CONTENT_RANK_REQUEST)
-    //     // let param = {
-    //     //     categoryId: categoryId
-    //     // }
-    //     // contentrankApi.contentrank(param).then((response) => {
-    //     //     rootState.requesting = false
-    //     //     if (categoryId === 1) {
-    //     //         console.log(response)
-    //     //     }
-    //     //     commit(TYPE.CONTENT_RANK_SUCCESS, response)
-    //     // }, (error) => {
-    //     //     rootState.requesting = false
-    //     //     commit(TYPE.CONTENT_RANK_FAILURE)
-    //     // })
-    // }
     // , getContentTags({ commit, state, rootState }) {
     //     rootState.requesting = true
     //     commit(TYPE.CONTENT_RANK_REQUEST)
@@ -148,7 +138,8 @@ const mutations = {
     },
     [TYPE.ARTICLES_FAILURE](state) {
 
-    }, [TYPE.ARTICLES_SEARCH_REQUEST](state) {
+    },
+    [TYPE.ARTICLES_SEARCH_REQUEST](state) {
 
     },
     [TYPE.ARTICLES_SEARCH_SUCCESS](state, response) {
@@ -163,6 +154,27 @@ const mutations = {
             data.push(rowItem)
         }
         state.articleSearch = data;
+    }, [TYPE.ARTICLES_RANK_FAILURE](state) {
+
+    },
+    [TYPE.ARTICLES_RANK_REQUEST](state) {
+
+    },
+    [TYPE.ARTICLES_RANK_SUCCESS](state, response) {
+        console.log("TYPE.ARTICLES_RANK_SUCCESS")
+        let ranks = response.data;
+        let data = [];
+        for (let i = 0; i < ranks.length; i++) {
+            let rank = ranks[i]
+            let rowItem = {
+                title: rank.btitle,
+                uName: rank.bsubmitter,
+                uId: rank.bsubmitterId,
+                href: "/articles/" + rank.id,
+            }
+            data.push(rowItem)
+        }
+        state.ranks = data;
     },
     [TYPE.ARTICLES_SEARCH_FAILURE](state) {
 

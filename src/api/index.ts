@@ -16,7 +16,12 @@ export const blogsApi = {
 		return http.default.post(url.blogs.post, params, {}).then((response) => {
 			return response.data;
 		})
-	}
+	},
+	rank(params) {
+		return http.default.get(url.blogs.rank, { params }).then((response) => {
+			return response.data;
+		})
+	},
 }
 
 export const loginApi = {
