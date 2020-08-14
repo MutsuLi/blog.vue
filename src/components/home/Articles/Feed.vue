@@ -25,11 +25,11 @@ export default {
   name: "Feed",
 
   components: {
-    FeedCard: () => import("@/components/home/FeedCard"),
+    FeedCard: () => import("./FeedCard"),
   },
 
   data: () => ({
-    layout: [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    layout: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     page: 1,
   }),
   computed: {

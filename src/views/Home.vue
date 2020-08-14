@@ -17,7 +17,7 @@ export default {
   components: {
     // HomeCarousels: () => import("@/components/home/Carousels"),
     // About: () => import('@/components/home/About'),
-    Articles: () => import("@/components/home/Articles"),
+    Articles: () => import("@/components/home/Articles/index"),
     HomeDrawer: () => import("@/components/home/Drawer/index"),
     // Social: () => import("@/components/home/Social")
     //CoreFooter: () => import("@/components/core/Footer")

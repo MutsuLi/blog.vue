@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <user-tag-editor></user-tag-editor>
+    <user-tag-tab></user-tag-tab>
   </v-app>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: "tag",
   components: {
-    userTagEditor: () => import("@/components/user/tagEditor"),
+    userTagTab: () => import("@/components/user/Tag/index"),
   },
 };
 </script>

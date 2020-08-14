@@ -13,7 +13,7 @@ export default {
     this.$store.dispatch("getContentRows", { page: 1, pageSize: 11 });
   },
   components: {
-    Feed: () => import("@/components/home/Feed"),
+    Feed: () => import("./Feed"),
   },
 };
 </script>

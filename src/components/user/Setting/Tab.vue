@@ -18,8 +18,8 @@
 export default {
   name: "userSettingTab",
   components: {
-    userSettingProfile: () => import("./profile"),
-    userSettingAccount: () => import("./security"),
+    userSettingProfile: () => import("./Profile"),
+    userSettingAccount: () => import("./Security"),
   },
   mounted() {
     this.$store.dispatch("getUserInfo");

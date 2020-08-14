@@ -6,6 +6,7 @@
         ref="title"
         v-model="title"
         :rules="titleRules"
+        hint="Title of the Article"
         label="title"
         required
         outlined
@@ -47,17 +48,6 @@
         <v-btn color="white" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
       </template>
     </v-snackbar>
-    <!-- <v-alert
-      dense
-      colored-border
-      elevation="1"
-      border="top"
-      dismissible
-      min-height="1"
-      close-icon="mdi-delete"
-      transition="scale-transition"
-      type="error"
-    >I'm an error alert.</v-alert>-->
 
     <mavon-editor ref="editor" class="me-editor" v-model="doc" :subfield="false" @save="save" fixed></mavon-editor>
   </v-container>

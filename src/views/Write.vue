@@ -8,7 +8,7 @@
 export default {
   name: "Write",
   components: {
-    UserArticleTab: () => import("@/components/user/ArticleTab"),
+    UserArticleTab: () => import("@/components/user/Article/Index"),
   },
 };
 </script>

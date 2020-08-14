@@ -48,7 +48,7 @@
           </v-card-text>
           <v-row>
             <v-col>
-              <v-btn class="ma-1" color="primary" left bottom absolute>reset</v-btn>
+              <v-btn class="ma-1" color="primary" @click="clear" left bottom absolute>reset</v-btn>
               <v-btn class="ma-1" color="primary" @click="submit" right bottom absolute>save</v-btn>
             </v-col>
           </v-row>
@@ -56,20 +56,13 @@
       </v-card>
     </v-row>
 
-    <v-row justify="center">
-      <v-col cols="12" sm="10" md="8" lg="6">
-        <p class="display-1 text--primary" align="center">Latest Tags</p>
-      </v-col>
-    </v-row>
-
-    <v-divider></v-divider>
     <v-snackbar
       v-model="snackbar"
       :color="color"
       class="tips"
       light
       :timeout="timeout"
-      right
+      centered
       top
       absolute
     >
@@ -78,18 +71,6 @@
         <v-btn color="white" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
       </template>
     </v-snackbar>
-    <v-row justify="center" align="center">
-      <v-chip-group column active-class="deep-purple--text text--accent">
-        <v-chip
-          v-for="item in tags"
-          :key="item.id"
-          :value="item.name"
-          outlined
-          pill
-          tag
-        >{{ item.name }}</v-chip>
-      </v-chip-group>
-    </v-row>
   </v-container>
 </template>
 
@@ -128,6 +109,13 @@ export default {
     await this.$store.dispatch("getTagList", { page: 1, pageSize: 25 });
   },
   methods: {
+    clear() {
+      if (this.name && this.displayName && this.description) {
+        this.name = "";
+        this.displayName = "";
+        this.description = "";
+      }
+    },
     async submit() {
       if (!this.$refs.tagForm.validate()) {
         this.text = "Please fill in.";
@@ -156,6 +144,9 @@ export default {
           this.color = this.error;
           this.snackbar = true;
         });
+      this.name = "";
+      this.displayName = "";
+      this.description = "";
     },
   },
 };

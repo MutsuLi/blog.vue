@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <v-card outlined>
+      <v-card-title>Edit Article</v-card-title>
       <user-editor></user-editor>
     </v-card>
   </v-container>
