@@ -130,13 +130,14 @@ export default {
         submitterId: this.user.uId,
         submitter: this.user.username,
       };
-      console.log(this.user);
+      let isRedirect = false;
       await this.$store
         .dispatch("postTag", tagBody)
         .then(() => {
           this.text = "Save tag successfully.";
           this.color = this.success;
           this.snackbar = true;
+          isRedirect = true;
         })
         .catch((err) => {
           console.log(err);
@@ -144,6 +145,12 @@ export default {
           this.color = this.error;
           this.snackbar = true;
         });
+      if (isRedirect) {
+        this.$router.push({
+          path: "/",
+        });
+        return;
+      }
       this.name = "";
       this.displayName = "";
       this.description = "";

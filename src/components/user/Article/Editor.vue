@@ -136,9 +136,7 @@ export default {
           this.snackbar = true;
         });
       if (isRedirect) {
-        this.$router.push({
-          path: "/",
-        });
+         this.$router.go(0);
       }
     },
     querySelections(val) {

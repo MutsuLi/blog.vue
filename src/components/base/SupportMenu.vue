@@ -28,7 +28,6 @@
 <script>
 export default {
   name: "BaseSupportMenu",
-
   data: (vm) => ({
     supports: [
       {

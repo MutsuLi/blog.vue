@@ -12,11 +12,11 @@
           <v-chip
             v-for="item in tags"
             :key="item.id"
-            :value="item.name"
+            :value="item.displayname"
             outlined
             pill
             tag
-          >{{ item.name }}</v-chip>
+          >{{ item.displayname }}</v-chip>
         </v-chip-group>
       </v-row>
     </v-card>
