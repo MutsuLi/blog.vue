@@ -2,3 +2,10 @@ wget http://download.redis.io/redis-stable.tar.gz
 tar -zxvf redis-stable.tar.gz
 docker pull mutsuli/blogapi:latest
 docker run -d --name blogapi -p 9100:80 -v /ect/localtime:/ect/localtime docker.io/mutsuli/blogapi
+#
+docker tag ce176b584a9e  mutsuli/blogvue:latest
+docker push mutsuli/blogvue:latest
+
+docker pull mutsuli/blogvue:latest
+docker run -d --name blog.vue -p 8300:80 -v /ect/localtime:/ect/localtime docker.io/mutsuli/blogvue
+#
