@@ -157,7 +157,7 @@ export default {
 };
 </script>
 
-<style scope lang="scss" scope>
+<style lang="scss" scoped>
 .input-title {
   width: 35%;
   z-index: 1501;

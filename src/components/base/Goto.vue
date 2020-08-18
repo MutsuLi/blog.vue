@@ -54,7 +54,7 @@ export default {
 };
 </script>
 
-<style lang="sass" scope>
+<style lang="sass" scoped>
 .core-goto
     position: relative
     text-decoration: none

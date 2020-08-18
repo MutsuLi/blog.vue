@@ -123,7 +123,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 #documentation-toc .supporter-group__title {
   padding-left: 8px;
 }

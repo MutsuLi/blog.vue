@@ -128,7 +128,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .v-list-item--doc p {
   margin-bottom: 0;
 }

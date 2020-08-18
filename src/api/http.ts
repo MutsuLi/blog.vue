@@ -3,6 +3,7 @@ import axios from 'axios'
 // import applicationUserManager from "../Auth/applicationusermanager";
 import router from '../router';
 import { removeToken, getToken } from '@/util/auth'
+import * as api from './urlConfig';
 
 // 配置API接口地址
 var root = "/api/";//用proxy实现本地代理跨域（生产环境使用的是nginx）
@@ -100,19 +101,19 @@ export default {
         Object.assign(option, {
             headers: defaultHeader
         });
-        return instance.get(url, option).then();
+        return instance.get(api.serverRoot + url, option).then();
     },
     post: function (url, params, headers) {
         if (params) {
             params = filterNull(params);
         }
-        return instance.post(url, params, headers);
+        return instance.post(api.serverRoot + url, params, headers);
     },
     put: function (url, params, headers) {
         if (params) {
             params = filterNull(params);
         }
-        return instance.put(url, params, headers)
+        return instance.put(api.serverRoot + url, params, headers)
     },
     delete: function (url, option) {
         if (option.params) {
@@ -121,6 +122,6 @@ export default {
         Object.assign(option, {
             headers: defaultHeader
         });
-        return apiAxios().delete(url, option)
+        return apiAxios().delete(api.serverRoot + url, option)
     },
 };

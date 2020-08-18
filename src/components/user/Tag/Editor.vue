@@ -159,7 +159,7 @@ export default {
 };
 </script>
 
-<style scope lang="scss" scope>
+<style  lang="scss" scoped>
 .inputarea {
   height: 50vh;
 }

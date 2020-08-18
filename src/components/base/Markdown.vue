@@ -105,7 +105,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .v-markdown:last-child p,
 .v-markdown:last-child {
   margin-bottom: 0 !important;

@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<style lang="sass" scope>
+<style lang="sass" scoped>
 .base-title
     display: inline-block
 

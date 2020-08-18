@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import minifyTheme from 'minify-css-string'
 import goTo from 'vuetify/es5/services/goto'
 
