@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 .text-decoration-none {
   text-decoration: none;
 }

@@ -43,7 +43,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 #core-app-bar {
   z-index: 1502;
   border-width: 0 0 thin 0;

@@ -13,7 +13,7 @@
     @click.native="$vuetify.goTo(0)"
   >
     <v-img
-      :src="`https://cdn.vuetifyjs.com/images/logos/vuetify-logo-${theme.isDark ? 'dark' : 'light' }.png`"
+      :src="`src\assets\logo.png`"
       alt="Vuetify Logo"
       class="shrink mr-2"
       contain

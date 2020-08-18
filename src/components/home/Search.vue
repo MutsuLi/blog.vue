@@ -82,7 +82,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 .algolia-autocomplete {
   flex: 1 1 auto;
   position: fixed !important;

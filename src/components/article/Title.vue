@@ -25,7 +25,7 @@
   }
 </script>
 
-<style lang="sass">
+<style lang="sass" scope>
 .core-goto--heading
   h1
     font-size: 3rem
