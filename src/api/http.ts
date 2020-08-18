@@ -8,7 +8,7 @@ import * as api from './urlConfig';
 // 配置API接口地址
 var root = "/api/";//用proxy实现本地代理跨域（生产环境使用的是nginx）
 const defaultHeader = {
-    baseURL: root,
+    baseURL: api.serverRoot + root,
     headers: { "Content-Type": "application/json; charset=utf-8" },
     withCredentials: false
 }
@@ -70,7 +70,7 @@ instance.interceptors.response.use(
                     })
             }
         }
-        return Promise.reject(error.response.data); // 返回接口返回的错误信息
+        return Promise.reject(error.response); // 返回接口返回的错误信息
     }
 );
 /*
@@ -101,19 +101,19 @@ export default {
         Object.assign(option, {
             headers: defaultHeader
         });
-        return instance.get(api.serverRoot + url, option).then();
+        return instance.get(defaultHeader.baseURL + url, option).then();
     },
     post: function (url, params, headers) {
         if (params) {
             params = filterNull(params);
         }
-        return instance.post(api.serverRoot + url, params, headers);
+        return instance.post(defaultHeader.baseURL + url, params, headers);
     },
     put: function (url, params, headers) {
         if (params) {
             params = filterNull(params);
         }
-        return instance.put(api.serverRoot + url, params, headers)
+        return instance.put(defaultHeader.baseURL + url, params, headers)
     },
     delete: function (url, option) {
         if (option.params) {
@@ -122,6 +122,6 @@ export default {
         Object.assign(option, {
             headers: defaultHeader
         });
-        return apiAxios().delete(api.serverRoot + url, option)
+        return apiAxios().delete(defaultHeader.baseURL + url, option)
     },
 };

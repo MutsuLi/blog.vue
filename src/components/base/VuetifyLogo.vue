@@ -12,19 +12,12 @@
     title="Vuetify Home Page"
     @click.native="$vuetify.goTo(0)"
   >
-    <v-img
-      :src="`src\assets\logo.png`"
-      alt="Vuetify Logo"
-      class="shrink mr-2"
-      contain
-      transition="scale-transition"
-      width="40"
-    />
+    <v-icon large>mdi-book-open</v-icon>
 
     <v-sheet
       class="display-1 hidden-sm-and-down font-weight-medium mr-0 mr-md-4"
       color="transparent"
-    >Vuetify</v-sheet>
+    >MutsuLi</v-sheet>
   </router-link>
 </template>
 
@@ -32,7 +25,7 @@
 export default {
   name: "BaseVuetifyLogo",
 
-  inject: ["theme"]
+  inject: ["theme"],
 };
 </script>
 
