@@ -6,6 +6,6 @@
     }, {
         "name": "Doc",
         "icon": "mdi-file-document",
-        "href": "http://47.102.128.186:9100/index.html"
+        "href": "http://47.102.128.186/api/index.html"
     }]
 }

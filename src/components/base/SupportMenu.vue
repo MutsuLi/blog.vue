@@ -37,7 +37,7 @@ export default {
         blank: false,
       },
       {
-        href: "https://github.com/okitasann",
+        href: "https://github.com/MutsuLi",
         icon: "mdi-git",
         text: "Github",
         blank: true,
