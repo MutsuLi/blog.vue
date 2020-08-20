@@ -74,7 +74,6 @@ export default {
   },
   methods: {
     showDetail(value) {
-      console.log("uId:" + value.uId);
       this.$router.push({
         path: value.href,
         query: { uId: value.uId },

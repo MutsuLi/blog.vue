@@ -82,7 +82,6 @@ const actions = {
         })
     },
     async getToken({ commit, state, rootState }, params) {
-        console.log("before getToken:" + JSON.stringify(state))
         rootState.requesting = true;
         commit(TYPE.TOKEN_REQUEST);
         let requestParams = { name: params.userid, pass: params.password };
@@ -125,18 +124,14 @@ const mutations = {
 
     },
     [TYPE.REGISTER_SUCCESS](state, res) {
-        console.log("TYPE.REGISTER_SUCCESS");
-        console.log(res)
 
     }, [TYPE.REGISTER_FAILURE](state, res) {
-        console.log(JSON.stringify(res));
         state.user = res;
     },
     [TYPE.USERINFO_REQUEST](state) {
 
     },
     [TYPE.USERINFO_SUCCESS](state, res) {
-        console.log("TYPE.USERINFO_SUCCESS");
         let user = {
             uId: res.uId,
             userid: res.uEmail,
@@ -154,7 +149,6 @@ const mutations = {
         state.user = user;
 
     }, [TYPE.USERINFO_FAILURE](state, res) {
-        console.log(JSON.stringify(res));
         state.user = res;
     }, [TYPE.USER_UPDATE_REQUEST](state, res) {
 
@@ -167,7 +161,6 @@ const mutations = {
 
     },
     [TYPE.AUTHOR_SUCCESS](state, res) {
-        console.log("TYPE.AUTHOR_SUCCESS");
         let author = {
             uId: res.uId,
             userid: res.uEmail,
@@ -184,7 +177,6 @@ const mutations = {
         state.author = author;
 
     }, [TYPE.AUTHOR_FAILURE](state, res) {
-        console.log(JSON.stringify(res));
         state.author = res;
     },
     [TYPE.TOKEN_REQUEST](state) {

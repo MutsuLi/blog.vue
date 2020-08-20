@@ -153,7 +153,6 @@ const mutations = {
             }
             data.push(rowItem)
         }
-        console.log(data)
         state.articleSearch = data;
     }, [TYPE.ARTICLES_RANK_FAILURE](state) {
 
@@ -162,7 +161,6 @@ const mutations = {
 
     },
     [TYPE.ARTICLES_RANK_SUCCESS](state, response) {
-        console.log("TYPE.ARTICLES_RANK_SUCCESS")
         let ranks = response.data;
         let data = [];
         for (let i = 0; i < ranks.length; i++) {

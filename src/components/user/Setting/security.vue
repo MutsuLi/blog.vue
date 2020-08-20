@@ -107,13 +107,11 @@ export default {
     checkPassword() {
       let rules = [];
       if (this.confirmpassword != "" && this.password != "") {
-        console.log("checkPassword");
         const rule = (v) =>
           (v || "") == this.password ||
           `New password and confirm password is not equal.`;
         rules.push(rule);
       }
-      console.log(rules.length);
       return rules;
     },
   },

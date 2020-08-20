@@ -72,7 +72,6 @@ export default {
         submitterId: this.user.uId,
         submitter: this.user.username,
       };
-      console.log(this.user);
       await this.$store
         .dispatch("postTag", tagBody)
         .then(() => {
@@ -81,7 +80,6 @@ export default {
           this.snackbar = true;
         })
         .catch((err) => {
-          console.log(err);
           this.text = "Save tag unsuccessfully." + err.msg;
           this.color = this.error;
           this.snackbar = true;

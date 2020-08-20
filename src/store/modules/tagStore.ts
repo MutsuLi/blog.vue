@@ -18,7 +18,6 @@ const actions = {
         commit(TYPE.TAG_LIST_REQUEST);
         await contentApi.tagApi.list(params).then((res) => {
             rootState.requesting = false;
-            console.log("TYPE.TAG_LIST_SUCCESS");
             commit(TYPE.TAG_LIST_SUCCESS, res.response);
         }, (error) => {
             console.log(error);
@@ -38,7 +37,6 @@ const actions = {
         }
         await contentApi.tagApi.post(requestParams).then((res) => {
             rootState.requesting = false;
-            console.log("TYPE.TAG_POST_SUCCESS");
             commit(TYPE.TAG_POST_SUCCESS, res.response);
         }, (error) => {
             console.log(error);
@@ -52,8 +50,6 @@ const mutations = {
     [TYPE.TAG_LIST_REQUEST](state) {
     },
     [TYPE.TAG_LIST_SUCCESS](state, response) {
-        console.log("TAG_LIST_SUCCESS");
-        console.log(response);
         let list = response.data;
         let data = [];
         for (let i = 0; i < list.length; i++) {
@@ -75,8 +71,6 @@ const mutations = {
     }, [TYPE.TAG_POST_REQUEST](state) {
 
     }, [TYPE.TAG_POST_SUCCESS](state, response) {
-        console.log("TAG_POST_SUCCESS");
-        console.log(response);
 
     }, [TYPE.TAG_POST_FAILURE](state, error) {
         console.log(error);

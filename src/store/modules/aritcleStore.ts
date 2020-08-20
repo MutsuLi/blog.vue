@@ -48,7 +48,6 @@ const actions = {
     async postArticle({ commit, state, rootState }, params) {
         rootState.requesting = true;
         commit(TYPE.ARTICLE_POST_REQUEST);
-        console.log(params)
         let requestParams = {
             bcontent: params.content,
             bsubmitterId: params.submitterId,
@@ -116,8 +115,6 @@ const mutations = {
     [TYPE.ARTICLE_POST_REQUEST](state) {
 
     }, [TYPE.ARTICLE_POST_SUCCESS](state, response) {
-        console.log("ARTICLE_POST_SUCCESS");
-        console.log(response)
 
     }, [TYPE.ARTICLE_POST_FAILURE](state, error) {
         return error;

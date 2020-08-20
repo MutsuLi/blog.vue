@@ -121,8 +121,6 @@ export default {
         uTitle: this.user.title,
         uDescription: this.user.description,
       };
-      console.log("user");
-      console.log(this.user);
       await this.$store
         .dispatch("updateUserInfo", userInfo)
         .then(() => {
@@ -131,7 +129,6 @@ export default {
           this.snackbar = true;
         })
         .catch((err) => {
-          console.log(err);
           this.text = "Save user info unsuccessfully." + err.msg;
           this.color = this.error;
           this.snackbar = true;
