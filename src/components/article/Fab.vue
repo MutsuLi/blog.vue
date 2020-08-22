@@ -1,6 +1,7 @@
 <template>
   <v-fab-transition>
     <v-btn
+      class="topScroll"
       v-show="fab"
       v-scroll="onScroll"
       :style="{
@@ -32,7 +33,7 @@ export default {
   data: () => ({ fab: true }),
 
   computed: {
-    ...sync("snackbar/*")
+    ...sync("snackbar/*"),
   },
 
   methods: {
@@ -45,7 +46,12 @@ export default {
     },
     toTop() {
       this.$vuetify.goTo(0);
-    }
-  }
+    },
+  },
 };
 </script>
+<style lang="scss" scoped>
+.topScroll {
+  z-index: 1503;
+}
+</style>

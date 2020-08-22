@@ -134,6 +134,7 @@ export default {
   padding: 32px 0 0;
   text-align: left;
   width: 100%;
+  z-index: 1502;
 }
 
 li {

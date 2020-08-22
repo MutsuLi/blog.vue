@@ -24,11 +24,6 @@ export default {
   computed: {
     ...mapGetters(["article", "author"]),
     async Author() {
-      // if (this.article.uId) {
-      //   await this.$store.dispatch("getUserInfoById", {
-      //     uId: this.article.uId,
-      //   });
-      // }
       return this.author;
     },
   },

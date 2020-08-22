@@ -136,7 +136,7 @@ export default {
           this.snackbar = true;
         });
       if (isRedirect) {
-         this.$router.go(0);
+        this.$router.go(0);
       }
     },
     querySelections(val) {
@@ -167,9 +167,10 @@ export default {
   z-index: 1501;
 }
 .me-editor {
-  height: 100vh;
+  height: 85vh;
+  width: 100%;
   margin-top: 2%;
-  position: absolute;
+  // position: absolute;
 }
 .tips {
   z-index: 2000;

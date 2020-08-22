@@ -81,18 +81,6 @@ export default {
     } else if (this.source) {
       code = this.source.code;
     }
-    // // Probably wants to make a list
-    // const wantsList = Array.isArray(code);
-
-    // if (wantsList) code = code.map(c => `- ${c}\n`).join("");
-
-    // if (typeof code !== "string") {
-    //   console.log(`Invalid type ${typeof code}, expected string`, code);
-    //   code = "";
-    // }
-    // var rendererMD = new marked.Renderer();
-    // // Convert markdown links
-    // code = code.replace(/\[([^\]]*)\]\(([^)]*)\)/g, parseLink);
 
     const innerHTML = code;
 
@@ -105,7 +93,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .v-markdown:last-child p,
 .v-markdown:last-child {
   margin-bottom: 0 !important;

@@ -1,25 +1,23 @@
 <template>
-  <div>
-    <v-row>
-      <v-col v-for="(link, i) in links" :key="i" cols="12" md="6">
-        <v-card outlined>
-          <base-item
-            :to="link.link"
-            :avatar="link.icon"
-            :avatar-color="link.color"
-            :text="link.target"
-            :subtext="link.section"
-            no-markdown
-            @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
-          >
-            <v-list-item-action>
-              <v-icon>mdi-arrow-right</v-icon>
-            </v-list-item-action>
-          </base-item>
-        </v-card>
-      </v-col>
-    </v-row>
-  </div>
+  <v-row class="ma-3">
+    <v-col v-for="(link, i) in links" :key="i" cols="12" md="6">
+      <v-card outlined>
+        <base-item
+          :to="link.link"
+          :avatar="link.icon"
+          :avatar-color="link.color"
+          :text="link.target"
+          :subtext="link.section"
+          no-markdown
+          @click.native="$ga.event('up-next', 'click', link.target, $route.path)"
+        >
+          <v-list-item-action>
+            <v-icon>mdi-arrow-left</v-icon>
+          </v-list-item-action>
+        </base-item>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -29,18 +27,20 @@ export default {
   computed: {
     ...mapGetters(["article"]),
     links() {
-      return this.article
-        ? [
-            {
-              link: "/articles/" + this.article.previousID,
-              target: this.article.previous,
-            },
-            {
-              link: "/articles/" + this.article.nextID,
-              target: this.article.next,
-            },
-          ]
-        : [];
+      let links = [];
+      if (this.article && this.article.previousID) {
+        links.push({
+          link: "/articles/" + this.article.previousID,
+          target: this.article.previous,
+        });
+      }
+      if (this.article && this.article.nextID) {
+        links.push({
+          link: "/articles/" + this.article.nextID,
+          target: this.article.next,
+        });
+      }
+      return links;
     },
   },
 

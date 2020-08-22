@@ -1,7 +1,7 @@
 <template>
   <div class="ma-1 pa-1">
     <v-container fluid>
-      <v-footer padless clipped-left clipped-right flat>
+      <v-footer class="footer" padless clipped-left clipped-right flat app>
         <v-spacer></v-spacer>
         <v-container>
           <v-row justify="center">
@@ -54,3 +54,8 @@ export default {
   }),
 };
 </script>
+<style lang="scss" scoped>
+.footer {
+  z-index: 1502;
+}
+</style>
