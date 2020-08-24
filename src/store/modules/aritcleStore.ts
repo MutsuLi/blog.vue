@@ -2,7 +2,7 @@
 import * as TYPE from '../actionType/contentType'
 import { parseLink } from "@/util/helpers";
 import * as contentApi from '../../api/index'
-
+import kebabCase from "lodash/kebabCase";
 //
 import marked from "marked";
 marked.setOptions({
@@ -80,9 +80,9 @@ const mutations = {
         const tagsArr: Array<object> = new Array();
         rendererMD.heading = (text, level) => {
             var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-            tagsArr.push({ text, subTitle: level > 2 });
+            tagsArr.push({ text, subTitle: level > 3 });
             return `<h${level}>
-            <a name="${text}" id="${text}" class="anchor" href="#${text}">
+            <a name="${text}" id="${kebabCase(text)}" class="anchor" href="#${text}">
             <span class="header-link"></span></a>${text}</h${level}>`;
         };
 
