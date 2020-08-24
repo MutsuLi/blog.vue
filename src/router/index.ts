@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router'
-// import Home from '../views/Home.vue';
-// import Articles from '../views/Article.vue';
-// import Login from '../views/Login.vue';
-// import Join from '../views/Join.vue';
-// import Write from '../views/Write.vue';
-// import Tag from '../views/Tag.vue';
-// import Setting from '../views/Setting.vue';
+import Home from '../views/Home.vue';
+import Articles from '../views/Article.vue';
+import Login from '../views/Login.vue';
+import Join from '../views/Join.vue';
+import Write from '../views/Write.vue';
+import Tag from '../views/Tag.vue';
+import Setting from '../views/Setting.vue';
 
 Vue.use(Router)
 
@@ -14,36 +14,36 @@ export const constantRoutes = [
   {
     path: '',
     name: 'Home',
-    component: () => require('../views/Home.vue')
+    component: Home
   },
   {
     path: '/articles/:bID',
     name: 'Articles',
-    component:  () => require('../views/Article.vue')
+    component: Articles
   },
   {
     path: '/login',
     name: 'Login',
-    component:() => require('../views/Login.vue')
+    component: Login
   },
   {
     path: '/join',
     name: 'Join',
-    component:() => require('../views/Join.vue')
+    component: Join
   },
   {
     path: '/write',
     name: 'Write',
-    component:() => require('../views/Write.vue')
+    component: Write
   },
   {
     path: '/tag',
     name: 'Tag',
-    component:() => require('../views/Tag.vue')
+    component: Tag
   }, {
     path: '/setting',
     name: 'Setting',
-    component:() => require('../views/Setting.vue')
+    component: Setting
   }
 ];
 
