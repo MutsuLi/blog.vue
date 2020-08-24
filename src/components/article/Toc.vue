@@ -72,6 +72,7 @@ export default {
     structure: sync("documentation/structure"),
     toc() {
       if (!this.article.headings) return [];
+      console.log(this.article.headings)
       return this.article.headings
         .map((title) => {
           return {
