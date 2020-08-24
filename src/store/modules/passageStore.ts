@@ -28,13 +28,6 @@ const actions = {
         rootState.requesting = false
         let response = require('@/data/menu.json').data;
         commit(TYPE.MENU_SUCCESS, response)
-        // contentApi.content().then((response) => {
-        //     rootState.requesting = false
-        //     commit(TYPE.CONTENT_SUCCESS, response)
-        // }, (error) => {
-        //     rootState.requesting = false
-        //     commit(TYPE.CONTENT_FAILURE)
-        // })
     },
     getContentRows({ commit, state, rootState }, params) {
         rootState.requesting = true;
@@ -73,33 +66,6 @@ const actions = {
         })
 
     }
-    // , getContentTags({ commit, state, rootState }) {
-    //     rootState.requesting = true
-    //     commit(TYPE.CONTENT_RANK_REQUEST)
-    //     rootState.requesting = false
-    //     let articles = require('@/data/articles.json').data;
-    //     let categories: category[] = []
-    //     let hashMap = new Set();
-    //     const defaultArr: category[] = [{
-    //         text: "dotnet",
-    //         href: '',
-    //     }, {
-    //         text: "database",
-    //         href: '',
-    //     }];
-    //     for (const article of articles) {
-    //         if ((typeof (article.bcategory) == "undefined") || article.bcategory == "") continue;
-    //         if (hashMap.has(article.bcategory)) continue;
-    //         hashMap.add(article.bcategory);
-    //         const text = article.bcategory;
-    //         categories.push({
-    //             text,
-    //             href: '',
-    //         })
-    //     }
-    //     categories = categories.concat(defaultArr)
-    //     commit(TYPE.CONTENT_TAGS_SUCCESS, categories)
-    // }
 }
 
 const mutations = {
@@ -149,7 +115,7 @@ const mutations = {
             let article = list[i]
             let rowItem = {
                 text: article.btitle,
-                value: "/articles/" + article.id,
+                value: "/articles/" + article.id + "?uId=" + article.bsubmitterId
             }
             data.push(rowItem)
         }
