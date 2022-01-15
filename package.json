@@ -15,7 +15,7 @@
     "eslint-config-vuetify": "^0.6.1",
     "eslint-plugin-vue": "^6.2.2",
     "js-cookie": "^2.2.1",
-    "marked": "^1.1.0",
+    "marked": "^4.0.10",
     "material-design-icons-iconfont": "^5.0.1",
     "mavon-editor": "^2.9.0",
     "minify-css-string": "^1.0.0",
